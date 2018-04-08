@@ -1,4 +1,4 @@
-package com.javier.edukka.models;
+package com.javier.edukka.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

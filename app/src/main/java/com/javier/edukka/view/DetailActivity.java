@@ -1,4 +1,4 @@
-package com.javier.edukka.views;
+package com.javier.edukka.view;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ public class DetailActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -45,5 +48,11 @@ public class DetailActivity extends AppCompatActivity {
         subjectPicutre.setImageDrawable(subjectPictures.getDrawable(position % subjectPictures.length()));
 
         subjectPictures.recycle();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 }

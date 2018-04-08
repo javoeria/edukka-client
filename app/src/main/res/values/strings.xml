@@ -11,4 +11,5 @@
         deserunt mollit anim id est laborum.
     </string>
     <string name="detail_location">"New York City"</string>
+    <string name="no_data_available">No Data Available</string>
 </resources>

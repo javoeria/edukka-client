@@ -1,6 +1,6 @@
-package com.javier.edukka.controllers;
+package com.javier.edukka.controller;
 
-import com.javier.edukka.models.UserModel;
+import com.javier.edukka.model.UserModel;
 
 public class UserSingleton {
     private static final UserSingleton ourInstance = new UserSingleton();

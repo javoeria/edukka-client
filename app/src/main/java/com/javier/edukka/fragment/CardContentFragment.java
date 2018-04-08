@@ -1,4 +1,4 @@
-package com.javier.edukka.views;
+package com.javier.edukka.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.view.DetailActivity;
 
 public class CardContentFragment extends Fragment {
 
@@ -30,6 +31,43 @@ public class CardContentFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return recyclerView;
+    }
+
+    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
+        // Set numbers of List in RecyclerView.
+        private static final int LENGTH = 10;
+        private final String[] subjects;
+        private final String[] subjectDesc;
+        private final Drawable[] subjectPictures;
+
+        public ContentAdapter(Context context) {
+            Resources resources = context.getResources();
+            subjects = resources.getStringArray(R.array.subjects);
+            subjectDesc = resources.getStringArray(R.array.subject_desc);
+            TypedArray a = resources.obtainTypedArray(R.array.subject_pictures);
+            subjectPictures = new Drawable[a.length()];
+            for (int i = 0; i < subjectPictures.length; i++) {
+                subjectPictures[i] = a.getDrawable(i);
+            }
+            a.recycle();
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.picture.setImageDrawable(subjectPictures[position % subjectPictures.length]);
+            holder.name.setText(subjects[position % subjects.length]);
+            holder.description.setText(subjectDesc[position % subjectDesc.length]);
+        }
+
+        @Override
+        public int getItemCount() {
+            return LENGTH;
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -80,41 +118,5 @@ public class CardContentFragment extends Fragment {
         }
     }
 
-    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
-        // Set numbers of List in RecyclerView.
-        private static final int LENGTH = 10;
-        private final String[] subjects;
-        private final String[] subjectDesc;
-        private final Drawable[] subjectPictures;
-
-        public ContentAdapter(Context context) {
-            Resources resources = context.getResources();
-            subjects = resources.getStringArray(R.array.subjects);
-            subjectDesc = resources.getStringArray(R.array.subject_desc);
-            TypedArray a = resources.obtainTypedArray(R.array.subject_pictures);
-            subjectPictures = new Drawable[a.length()];
-            for (int i = 0; i < subjectPictures.length; i++) {
-                subjectPictures[i] = a.getDrawable(i);
-            }
-            a.recycle();
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.picture.setImageDrawable(subjectPictures[position % subjectPictures.length]);
-            holder.name.setText(subjects[position % subjects.length]);
-            holder.description.setText(subjectDesc[position % subjectDesc.length]);
-        }
-
-        @Override
-        public int getItemCount() {
-            return LENGTH;
-        }
-    }
 }
 

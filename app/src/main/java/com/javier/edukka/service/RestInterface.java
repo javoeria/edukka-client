@@ -1,10 +1,10 @@
-package com.javier.edukka.controllers;
+package com.javier.edukka.service;
 
-import com.javier.edukka.models.ActivityModel;
-import com.javier.edukka.models.ClassModel;
-import com.javier.edukka.models.GameModel;
-import com.javier.edukka.models.QuizModel;
-import com.javier.edukka.models.UserModel;
+import com.javier.edukka.model.ActivityModel;
+import com.javier.edukka.model.ClassModel;
+import com.javier.edukka.model.GameModel;
+import com.javier.edukka.model.QuizModel;
+import com.javier.edukka.model.UserModel;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface RestService {
+public interface RestInterface {
 
 // User Service
 
@@ -29,20 +29,20 @@ public interface RestService {
     Call<List<ActivityModel>> getUserActivity(@Path("id") int studentId);
 
     @FormUrlEncoded
-    @POST("/login")
+    @POST("login")
     Call<UserModel> logIn(@Field("username") String username, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("/signup")
+    @POST("signup")
     Call<UserModel> signUp(@Field("name") String name, @Field("surname") String surname, @Field("username") String username,
                            @Field("password") String password, @Field("role") String role, @Field("class_id") int classId);
 
     @FormUrlEncoded
-    @POST("/user/edit")
+    @POST("user/edit")
     Call<UserModel> updateUser(@Field("name") String name, @Field("surname") String surname, @Field("password") String password, @Field("id") int userId);
 
     @FormUrlEncoded
-    @POST("/user/delete")
+    @POST("user/delete")
     Call<Void> deleteUser(@Field("id") int userId, @Field("role") String role);
 
 // Class Service
@@ -60,23 +60,23 @@ public interface RestService {
     Call<List<ActivityModel>> getClassActivity(@Path("id") int classId);
 
     @FormUrlEncoded
-    @POST("/class/new")
+    @POST("class/new")
     Call<ClassModel> createClass(@Field("name") String name, @Field("information") String information, @Field("teacher_id") int teacherId);
 
     @FormUrlEncoded
-    @POST("/class/edit")
+    @POST("class/edit")
     Call<ClassModel> updateClass(@Field("name") String name, @Field("information") String information, @Field("id") int classId);
 
     @FormUrlEncoded
-    @POST("/class/delete")
+    @POST("class/delete")
     Call<Void> deleteClass(@Field("id") int classId);
 
     @FormUrlEncoded
-    @POST("/class/adduser")
+    @POST("class/adduser")
     Call<ClassModel> addUserClass(@Field("id") int userId, @Field("class_id") int classId);
 
     @FormUrlEncoded
-    @POST("/class/remuser")
+    @POST("class/remuser")
     Call<Void> removeUserClass(@Field("id") int userId);
 
 // Game Service
@@ -94,29 +94,29 @@ public interface RestService {
     Call<List<GameModel>> searchGames(@Path("sub") String subject, @Path("str") String string);
 
     @FormUrlEncoded
-    @POST("/game/new")
+    @POST("game/new")
     Call<GameModel> createGame(@Field("subject") String subject, @Field("title") String title, @Field("description") String description,
                                @Field("difficulty") String difficulty, @Field("teacher_id") int teacherId);
 
     @FormUrlEncoded
-    @POST("/game/edit")
+    @POST("game/edit")
     Call<GameModel> updateGame(@Field("subject") String subject, @Field("title") String title, @Field("description") String description,
                                @Field("difficulty") String difficulty, @Field("id") int gameId);
 
     @FormUrlEncoded
-    @POST("/game/delete")
+    @POST("game/delete")
     Call<Void> deleteGame(@Field("id") int gameId);
 
     @FormUrlEncoded
-    @POST("/game/finish")
+    @POST("game/finish")
     Call<ActivityModel> finishGame(@Field("student_id") int studentId, @Field("game_id") int gameId, @Field("result") int result);
 
     @FormUrlEncoded
-    @POST("/game/upvote")
+    @POST("game/upvote")
     Call<GameModel> upvoteGame(@Field("id") int gameId);
 
     @FormUrlEncoded
-    @POST("/game/downvote")
+    @POST("game/downvote")
     Call<GameModel> downvoteGame(@Field("id") int gameId);
 
 // Quiz Service
@@ -131,17 +131,17 @@ public interface RestService {
     Call<List<QuizModel>> getGameQuiz(@Path("id") int gameId);
 
     @FormUrlEncoded
-    @POST("/quiz/new")
+    @POST("quiz/new")
     Call<QuizModel> createQuiz(@Field("type") String type, @Field("question") String question, @Field("answer") String answer,
                                @Field("options") String options, @Field("hint") String hint, @Field("game_id") int gameId);
 
     @FormUrlEncoded
-    @POST("/quiz/edit")
+    @POST("quiz/edit")
     Call<QuizModel> updateQuiz(@Field("type") String type, @Field("question") String question, @Field("answer") String answer,
                                @Field("options") String options, @Field("hint") String hint, @Field("id") int quizId);
 
     @FormUrlEncoded
-    @POST("/quiz/delete")
+    @POST("quiz/delete")
     Call<Void> deleteQuiz(@Field("id") int quizId);
 
 }

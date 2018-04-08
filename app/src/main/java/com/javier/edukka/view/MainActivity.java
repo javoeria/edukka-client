@@ -1,4 +1,4 @@
-package com.javier.edukka.views;
+package com.javier.edukka.view;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -10,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.javier.edukka.R;
+import com.javier.edukka.fragment.CardContentFragment;
+import com.javier.edukka.fragment.ListContentFragment;
+import com.javier.edukka.fragment.TileContentFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle(UserSingleton.getInstance().getUserModel().getUsername());
 
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
