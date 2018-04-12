@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/card_title_height"
             android:layout_alignBottom="@+id/card_image"
-            android:layout_marginLeft="@dimen/md_keylines"
+            android:layout_marginStart="@dimen/md_keylines"
             tools:text="@string/item_title"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/black" />
@@ -60,10 +60,10 @@
             android:id="@+id/share_button"
             android:layout_width="@dimen/card_button_width"
             android:layout_height="@dimen/card_button_height"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_marginEnd="@dimen/md_keylines"
             app:srcCompat="@drawable/ic_share"
             android:layout_below="@+id/card_text"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             style="?android:attr/borderlessButtonStyle"
             android:tint="@color/button_grey" />
 
@@ -71,10 +71,10 @@
             android:id="@+id/favorite_button"
             android:layout_width="@dimen/card_button_width"
             android:layout_height="@dimen/card_button_height"
-            android:layout_marginRight="@dimen/md_keylines"
+            android:layout_marginEnd="@dimen/md_keylines"
             app:srcCompat="@drawable/ic_favorite"
             android:layout_below="@+id/card_text"
-            android:layout_toLeftOf="@id/share_button"
+            android:layout_toStartOf="@id/share_button"
             style="?android:attr/borderlessButtonStyle"
             android:tint="@color/button_grey" />
     </RelativeLayout>

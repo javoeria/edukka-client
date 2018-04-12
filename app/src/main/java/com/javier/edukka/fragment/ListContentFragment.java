@@ -14,10 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
-import com.javier.edukka.model.UserModel;
-import com.javier.edukka.view.DetailActivity;
+import com.javier.edukka.view.ProfileActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,8 @@ import retrofit2.Response;
 public class ListContentFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private ArrayList<UserModel> mArrayList;
     private ContentAdapter mAdapter;
+    public static ArrayList<UserModel> mArrayList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class ListContentFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int i) {
-            //holder.avatar.setImageDrawable(subjectAvatars[position % subjectAvatars.length]);
+            holder.avatar.setImageResource(R.drawable.dog);
             holder.name.setText(mArrayList.get(i).getUsername());
             holder.description.setText(mArrayList.get(i).getName());
         }
@@ -101,8 +101,9 @@ public class ListContentFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    Integer i = Integer.parseInt(mArrayList.get(getAdapterPosition()).getId());
+                    intent.putExtra(ProfileActivity.EXTRA_POSITION, i);
                     context.startActivity(intent);
                 }
             });
