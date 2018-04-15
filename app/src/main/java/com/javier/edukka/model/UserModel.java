@@ -11,9 +11,6 @@ public class UserModel {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("surname")
-    @Expose
-    private String surname;
     @SerializedName("username")
     @Expose
     private String username;
@@ -23,6 +20,9 @@ public class UserModel {
     @SerializedName("role")
     @Expose
     private String role;
+    @SerializedName("image")
+    @Expose
+    private String image;
     @SerializedName("score")
     @Expose
     private String score;
@@ -32,14 +32,14 @@ public class UserModel {
 
     public UserModel() {}
 
-    public UserModel(String id, String name, String surname, String username, String password, String role, String score, String classId) {
+    public UserModel(String id, String name, String username, String password, String role, String image, String score, String classId) {
         super();
         this.id = id;
         this.name = name;
-        this.surname = surname;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.image = image;
         this.score = score;
         this.classId = classId;
     }
@@ -58,14 +58,6 @@ public class UserModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 
     public String getUsername() {
@@ -90,6 +82,14 @@ public class UserModel {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getScore() {

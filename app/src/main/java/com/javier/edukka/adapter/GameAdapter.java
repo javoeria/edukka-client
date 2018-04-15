@@ -1,5 +1,7 @@
 package com.javier.edukka.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.javier.edukka.R;
 import com.javier.edukka.model.GameModel;
+import com.javier.edukka.view.GameActivity;
 
 import java.util.ArrayList;
 
@@ -81,6 +84,17 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
             game_name = (TextView) view.findViewById(R.id.game_name);
             game_desc = (TextView) view.findViewById(R.id.game_desc);
             game_level = (TextView) view.findViewById(R.id.game_level);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, GameActivity.class);
+                    Integer i = Integer.parseInt(mFilteredList.get(getAdapterPosition()).getId());
+                    intent.putExtra(GameActivity.EXTRA_POSITION, i);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

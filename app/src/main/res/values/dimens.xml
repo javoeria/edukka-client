@@ -16,13 +16,13 @@
     <dimen name="list_body">14sp</dimen>
     <dimen name="avatar_size">40dp</dimen>
     <dimen name="article_titles">20sp</dimen>
-    <dimen name="article_keylines">72dp</dimen>
+    <dimen name="article_keylines">52dp</dimen>
     <dimen name="article_subheading">16sp</dimen>
 
     <dimen name="tile_title">16sp</dimen>
     <dimen name="tile_padding">4dp</dimen>
     <dimen name="tile_height">160dp</dimen>
-    <dimen name="tile1_height">140dp</dimen>
-    <dimen name="tile2_height">30dp</dimen>
+    <dimen name="tile1_height">136dp</dimen>
+    <dimen name="tile2_height">24dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 </resources>

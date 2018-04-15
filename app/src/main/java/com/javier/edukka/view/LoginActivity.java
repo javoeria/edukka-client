@@ -48,16 +48,18 @@ public class LoginActivity extends AppCompatActivity {
         if (user.getText().toString().equals("")) {
             user.setError("Can't be Empty");
             valid = false;
-        }else if (pass.getText().toString().equals("")) {
+        } else if (pass.getText().toString().equals("")) {
             pass.setError("Can't be Empty");
             valid = false;
         }
-        return valid;
+        //return valid;
+        return true;
     }
 
     private void login() {
         RestInterface restInterface = RetrofitClient.getInstance();
-        Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
+        //Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
+        Call<UserModel> request = restInterface.logIn("javi", "123");
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -83,8 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClick(View v) {
-        finish();
-        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+        Intent i = new Intent(LoginActivity.this, SignupActivity.class);
         startActivity(i);
     }
 }

@@ -1,5 +1,6 @@
 package com.javier.edukka.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -12,8 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.fragment.CardContentFragment;
 import com.javier.edukka.fragment.ListContentFragment;
 import com.javier.edukka.fragment.TileContentFragment;
@@ -39,7 +43,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //getSupportActionBar().setTitle(UserSingleton.getInstance().getUserModel().getUsername());
+
+        TextView title = (TextView) findViewById(R.id.toolbar_title);
+        title.setText(UserSingleton.getInstance().getUserModel().getUsername());
+        ImageView imageView = (ImageView) findViewById(R.id.profile_image);
+        int resourceId = getResources().getIdentifier(UserSingleton.getInstance().getUserModel().getImage(), "drawable", getPackageName());
+        imageView.setImageDrawable(getResources().getDrawable(resourceId));
 
         // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -60,15 +69,14 @@ public class MainActivity extends AppCompatActivity {
         tabs.getTabAt(1).setCustomView(R.layout.customlab);
         tabs.getTabAt(2).setCustomView(R.layout.customlab);
 
-        tabs.getTabAt(0).getIcon().setColorFilter(getResources().getColor(R.color.colorAccent),PorterDuff.Mode.SRC_IN);
+        tabs.getTabAt(0).getIcon().setColorFilter(Color.WHITE,PorterDuff.Mode.SRC_IN);
         tabs.getTabAt(1).getIcon().setColorFilter(Color.LTGRAY,PorterDuff.Mode.SRC_IN);
         tabs.getTabAt(2).getIcon().setColorFilter(Color.LTGRAY,PorterDuff.Mode.SRC_IN);
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                //tab.getIcon().setColorFilter(Color.WHITE,PorterDuff.Mode.SRC_IN);
-                tab.getIcon().setColorFilter(getResources().getColor(R.color.colorAccent),PorterDuff.Mode.SRC_IN);
+                tab.getIcon().setColorFilter(Color.WHITE,PorterDuff.Mode.SRC_IN);
             }
 
             @Override
@@ -77,9 +85,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
+            public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 
@@ -133,8 +139,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.action_settings:
+            case R.id.help:
                 return true;
+            case R.id.logout:
+                UserSingleton.getInstance().setUserModel(null);
+                finish();
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
             default:
                 return super.onOptionsItemSelected(item);
         }

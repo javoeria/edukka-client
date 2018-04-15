@@ -56,10 +56,11 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
                 UserModel jsonResponse = response.body();
-                collapsingToolbar.setTitle(jsonResponse.getName());
-                name.setText(jsonResponse.getName()+' '+jsonResponse.getSurname());
+                collapsingToolbar.setTitle(jsonResponse.getUsername());
+                name.setText(jsonResponse.getName());
                 score.setText(jsonResponse.getScore()+" pts");
-                userImage.setImageResource(R.drawable.dog);
+                int resourceId = getResources().getIdentifier(jsonResponse.getImage(), "drawable", getPackageName());
+                userImage.setImageDrawable(getResources().getDrawable(resourceId));
             }
 
             @Override

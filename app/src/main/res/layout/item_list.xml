@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,7 +11,7 @@
         android:id="@+id/list_avatar"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
-        android:src="@drawable/dog"/>
+        android:src="@drawable/avatar_dog"/>
 
     <TextView
         android:id="@+id/list_title"
@@ -29,7 +30,7 @@
         android:layout_below="@+id/list_title"
         android:layout_marginStart="@dimen/md_keylines"
         android:layout_toEndOf="@+id/list_avatar"
-        android:textColor="@color/medium_grey"
+        android:textColor="@color/colorSecondaryText"
         android:ellipsize="end"
         android:singleLine="true"
         tools:text="@string/item_desc"

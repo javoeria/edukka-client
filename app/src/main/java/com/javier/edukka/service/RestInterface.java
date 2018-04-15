@@ -34,8 +34,8 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("signup")
-    Call<UserModel> signUp(@Field("name") String name, @Field("surname") String surname, @Field("username") String username,
-                           @Field("password") String password, @Field("role") String role, @Field("class_id") int classId);
+    Call<UserModel> signUp(@Field("name") String name, @Field("username") String username, @Field("password") String password,
+                           @Field("role") String role, @Field("image") String image, @Field("class_id") int classId);
 
     @FormUrlEncoded
     @POST("user/edit")

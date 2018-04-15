@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -45,6 +46,8 @@ public class ListContentFragment extends Fragment {
     private void loadJSON(){
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<List<UserModel>> call = restInterface.getAllUsers();
+        //Integer id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
+        //Call<List<UserModel>> call = restInterface.getUserClass(id);
         call.enqueue(new Callback<List<UserModel>>() {
             @Override
             public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
@@ -61,7 +64,7 @@ public class ListContentFragment extends Fragment {
         });
     }
 
-    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
+    public class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         private ArrayList<UserModel> mArrayList;
 
         public ContentAdapter(ArrayList<UserModel> arrayList) {
@@ -75,7 +78,8 @@ public class ListContentFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int i) {
-            holder.avatar.setImageResource(R.drawable.dog);
+            int resourceId = getResources().getIdentifier(mArrayList.get(i).getImage(), "drawable", getContext().getPackageName());
+            holder.avatar.setImageResource(resourceId);
             holder.name.setText(mArrayList.get(i).getUsername());
             holder.description.setText(mArrayList.get(i).getName());
         }

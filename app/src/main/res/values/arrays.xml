@@ -64,15 +64,27 @@
         <item>Cape Town, South Africa</item>
     </string-array>
     <array name="subject_pictures">
-        <item>@drawable/icon1</item>
-        <item>@drawable/icon2</item>
-        <item>@drawable/icon3</item>
-        <item>@drawable/icon4</item>
-        <item>@drawable/icon5</item>
-        <item>@drawable/icon6</item>
-        <item>@drawable/icon7</item>
-        <item>@drawable/icon8</item>
-        <item>@drawable/icon9</item>
-        <item>@drawable/icon10</item>
+        <item>@drawable/subject_spanish</item>
+        <item>@drawable/subject_math</item>
+        <item>@drawable/subject_natural</item>
+        <item>@drawable/subject_social</item>
+        <item>@drawable/subject_biology</item>
+        <item>@drawable/subject_geography</item>
+        <item>@drawable/subject_music</item>
+        <item>@drawable/subject_sport</item>
+        <item>@drawable/subject_english</item>
+        <item>@drawable/subject_general</item>
+    </array>
+    <array name="avatar_pictures">
+        <item>@drawable/avatar_butterfly</item>
+        <item>@drawable/avatar_cat</item>
+        <item>@drawable/avatar_dog</item>
+        <item>@drawable/avatar_elephant</item>
+        <item>@drawable/avatar_lion</item>
+        <item>@drawable/avatar_panda</item>
+        <item>@drawable/avatar_snake</item>
+        <item>@drawable/avatar_spider</item>
+        <item>@drawable/avatar_turtle</item>
+        <item>@drawable/avatar_wolf</item>
     </array>
 </resources>

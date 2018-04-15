@@ -90,7 +90,12 @@ public class SearchActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.search) {
+            return super.onOptionsItemSelected(item);
+        } else {
+            finish();
+            return true;
+        }
     }
 
     private void search(SearchView searchView) {

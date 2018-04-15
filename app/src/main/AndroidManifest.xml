@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.SignupActivity"
+            android:parentActivityName=".view.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.LoginActivity" />
+        </activity>
         <activity android:name=".view.MainActivity" />
         <activity
             android:name=".view.DetailActivity"
@@ -33,7 +40,20 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
         </activity>
-        <activity android:name=".view.ProfileActivity" />
+        <activity
+            android:name=".view.ProfileActivity"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.GameActivity"
+            android:parentActivityName=".view.SearchActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.SearchActivity" />
+        </activity>
     </application>
 
 </manifest>
