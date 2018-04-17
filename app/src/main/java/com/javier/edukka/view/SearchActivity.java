@@ -1,7 +1,8 @@
 package com.javier.edukka.view;
 
 import android.os.Bundle;
-import android.support.v4.view.MenuItemCompat;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.View;
 
 import com.javier.edukka.R;
 import com.javier.edukka.adapter.GameAdapter;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -37,15 +39,24 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         subject = getIntent().getStringExtra(SUBJECT_NAME);
         getSupportActionBar().setTitle(subject);
-
         initViews();
         loadJSON();
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("Teacher")) {
+            fab.setVisibility(View.VISIBLE);
+        }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        });
     }
 
     private void initViews(){
@@ -83,7 +94,7 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem search = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(search);
+        SearchView searchView = (SearchView) search.getActionView();
         search(searchView);
         return true;
     }

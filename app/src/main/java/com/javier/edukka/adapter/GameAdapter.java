@@ -27,7 +27,7 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.card_row, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.game_row, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -91,7 +91,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
                     Context context = v.getContext();
                     Intent intent = new Intent(context, GameActivity.class);
                     Integer i = Integer.parseInt(mFilteredList.get(getAdapterPosition()).getId());
+                    String s = mFilteredList.get(getAdapterPosition()).getSubject();
                     intent.putExtra(GameActivity.EXTRA_POSITION, i);
+                    intent.putExtra(GameActivity.EXTRA_SUBJECT, s);
                     context.startActivity(intent);
                 }
             });

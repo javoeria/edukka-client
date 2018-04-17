@@ -11,7 +11,7 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
+        android:fitsSystemWindows="false"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -53,27 +53,75 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingStart="@dimen/article_keylines"
-            android:paddingEnd="@dimen/md_keylines"
+            android:paddingEnd="@dimen/article_keylines"
             android:paddingTop="@dimen/md_keylines">
 
             <TextView
-                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
+                android:text="Full Name"
                 android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines"
-                android:layout_marginBottom="@dimen/md_keylines" />
+                android:layout_marginTop="@dimen/md_keylines" />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/detail_location" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorAccent"
+                android:text="Score"
+                android:textSize="@dimen/article_titles"
+                android:layout_marginTop="@dimen/md_keylines" />
 
             <TextView
                 android:id="@+id/user_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0 points" />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
+                android:text="Role"
                 android:textSize="@dimen/article_titles"
-                android:layout_marginBottom="@dimen/md_keylines"
                 android:layout_marginTop="@dimen/md_keylines" />
+
+            <TextView
+                android:id="@+id/user_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Student" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorAccent"
+                android:text="Class"
+                android:textSize="@dimen/article_titles"
+                android:layout_marginTop="@dimen/md_keylines" />
+
+            <TextView
+                android:id="@+id/user_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="@string/item_title" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_mode_edit_white_24dp"
+        android:visibility="invisible"
+        android:layout_margin="16dp" />
+
 </android.support.design.widget.CoordinatorLayout>

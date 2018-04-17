@@ -27,21 +27,7 @@
         </activity>
         <activity android:name=".view.MainActivity" />
         <activity
-            android:name=".view.DetailActivity"
-            android:parentActivityName=".view.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
-        </activity>
-        <activity
             android:name=".view.SearchActivity"
-            android:parentActivityName=".view.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
-        </activity>
-        <activity
-            android:name=".view.ProfileActivity"
             android:parentActivityName=".view.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -53,6 +39,27 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.SearchActivity" />
+        </activity>
+        <activity
+            android:name=".view.ProfileActivity"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.ClassActivity"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.DetailActivity"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
         </activity>
     </application>
 

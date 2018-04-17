@@ -6,7 +6,7 @@
         <!-- Light Indigo -->
         <item name="colorPrimaryDark">#303F9F</item>
         <!-- Dark Indigo -->
-        <item name="colorAccent">#00B0FF</item>
+        <item name="colorAccent">#03A9F4</item>
         <!-- Blue -->
     </style>
     <style name="AppTheme" parent="AppTheme.Base" />

@@ -1,10 +1,10 @@
 package com.javier.edukka.view;
 
-import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.javier.edukka.R;
 import com.javier.edukka.controller.UserSingleton;
+import com.javier.edukka.model.ClassModel;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -22,29 +23,26 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ClassActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
     private CollapsingToolbarLayout collapsingToolbar;
-    private TextView name, score, role, classid;
-    private ImageView userImage;
+    private TextView id, info, size;
     private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_class);
 
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        name = (TextView) findViewById(R.id.user_name);
-        score = (TextView) findViewById(R.id.user_score);
-        role = (TextView) findViewById(R.id.user_role);
-        classid = (TextView) findViewById(R.id.user_class);
-        userImage = (ImageView) findViewById(R.id.image);
+        id = (TextView) findViewById(R.id.class_id);
+        info = (TextView) findViewById(R.id.class_info);
+        size = (TextView) findViewById(R.id.class_size);
         loadJSON();
 
         fab = findViewById(R.id.fab);
@@ -65,25 +63,22 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadJSON(){
         int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
         RestInterface restInterface = RetrofitClient.getInstance();
-        Call<UserModel> call = restInterface.getUser(position);
-        call.enqueue(new Callback<UserModel>() {
+        Call<ClassModel> call = restInterface.getClass(position);
+        call.enqueue(new Callback<ClassModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
-                UserModel jsonResponse = response.body();
-                collapsingToolbar.setTitle(jsonResponse.getUsername());
-                name.setText(jsonResponse.getName());
-                score.setText(jsonResponse.getScore()+" pts");
-                role.setText(jsonResponse.getRole());
-                classid.setText(jsonResponse.getClassId());
-                int resourceId = getResources().getIdentifier(jsonResponse.getImage(), "drawable", getPackageName());
-                userImage.setImageDrawable(getResources().getDrawable(resourceId));
-                if (UserSingleton.getInstance().getUserModel().getUsername().equals(jsonResponse.getUsername())) {
+            public void onResponse(Call<ClassModel> call, Response<ClassModel> response) {
+                ClassModel jsonResponse = response.body();
+                collapsingToolbar.setTitle(jsonResponse.getName());
+                id.setText(jsonResponse.getId());
+                info.setText(jsonResponse.getInformation());
+                size.setText("10 usuarios");
+                if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
                     fab.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(Call<ClassModel> call, Throwable t) {
                 Log.d("Error",t.getMessage());
             }
         });

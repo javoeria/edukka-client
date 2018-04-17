@@ -39,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         TextView subjectDetail = (TextView) findViewById(R.id.subject_detail);
         subjectDetail.setText(subjectDetails[position % subjectDetails.length]);
 
-        String[] subjectLocations = resources.getStringArray(R.array.subject_locations);
+        String[] subjectLocations = resources.getStringArray(R.array.subject_details);
         TextView subjectLocation =  (TextView) findViewById(R.id.subject_location);
         subjectLocation.setText(subjectLocations[position % subjectLocations.length]);
 

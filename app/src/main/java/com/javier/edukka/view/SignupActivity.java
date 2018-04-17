@@ -108,6 +108,7 @@ public class SignupActivity extends AppCompatActivity {
         for (int i=0; i<array.length; i++) {
             avatars.add(a.getDrawable(i));
         }
+        a.recycle();
     }
 
     private void signup() {

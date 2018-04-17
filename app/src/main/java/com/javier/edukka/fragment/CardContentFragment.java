@@ -35,19 +35,19 @@ public class CardContentFragment extends Fragment {
 
     public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         // Set numbers of List in RecyclerView.
-        private static final int LENGTH = 10;
-        private final String[] subjects;
-        private final String[] subjectDesc;
-        private final Drawable[] subjectPictures;
+        private static final int LENGTH = 2;
+        private final String[] activity;
+        private final String[] activityDesc;
+        private final Drawable[] activityPictures;
 
         public ContentAdapter(Context context) {
             Resources resources = context.getResources();
-            subjects = resources.getStringArray(R.array.subjects);
-            subjectDesc = resources.getStringArray(R.array.subject_desc);
-            TypedArray a = resources.obtainTypedArray(R.array.subject_pictures);
-            subjectPictures = new Drawable[a.length()];
-            for (int i = 0; i < subjectPictures.length; i++) {
-                subjectPictures[i] = a.getDrawable(i);
+            activity = resources.getStringArray(R.array.activity);
+            activityDesc = resources.getStringArray(R.array.activity_desc);
+            TypedArray a = resources.obtainTypedArray(R.array.activity_pictures);
+            activityPictures = new Drawable[a.length()];
+            for (int i = 0; i < activityPictures.length; i++) {
+                activityPictures[i] = a.getDrawable(i);
             }
             a.recycle();
         }
@@ -59,9 +59,9 @@ public class CardContentFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.picture.setImageDrawable(subjectPictures[position % subjectPictures.length]);
-            holder.name.setText(subjects[position % subjects.length]);
-            holder.description.setText(subjectDesc[position % subjectDesc.length]);
+            holder.picture.setImageDrawable(activityPictures[position % activityPictures.length]);
+            holder.name.setText(activity[position % activity.length]);
+            holder.description.setText(activityDesc[position % activityDesc.length]);
         }
 
         @Override
@@ -88,31 +88,6 @@ public class CardContentFragment extends Fragment {
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
                     context.startActivity(intent);
-                }
-            });
-
-            // Adding Snackbar to Action Button inside card
-            Button button = (Button) itemView.findViewById(R.id.action_button);
-            button.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Action is pressed", Snackbar.LENGTH_LONG).show();
-                }
-            });
-
-            ImageButton favoriteImageButton = (ImageButton) itemView.findViewById(R.id.favorite_button);
-            favoriteImageButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Added to Favorite", Snackbar.LENGTH_LONG).show();
-                }
-            });
-
-            ImageButton shareImageButton = (ImageButton) itemView.findViewById(R.id.share_button);
-            shareImageButton.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v) {
-                    Snackbar.make(v, "Share article", Snackbar.LENGTH_LONG).show();
                 }
             });
         }

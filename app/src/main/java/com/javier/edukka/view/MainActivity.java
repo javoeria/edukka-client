@@ -29,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabs;
     private int[] tabIcons = {
-            R.drawable.ic_games_white_36dp,
-            R.drawable.ic_group_white_36dp,
-            R.drawable.ic_schedule_white_36dp
+        R.drawable.ic_games_white_36dp,
+        R.drawable.ic_group_white_36dp,
+        R.drawable.ic_schedule_white_36dp
     };
 
     @Override
@@ -139,6 +139,18 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+            case R.id.profile:
+                Intent intentp = new Intent(MainActivity.this, ProfileActivity.class);
+                Integer idp = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
+                intentp.putExtra(ProfileActivity.EXTRA_POSITION, idp);
+                startActivity(intentp);
+                return true;
+            case R.id.myclass:
+                Intent intentc = new Intent(MainActivity.this, ClassActivity.class);
+                Integer idc = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
+                intentc.putExtra(ProfileActivity.EXTRA_POSITION, idc);
+                startActivity(intentc);
+                return true;
             case R.id.help:
                 return true;
             case R.id.logout:
