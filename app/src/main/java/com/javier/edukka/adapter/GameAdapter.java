@@ -17,7 +17,7 @@ import com.javier.edukka.view.GameActivity;
 import java.util.ArrayList;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> implements Filterable {
-    private ArrayList<GameModel> mArrayList;
+    private final ArrayList<GameModel> mArrayList;
     private ArrayList<GameModel> mFilteredList;
 
     public GameAdapter(ArrayList<GameModel> arrayList) {
@@ -74,16 +74,16 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
         };
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView game_name;
-        private TextView game_desc;
-        private TextView game_level;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final TextView game_name;
+        private final TextView game_desc;
+        private final TextView game_level;
 
-        public ViewHolder(View view) {
+        private ViewHolder(View view) {
             super(view);
-            game_name = (TextView) view.findViewById(R.id.game_name);
-            game_desc = (TextView) view.findViewById(R.id.game_desc);
-            game_level = (TextView) view.findViewById(R.id.game_level);
+            game_name = view.findViewById(R.id.game_name);
+            game_desc = view.findViewById(R.id.game_desc);
+            game_level = view.findViewById(R.id.game_level);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="subjects">
-        <item>Spanish Literature</item>
-        <item>Mathematics</item>
-        <item>Natural Sciences</item>
-        <item>Social Sciences</item>
-        <item>Biology &amp; Geology</item>
-        <item>Geography &amp; History</item>
-        <item>Music</item>
-        <item>Sports</item>
-        <item>English Language</item>
-        <item>General Knowledge</item>
+        <item>Lengua Castellana y Literatura</item>
+        <item>Matemáticas</item>
+        <item>Ciencias Naturales</item>
+        <item>Ciencias Sociales</item>
+        <item>Biología y Geología</item>
+        <item>Geografía e Historia</item>
+        <item>Música</item>
+        <item>Deportes</item>
+        <item>Inglés</item>
+        <item>Conocimiento General</item>
     </string-array>
     <string-array name="activity">
-        <item>History</item>
-        <item>Statistics</item>
+        <item>Historial</item>
+        <item>Estadísticas</item>
     </string-array>
     <string-array name="activity_desc">
-        <item>Record in a database of all games made by the user.</item>
-        <item>Study of the games to reach conclusions based on the results obtained.</item>
+        <item>Registro en una base de datos de los juegos realizados por el usuario.</item>
+        <item>Estudio de los juegos para llegar a conclusiones a partir de los resultados obtenidos.</item>
     </string-array>
     <string-array name="subject_details">
         <item>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do

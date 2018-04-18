@@ -3,6 +3,7 @@ package com.javier.edukka.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
-import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -31,7 +31,7 @@ public class ListContentFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
-    public static ArrayList<UserModel> mArrayList;
+    private static ArrayList<UserModel> mArrayList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class ListContentFragment extends Fragment {
         //Call<List<UserModel>> call = restInterface.getUserClass(id);
         call.enqueue(new Callback<List<UserModel>>() {
             @Override
-            public void onResponse(Call<List<UserModel>> call, Response<List<UserModel>> response) {
+            public void onResponse(@NonNull Call<List<UserModel>> call, @NonNull Response<List<UserModel>> response) {
                 List<UserModel> jsonResponse = response.body();
                 mArrayList = (ArrayList<UserModel>) jsonResponse;
                 mAdapter = new ContentAdapter(mArrayList);
@@ -58,16 +58,16 @@ public class ListContentFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<UserModel>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<UserModel>> call, @NonNull Throwable t) {
                 Log.d("Error",t.getMessage());
             }
         });
     }
 
     public class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
-        private ArrayList<UserModel> mArrayList;
+        private final ArrayList<UserModel> mArrayList;
 
-        public ContentAdapter(ArrayList<UserModel> arrayList) {
+        private ContentAdapter(ArrayList<UserModel> arrayList) {
             mArrayList = arrayList;
         }
 
@@ -90,16 +90,16 @@ public class ListContentFragment extends Fragment {
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView avatar;
-        public TextView name;
-        public TextView description;
+    private static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView avatar;
+        private final TextView name;
+        private final TextView description;
 
-        public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
+        private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_list, parent, false));
-            avatar = (ImageView) itemView.findViewById(R.id.list_avatar);
-            name = (TextView) itemView.findViewById(R.id.list_title);
-            description = (TextView) itemView.findViewById(R.id.list_desc);
+            avatar = itemView.findViewById(R.id.list_avatar);
+            name = itemView.findViewById(R.id.list_title);
+            description = itemView.findViewById(R.id.list_desc);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

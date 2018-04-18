@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,7 +25,7 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Set Collapsing Toolbar layout to the screen
-        CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        CollapsingToolbarLayout collapsingToolbar = findViewById(R.id.collapsing_toolbar);
         // Set title of Detail page
         // collapsingToolbar.setTitle(getString(R.string.item_title));
 
@@ -36,17 +35,16 @@ public class DetailActivity extends AppCompatActivity {
         collapsingToolbar.setTitle(subjects[position % subjects.length]);
 
         String[] subjectDetails = resources.getStringArray(R.array.subject_details);
-        TextView subjectDetail = (TextView) findViewById(R.id.subject_detail);
+        TextView subjectDetail = findViewById(R.id.subject_detail);
         subjectDetail.setText(subjectDetails[position % subjectDetails.length]);
 
         String[] subjectLocations = resources.getStringArray(R.array.subject_details);
-        TextView subjectLocation =  (TextView) findViewById(R.id.subject_location);
+        TextView subjectLocation = findViewById(R.id.subject_location);
         subjectLocation.setText(subjectLocations[position % subjectLocations.length]);
 
         TypedArray subjectPictures = resources.obtainTypedArray(R.array.subject_pictures);
-        ImageView subjectPicutre = (ImageView) findViewById(R.id.image);
-        subjectPicutre.setImageDrawable(subjectPictures.getDrawable(position % subjectPictures.length()));
-
+        ImageView subjectPicture = findViewById(R.id.image);
+        subjectPicture.setImageDrawable(subjectPictures.getDrawable(position % subjectPictures.length()));
         subjectPictures.recycle();
     }
 

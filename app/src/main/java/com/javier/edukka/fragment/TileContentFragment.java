@@ -40,7 +40,7 @@ public class TileContentFragment extends Fragment {
         private final String[] subjects;
         private final Drawable[] subjectPictures;
 
-        public ContentAdapter(Context context) {
+        private ContentAdapter(Context context) {
             Resources resources = context.getResources();
             subjects = resources.getStringArray(R.array.subjects);
             TypedArray a = resources.obtainTypedArray(R.array.subject_pictures);
@@ -68,14 +68,14 @@ public class TileContentFragment extends Fragment {
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView picture;
-        public TextView name;
+    private static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView picture;
+        private final TextView name;
 
-        public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
+        private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_tile, parent, false));
-            picture = (ImageView) itemView.findViewById(R.id.tile_picture);
-            name = (TextView) itemView.findViewById(R.id.tile_title);
+            picture = itemView.findViewById(R.id.tile_picture);
+            name = itemView.findViewById(R.id.tile_title);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

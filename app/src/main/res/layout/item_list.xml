@@ -11,7 +11,7 @@
         android:id="@+id/list_avatar"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
-        android:src="@drawable/avatar_dog"/>
+        tools:src="@drawable/avatar_dog"/>
 
     <TextView
         android:id="@+id/list_title"
@@ -19,9 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/md_keylines"
         android:layout_toEndOf="@+id/list_avatar"
-        tools:text="@string/item_title"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="@dimen/article_subheading" />
+        android:textSize="@dimen/article_subheading"
+        tools:text="@string/item_title" />
 
     <TextView
         android:id="@+id/list_desc"
@@ -33,7 +33,8 @@
         android:textColor="@color/colorSecondaryText"
         android:ellipsize="end"
         android:singleLine="true"
-        tools:text="@string/item_desc"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="@dimen/list_body" />
+        android:textSize="@dimen/list_body"
+        tools:text="@string/item_desc" />
+
 </RelativeLayout>

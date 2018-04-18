@@ -6,15 +6,12 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,7 +37,7 @@ public class CardContentFragment extends Fragment {
         private final String[] activityDesc;
         private final Drawable[] activityPictures;
 
-        public ContentAdapter(Context context) {
+        private ContentAdapter(Context context) {
             Resources resources = context.getResources();
             activity = resources.getStringArray(R.array.activity);
             activityDesc = resources.getStringArray(R.array.activity_desc);
@@ -70,16 +67,16 @@ public class CardContentFragment extends Fragment {
         }
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView picture;
-        public TextView name;
-        public TextView description;
+    private static class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView picture;
+        private final TextView name;
+        private final TextView description;
 
-        public ViewHolder(LayoutInflater inflater, ViewGroup parent) {
+        private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_card, parent, false));
-            picture = (ImageView) itemView.findViewById(R.id.card_image);
-            name = (TextView) itemView.findViewById(R.id.card_title);
-            description = (TextView) itemView.findViewById(R.id.card_text);
+            picture = itemView.findViewById(R.id.card_image);
+            name = itemView.findViewById(R.id.card_title);
+            description = itemView.findViewById(R.id.card_text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -94,4 +91,3 @@ public class CardContentFragment extends Fragment {
     }
 
 }
-

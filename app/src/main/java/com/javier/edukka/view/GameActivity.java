@@ -1,28 +1,22 @@
 package com.javier.edukka.view;
 
-import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
-import com.javier.edukka.adapter.GameAdapter;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -31,9 +25,9 @@ import retrofit2.Response;
 
 public class GameActivity extends AppCompatActivity {
 
-    private Map<String, String> map;
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SUBJECT = "subject";
+    private Map<String, String> map;
     private CollapsingToolbarLayout collapsingToolbar;
     private TextView detail, difficulty, vote;
     private ImageView subjectImage;
@@ -47,11 +41,11 @@ public class GameActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        detail = (TextView) findViewById(R.id.game_detail);
-        difficulty = (TextView) findViewById(R.id.game_difficulty);
-        vote = (TextView) findViewById(R.id.game_vote);
-        subjectImage = (ImageView) findViewById(R.id.image);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        detail = findViewById(R.id.game_detail);
+        difficulty = findViewById(R.id.game_difficulty);
+        vote = findViewById(R.id.game_vote);
+        subjectImage = findViewById(R.id.image);
         initMap();
         loadJSON();
     }
@@ -76,7 +70,7 @@ public class GameActivity extends AppCompatActivity {
         Call<GameModel> call = restInterface.getGame(position);
         call.enqueue(new Callback<GameModel>() {
             @Override
-            public void onResponse(Call<GameModel> call, Response<GameModel> response) {
+            public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
                 GameModel jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getTitle());
                 detail.setText(jsonResponse.getDescription());
@@ -94,7 +88,7 @@ public class GameActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GameModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<GameModel> call, @NonNull Throwable t) {
                 Log.d("Error",t.getMessage());
             }
         });

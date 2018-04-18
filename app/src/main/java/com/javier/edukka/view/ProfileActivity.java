@@ -1,6 +1,7 @@
 package com.javier.edukka.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,12 +40,12 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        name = (TextView) findViewById(R.id.user_name);
-        score = (TextView) findViewById(R.id.user_score);
-        role = (TextView) findViewById(R.id.user_role);
-        classid = (TextView) findViewById(R.id.user_class);
-        userImage = (ImageView) findViewById(R.id.image);
+        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
+        name = findViewById(R.id.user_name);
+        score = findViewById(R.id.user_score);
+        role = findViewById(R.id.user_role);
+        classid = findViewById(R.id.user_class);
+        userImage = findViewById(R.id.image);
         loadJSON();
 
         fab = findViewById(R.id.fab);
@@ -68,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         Call<UserModel> call = restInterface.getUser(position);
         call.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 UserModel jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getUsername());
                 name.setText(jsonResponse.getName());
@@ -83,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
                 Log.d("Error",t.getMessage());
             }
         });

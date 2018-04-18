@@ -13,7 +13,7 @@ import com.javier.edukka.R;
 import java.util.List;
 
 public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder> {
-    private List<Drawable> data;
+    private final List<Drawable> data;
     private int selectedPos = 0;
 
     public AvatarAdapter(List<Drawable> data) {
@@ -41,10 +41,10 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder
         return selectedPos;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView avatar;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private final ImageView avatar;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             avatar = itemView.findViewById(R.id.avatar_img);
             itemView.setOnClickListener(new View.OnClickListener() {

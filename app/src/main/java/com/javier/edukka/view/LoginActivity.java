@@ -1,6 +1,7 @@
 package com.javier.edukka.view;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
@@ -29,9 +30,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         StatusBarUtil.setTransparent(this);
 
-        user = (EditText) findViewById(R.id.editText);
-        pass = (EditText) findViewById(R.id.editText2);
-        CardView cardview = (CardView) findViewById(R.id.cardView);
+        user = findViewById(R.id.editText);
+        pass = findViewById(R.id.editText2);
+        CardView cardview = findViewById(R.id.cardView);
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         Call<UserModel> request = restInterface.logIn("javi", "123");
         request.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 finish();
                 UserModel model = response.body();
                 if (model.getId()==null) {
@@ -76,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
                 finish();
                 startActivity(getIntent());
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();

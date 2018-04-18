@@ -28,7 +28,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabs;
-    private int[] tabIcons = {
+    private final int[] tabIcons = {
         R.drawable.ic_games_white_36dp,
         R.drawable.ic_group_white_36dp,
         R.drawable.ic_schedule_white_36dp
@@ -40,22 +40,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Adding Toolbar to Main screen
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
+        Toolbar toolbar = findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TextView title = (TextView) findViewById(R.id.toolbar_title);
+        TextView title = findViewById(R.id.toolbar_title);
         title.setText(UserSingleton.getInstance().getUserModel().getUsername());
-        ImageView imageView = (ImageView) findViewById(R.id.profile_image);
+        ImageView imageView = findViewById(R.id.profile_image);
         int resourceId = getResources().getIdentifier(UserSingleton.getInstance().getUserModel().getImage(), "drawable", getPackageName());
         imageView.setImageDrawable(getResources().getDrawable(resourceId));
 
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         // Set Tabs inside Toolbar
-        tabs = (TabLayout) findViewById(R.id.tabs);
+        tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         setupTabIcons();
     }
@@ -162,6 +162,5 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }

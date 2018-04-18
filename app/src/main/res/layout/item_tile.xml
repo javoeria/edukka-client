@@ -31,4 +31,5 @@
         android:textColor="@color/colorPrimaryText"
         android:textSize="@dimen/tile_title"
         tools:text="@string/item_title" />
+
 </RelativeLayout>

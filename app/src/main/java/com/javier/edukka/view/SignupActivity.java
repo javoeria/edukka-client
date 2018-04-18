@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,8 +33,8 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private String[] array = {"avatar_butterfly", "avatar_cat", "avatar_dog", "avatar_elephant",
-            "avatar_lion", "avatar_panda", "avatar_snake", "avatar_spider", "avatar_turtle", "avatar_wold"};
+    private final String[] array = {"avatar_butterfly", "avatar_cat", "avatar_dog", "avatar_elephant",
+            "avatar_lion", "avatar_panda", "avatar_snake", "avatar_spider", "avatar_turtle", "avatar_wolf"};
     private AvatarAdapter avatarAdapter;
     private List<Drawable> avatars;
     private EditText name, user, pass, classid;
@@ -48,20 +49,20 @@ public class SignupActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        name = (EditText) findViewById(R.id.fullname);
-        user = (EditText) findViewById(R.id.username);
-        pass = (EditText) findViewById(R.id.password);
-        classid = (EditText) findViewById(R.id.classid);
+        name = findViewById(R.id.fullname);
+        user = findViewById(R.id.username);
+        pass = findViewById(R.id.password);
+        classid = findViewById(R.id.classid);
 
         initAvatars();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         avatarAdapter = new AvatarAdapter(avatars);
         recyclerView.setAdapter(avatarAdapter);
 
-        CardView cardview = (CardView) findViewById(R.id.cardView);
+        CardView cardview = findViewById(R.id.cardView);
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,7 +121,7 @@ public class SignupActivity extends AppCompatActivity {
                 radio, array[avatarAdapter.getSelectedPos()], Integer.parseInt(classid.getText().toString()));
         request.enqueue(new Callback<UserModel>() {
             @Override
-            public void onResponse(Call<UserModel> call, Response<UserModel> response) {
+            public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 finish();
                 UserModel model = response.body();
                 if (model.getId()==null) {
@@ -134,7 +135,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
             }
             @Override
-            public void onFailure(Call<UserModel> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserModel> call, @NonNull Throwable t) {
                 finish();
                 startActivity(getIntent());
                 Toast.makeText(SignupActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();

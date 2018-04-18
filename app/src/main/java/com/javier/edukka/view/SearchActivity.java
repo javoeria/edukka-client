@@ -1,6 +1,7 @@
 package com.javier.edukka.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -60,7 +61,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+        mRecyclerView = findViewById(R.id.card_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -71,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         Call<List<GameModel>> call = restInterface.getSubjectGames(subject);
         call.enqueue(new Callback<List<GameModel>>() {
             @Override
-            public void onResponse(Call<List<GameModel>> call, Response<List<GameModel>> response) {
+            public void onResponse(@NonNull Call<List<GameModel>> call, @NonNull Response<List<GameModel>> response) {
                 List<GameModel> jsonResponse = response.body();
                 if (jsonResponse.get(0).getId()==null) {
                     mArrayList = new ArrayList<>();
@@ -84,7 +85,7 @@ public class SearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<GameModel>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<GameModel>> call, @NonNull Throwable t) {
                 Log.d("Error",t.getMessage());
             }
         });
