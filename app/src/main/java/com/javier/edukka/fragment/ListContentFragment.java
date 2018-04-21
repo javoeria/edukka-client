@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class ListContentFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
     private static ArrayList<UserModel> mArrayList;
+    private static Integer size;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,8 +41,14 @@ public class ListContentFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
         loadJSON();
         return mRecyclerView;
+    }
+
+    public static Integer getSize() {
+        return size;
     }
 
     private void loadJSON(){
@@ -55,6 +63,7 @@ public class ListContentFragment extends Fragment {
                 mArrayList = (ArrayList<UserModel>) jsonResponse;
                 mAdapter = new ContentAdapter(mArrayList);
                 mRecyclerView.setAdapter(mAdapter);
+                size = mArrayList.size();
             }
 
             @Override
@@ -82,6 +91,7 @@ public class ListContentFragment extends Fragment {
             holder.avatar.setImageResource(resourceId);
             holder.name.setText(mArrayList.get(i).getUsername());
             holder.description.setText(mArrayList.get(i).getName());
+            holder.score.setText(mArrayList.get(i).getScore());
         }
 
         @Override
@@ -94,12 +104,14 @@ public class ListContentFragment extends Fragment {
         private final ImageView avatar;
         private final TextView name;
         private final TextView description;
+        private final TextView score;
 
         private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_list, parent, false));
             avatar = itemView.findViewById(R.id.list_avatar);
             name = itemView.findViewById(R.id.list_title);
             description = itemView.findViewById(R.id.list_desc);
+            score = itemView.findViewById(R.id.list_score);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

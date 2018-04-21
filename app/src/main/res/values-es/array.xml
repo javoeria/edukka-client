@@ -59,6 +59,7 @@
         <item>@drawable/avatar_spider</item>
         <item>@drawable/avatar_turtle</item>
         <item>@drawable/avatar_wolf</item>
+        <item>@drawable/avatar_teacher</item>
     </array>
     <array name="activity_pictures">
         <item>@drawable/activity_history</item>

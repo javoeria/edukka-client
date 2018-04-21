@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/list_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/md_keylines"
         android:layout_toEndOf="@+id/list_avatar"
@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/list_desc"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list_title"
         android:layout_marginStart="@dimen/md_keylines"
@@ -35,6 +35,19 @@
         android:singleLine="true"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="@dimen/list_body"
-        tools:text="@string/item_desc" />
+        tools:text="@string/item_title" />
+
+    <TextView
+        android:id="@+id/list_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/md_keylines"
+        android:layout_marginTop="@dimen/md_keylines"
+        android:layout_toEndOf="@+id/list_title"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="@dimen/article_subheading"
+        android:gravity="end"
+        android:textColor="@color/colorPrimary"
+        tools:text="100 points" />
 
 </RelativeLayout>

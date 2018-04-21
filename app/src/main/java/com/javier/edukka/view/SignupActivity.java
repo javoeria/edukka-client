@@ -34,7 +34,7 @@ import retrofit2.Response;
 public class SignupActivity extends AppCompatActivity {
 
     private final String[] array = {"avatar_butterfly", "avatar_cat", "avatar_dog", "avatar_elephant",
-            "avatar_lion", "avatar_panda", "avatar_snake", "avatar_spider", "avatar_turtle", "avatar_wolf"};
+            "avatar_lion", "avatar_panda", "avatar_snake", "avatar_spider", "avatar_turtle", "avatar_wolf", "avatar_teacher"};
     private AvatarAdapter avatarAdapter;
     private List<Drawable> avatars;
     private EditText name, user, pass, classid;

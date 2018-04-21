@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.javier.edukka.R;
 import com.javier.edukka.controller.UserSingleton;
+import com.javier.edukka.fragment.ListContentFragment;
 import com.javier.edukka.model.ClassModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -70,7 +71,7 @@ public class ClassActivity extends AppCompatActivity {
                 collapsingToolbar.setTitle(jsonResponse.getName());
                 id.setText(jsonResponse.getId());
                 info.setText(jsonResponse.getInformation());
-                size.setText("10 usuarios");
+                size.setText(ListContentFragment.getSize()+" users");
                 if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
                     fab.setVisibility(View.VISIBLE);
                 }

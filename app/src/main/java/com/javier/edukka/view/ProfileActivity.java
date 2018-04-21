@@ -27,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
     private CollapsingToolbarLayout collapsingToolbar;
-    private TextView name, score, role, classid;
+    private TextView name, score, role;
     private ImageView userImage;
     private FloatingActionButton fab;
 
@@ -44,7 +44,6 @@ public class ProfileActivity extends AppCompatActivity {
         name = findViewById(R.id.user_name);
         score = findViewById(R.id.user_score);
         role = findViewById(R.id.user_role);
-        classid = findViewById(R.id.user_class);
         userImage = findViewById(R.id.image);
         loadJSON();
 
@@ -73,9 +72,8 @@ public class ProfileActivity extends AppCompatActivity {
                 UserModel jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getUsername());
                 name.setText(jsonResponse.getName());
-                score.setText(jsonResponse.getScore()+" pts");
+                score.setText(jsonResponse.getScore()+" points");
                 role.setText(jsonResponse.getRole());
-                classid.setText(jsonResponse.getClassId());
                 int resourceId = getResources().getIdentifier(jsonResponse.getImage(), "drawable", getPackageName());
                 userImage.setImageDrawable(getResources().getDrawable(resourceId));
                 if (UserSingleton.getInstance().getUserModel().getUsername().equals(jsonResponse.getUsername())) {
