@@ -61,6 +61,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
         </activity>
+        <activity
+            android:name=".view.ProfileEditActivity"
+            android:parentActivityName=".view.ProfileActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ProfileActivity" />
+        </activity>
+        <activity android:name=".view.ClassEditActivity"></activity>
     </application>
 
 </manifest>

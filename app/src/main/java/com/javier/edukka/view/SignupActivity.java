@@ -67,7 +67,6 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkFieldValidation()) {
-                    setContentView(R.layout.progressbar_layout);
                     signup();
                 }
             }
@@ -122,15 +121,15 @@ public class SignupActivity extends AppCompatActivity {
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
-                finish();
                 UserModel model = response.body();
                 if (model.getId()==null) {
-                    Toast.makeText(SignupActivity.this, "Invalid UserName/Pass", Toast.LENGTH_SHORT).show();
-                    startActivity(getIntent());
+                    Toast.makeText(SignupActivity.this, "Invalid UserName/Class", Toast.LENGTH_SHORT).show();
                 } else {
+                    setContentView(R.layout.progressbar_layout);
                     UserSingleton.getInstance().setUserModel(model);
                     Toast.makeText(SignupActivity.this, "Login In SuccessFully", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, MainActivity.class);
+                    finish();
                     startActivity(i);
                 }
             }
@@ -139,7 +138,6 @@ public class SignupActivity extends AppCompatActivity {
                 finish();
                 startActivity(getIntent());
                 Toast.makeText(SignupActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.d("error", call.toString());
             }
         });
     }

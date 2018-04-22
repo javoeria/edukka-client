@@ -41,6 +41,12 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder
         return selectedPos;
     }
 
+    public void setSelectedPos(int pos) {
+        notifyItemChanged(selectedPos);
+        selectedPos = pos;
+        notifyItemChanged(selectedPos);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView avatar;
 

@@ -139,6 +139,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
+            case R.id.refresh:
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+                return true;
             case R.id.profile:
                 Intent intentp = new Intent(MainActivity.this, ProfileActivity.class);
                 Integer idp = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());

@@ -36,4 +36,10 @@
     <string name="vote">Vote</string>
     <string name="role">Role</string>
     <string name="help">Help</string>
+    <string name="avatar">Avatar</string>
+    <string name="newpassword">New Password</string>
+    <string name="save">Save Changes</string>
+    <string name="editprofile">Edit Profile</string>
+    <string name="editclass">Edit Class</string>
+    <string name="refresh">Refresh</string>
 </resources>

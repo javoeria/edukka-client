@@ -1,9 +1,11 @@
 package com.javier.edukka.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +33,7 @@ import retrofit2.Response;
 public class SearchActivity extends AppCompatActivity {
 
     public static final String SUBJECT_NAME = "subject";
+    private SwipeRefreshLayout mySwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private ArrayList<GameModel> mArrayList;
     private GameAdapter mAdapter;
@@ -43,10 +46,12 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
         subject = getIntent().getStringExtra(SUBJECT_NAME);
         getSupportActionBar().setTitle(subject);
         initViews();
         loadJSON();
+        refresh();
 
         FloatingActionButton fab = findViewById(R.id.fab);
         if (UserSingleton.getInstance().getUserModel().getRole().equals("Teacher")) {
@@ -122,5 +127,18 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void refresh() {
+        mySwipeRefreshLayout.setOnRefreshListener(
+            new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    Intent intent = getIntent();
+                    finish();
+                    startActivity(intent);
+                }
+            }
+        );
     }
 }

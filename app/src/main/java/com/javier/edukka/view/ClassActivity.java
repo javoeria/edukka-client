@@ -1,10 +1,10 @@
 package com.javier.edukka.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,7 +49,10 @@ public class ClassActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Intent intent = new Intent(ClassActivity.this, ClassEditActivity.class);
+                int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+                intent.putExtra(ProfileActivity.EXTRA_POSITION, id);
+                startActivity(intent);
             }
         });
     }
@@ -58,6 +61,13 @@ public class ClassActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     private void loadJSON(){

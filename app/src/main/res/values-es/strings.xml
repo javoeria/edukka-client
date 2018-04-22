@@ -36,4 +36,10 @@
     <string name="vote">Votos</string>
     <string name="role">Rol</string>
     <string name="help">Ayuda</string>
+    <string name="avatar">Avatar</string>
+    <string name="newpassword">Nueva Contraseña</string>
+    <string name="save">Guardar Cambios</string>
+    <string name="editprofile">Editar Perfil</string>
+    <string name="editclass">Editar Clase</string>
+    <string name="refresh">Recargar</string>
 </resources>

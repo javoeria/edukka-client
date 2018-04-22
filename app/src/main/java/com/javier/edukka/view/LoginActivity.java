@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(CheckFieldValidation()) {
+                if (checkFieldValidation()) {
                     setContentView(R.layout.progressbar_layout);
                     login();
                 }
@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private boolean CheckFieldValidation() {
+    private boolean checkFieldValidation() {
         boolean valid = true;
         if (user.getText().toString().equals("")) {
             user.setError("Can't be Empty");
