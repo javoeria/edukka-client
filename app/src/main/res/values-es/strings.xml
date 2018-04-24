@@ -42,4 +42,6 @@
     <string name="editprofile">Editar Perfil</string>
     <string name="editclass">Editar Clase</string>
     <string name="refresh">Recargar</string>
+    <string name="history">Historial</string>
+    <string name="statistics">Estadísticas</string>
 </resources>

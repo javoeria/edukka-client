@@ -42,4 +42,6 @@
     <string name="editprofile">Edit Profile</string>
     <string name="editclass">Edit Class</string>
     <string name="refresh">Refresh</string>
+    <string name="history">History</string>
+    <string name="statistics">Statistics</string>
 </resources>

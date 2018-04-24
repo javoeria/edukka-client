@@ -110,7 +110,8 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("game/finish")
-    Call<ActivityModel> finishGame(@Field("student_id") int studentId, @Field("game_id") int gameId, @Field("result") int result);
+    Call<ActivityModel> finishGame(@Field("student_id") int studentId, @Field("game_id") int gameId, @Field("subject") String subject,
+                                   @Field("result") float result, @Field("date") String date);
 
     @FormUrlEncoded
     @POST("game/upvote")

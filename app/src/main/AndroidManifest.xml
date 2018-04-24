@@ -68,7 +68,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.ProfileActivity" />
         </activity>
-        <activity android:name=".view.ClassEditActivity"></activity>
+        <activity
+            android:name=".view.ClassEditActivity"
+            android:parentActivityName=".view.ClassActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ClassActivity" />
+        </activity>
+        <activity
+            android:name=".view.HistoryActivity"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
+        <activity
+            android:name=".view.StatisticsActivity"
+            android:parentActivityName=".view.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

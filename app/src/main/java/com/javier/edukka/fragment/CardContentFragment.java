@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.javier.edukka.R;
 import com.javier.edukka.view.DetailActivity;
+import com.javier.edukka.view.HistoryActivity;
+import com.javier.edukka.view.StatisticsActivity;
 
 public class CardContentFragment extends Fragment {
 
@@ -82,9 +84,13 @@ public class CardContentFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
-                    context.startActivity(intent);
+                    if (getAdapterPosition()==0) {
+                        Intent intent = new Intent(context, HistoryActivity.class);
+                        context.startActivity(intent);
+                    } else if (getAdapterPosition()==1) {
+                        Intent intent = new Intent(context, StatisticsActivity.class);
+                        context.startActivity(intent);
+                    }
                 }
             });
         }
