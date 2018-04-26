@@ -19,7 +19,6 @@
     <string name="difficulty">Difficulty</string>
     <string name="myprofile">My Profile</string>
     <string name="fullname">Full Name</string>
-    <string name="location">Location</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="myclass">My Class</string>
@@ -41,7 +40,11 @@
     <string name="save">Save Changes</string>
     <string name="editprofile">Edit Profile</string>
     <string name="editclass">Edit Class</string>
-    <string name="refresh">Refresh</string>
+    <string name="editgame">Edit Game</string>
     <string name="history">History</string>
     <string name="statistics">Statistics</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="game">Game</string>
 </resources>

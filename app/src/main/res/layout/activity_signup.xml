@@ -139,7 +139,7 @@
                     android:textColor="#ffffff"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:hint="@string/classid" />
+                    android:hint="Class ID (optional)" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.RecyclerView

@@ -2,6 +2,7 @@ package com.javier.edukka.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +26,15 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
         mFilteredList = arrayList;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.game_row, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.game_name.setText(mFilteredList.get(i).getTitle());
         viewHolder.game_desc.setText(mFilteredList.get(i).getDescription());
         viewHolder.game_level.setText(mFilteredList.get(i).getDifficulty());

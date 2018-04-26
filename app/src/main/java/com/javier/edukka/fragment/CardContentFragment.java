@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,14 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
-import com.javier.edukka.view.DetailActivity;
 import com.javier.edukka.view.HistoryActivity;
 import com.javier.edukka.view.StatisticsActivity;
 
 public class CardContentFragment extends Fragment {
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         ContentAdapter adapter = new ContentAdapter(recyclerView.getContext());
         recyclerView.setAdapter(adapter);
@@ -32,7 +32,7 @@ public class CardContentFragment extends Fragment {
         return recyclerView;
     }
 
-    public static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
+    private static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         // Set numbers of List in RecyclerView.
         private static final int LENGTH = 2;
         private final String[] activity;
@@ -51,13 +51,14 @@ public class CardContentFragment extends Fragment {
             a.recycle();
         }
 
+        @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.picture.setImageDrawable(activityPictures[position % activityPictures.length]);
             holder.name.setText(activity[position % activity.length]);
             holder.description.setText(activityDesc[position % activityDesc.length]);

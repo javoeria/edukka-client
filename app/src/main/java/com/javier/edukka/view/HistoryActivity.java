@@ -69,6 +69,7 @@ public class HistoryActivity extends AppCompatActivity {
                     findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
                 } else {
                     mArrayList = (ArrayList<ActivityModel>) jsonResponse;
+                    findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
                 }
                 mAdapter = new HistoryAdapter(mArrayList);
                 mRecyclerView.setAdapter(mAdapter);

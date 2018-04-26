@@ -21,7 +21,6 @@
     <string name="fullname">Nombre y Apellidos</string>
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
-    <string name="location">Lugar</string>
     <string name="myclass">Mi Clase</string>
     <string name="classid">ID Clase</string>
     <string name="student">Estudiante</string>
@@ -41,7 +40,11 @@
     <string name="save">Guardar Cambios</string>
     <string name="editprofile">Editar Perfil</string>
     <string name="editclass">Editar Clase</string>
-    <string name="refresh">Recargar</string>
+    <string name="editgame">Editar Juego</string>
     <string name="history">Historial</string>
     <string name="statistics">Estadísticas</string>
+    <string name="delete">Borrar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Vale</string>
+    <string name="game">Juego</string>
 </resources>

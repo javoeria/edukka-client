@@ -51,7 +51,7 @@ public class ClassActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ClassActivity.this, ClassEditActivity.class);
                 int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
-                intent.putExtra(ProfileActivity.EXTRA_POSITION, id);
+                intent.putExtra(ClassEditActivity.EXTRA_POSITION, id);
                 startActivity(intent);
             }
         });
@@ -65,9 +65,7 @@ public class ClassActivity extends AppCompatActivity {
 
     protected void onRestart() {
         super.onRestart();
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+        loadJSON();
     }
 
     private void loadJSON(){

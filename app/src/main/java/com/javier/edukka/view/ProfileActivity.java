@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
                 Integer id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
-                intent.putExtra(ProfileActivity.EXTRA_POSITION, id);
+                intent.putExtra(ProfileEditActivity.EXTRA_POSITION, id);
                 startActivity(intent);
             }
         });
@@ -67,9 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     protected void onRestart() {
         super.onRestart();
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
+        loadJSON();
     }
 
     private void loadJSON(){

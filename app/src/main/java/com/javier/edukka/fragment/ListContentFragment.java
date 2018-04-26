@@ -32,11 +32,11 @@ public class ListContentFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private ContentAdapter mAdapter;
-    private static ArrayList<UserModel> mArrayList;
+    private ArrayList<UserModel> mArrayList;
     private static Integer size;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRecyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -73,20 +73,21 @@ public class ListContentFragment extends Fragment {
         });
     }
 
-    public class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
+    private class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
         private final ArrayList<UserModel> mArrayList;
 
         private ContentAdapter(ArrayList<UserModel> arrayList) {
             mArrayList = arrayList;
         }
 
+        @NonNull
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int i) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
             return new ViewHolder(LayoutInflater.from(parent.getContext()), parent);
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int i) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
             int resourceId = getResources().getIdentifier(mArrayList.get(i).getImage(), "drawable", getContext().getPackageName());
             holder.avatar.setImageResource(resourceId);
             holder.name.setText(mArrayList.get(i).getUsername());
@@ -102,7 +103,7 @@ public class ListContentFragment extends Fragment {
         }
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder {
+    private class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView avatar;
         private final TextView name;
         private final TextView description;
@@ -128,4 +129,9 @@ public class ListContentFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadJSON();
+    }
 }

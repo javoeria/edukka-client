@@ -1,14 +1,18 @@
 package com.javier.edukka.view;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -128,9 +132,67 @@ public class ProfileEditActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_edit, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.delete) {
+            infoDialog();
+            return true;
+        } else {
+            finish();
+            return true;
+        }
+    }
+
+    private void infoDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Delete User");
+        builder.setIcon(android.R.drawable.ic_delete);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                setContentView(R.layout.progressbar_layout);
+                deleteUser();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
+        TextView textView1 = dialogView.findViewById(android.R.id.text1);
+        textView1.setText("Esta acción borrará tu usuario de la base de datos, ¿estás seguro?");
+        builder.setView(dialogView);
+        builder.show();
+    }
+
+    private void deleteUser(){
+        int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        String role = UserSingleton.getInstance().getUserModel().getRole();
+        RestInterface restInterface = RetrofitClient.getInstance();
+        Call<Void> call = restInterface.deleteUser(position, role);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Intent i = new Intent(ProfileEditActivity.this, LoginActivity.class);
+                finish();
+                startActivity(i);
+                Toast.makeText(ProfileEditActivity.this, "User Deleted Successfully", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.d("Error",t.getMessage());
+            }
+        });
     }
 
 }

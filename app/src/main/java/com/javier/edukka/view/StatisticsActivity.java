@@ -1,24 +1,19 @@
 package com.javier.edukka.view;
 
-import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
-import com.javier.edukka.adapter.HistoryAdapter;
 import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.ActivityModel;
-import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

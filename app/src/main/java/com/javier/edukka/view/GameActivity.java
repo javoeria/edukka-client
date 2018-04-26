@@ -1,17 +1,21 @@
 package com.javier.edukka.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -31,6 +35,8 @@ public class GameActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbar;
     private TextView detail, difficulty, vote;
     private ImageView subjectImage;
+    private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,22 @@ public class GameActivity extends AppCompatActivity {
         subjectImage = findViewById(R.id.image);
         initMap();
         loadJSON();
+
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GameActivity.this, GameEditActivity.class);
+                int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+                intent.putExtra(GameEditActivity.EXTRA_POSITION, id);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initMap() {
         map = new HashMap<>();
-        map.put("Spanish Language", "subject_spanish");
+        map.put("Spanish Literature", "subject_spanish");
         map.put("Mathematics", "subject_math");
         map.put("Natural Sciences", "subject_natural");
         map.put("Social Sciences", "subject_social");
@@ -81,10 +98,15 @@ public class GameActivity extends AppCompatActivity {
                 } else if (Integer.parseInt(jsonResponse.getVote()) < 0) {
                     vote.setText(jsonResponse.getVote());
                     vote.setTextColor(Color.RED);
+                } else {
+                    vote.setText(jsonResponse.getVote());
                 }
                 String s = getIntent().getStringExtra(EXTRA_SUBJECT);
                 int resourceId = getResources().getIdentifier(map.get(s), "drawable", getPackageName());
                 subjectImage.setImageDrawable(getResources().getDrawable(resourceId));
+                if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
+                    fab.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -92,6 +114,11 @@ public class GameActivity extends AppCompatActivity {
                 Log.d("Error",t.getMessage());
             }
         });
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        loadJSON();
     }
 
     @Override

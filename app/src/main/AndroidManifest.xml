@@ -55,11 +55,11 @@
                 android:value=".view.MainActivity" />
         </activity>
         <activity
-            android:name=".view.DetailActivity"
-            android:parentActivityName=".view.MainActivity">
+            android:name=".view.GameEditActivity"
+            android:parentActivityName=".view.GameActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.MainActivity" />
+                android:value=".view.GameActivity" />
         </activity>
         <activity
             android:name=".view.ProfileEditActivity"

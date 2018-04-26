@@ -1,6 +1,5 @@
 package com.javier.edukka.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -47,6 +46,7 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         subject = getIntent().getStringExtra(SUBJECT_NAME);
         getSupportActionBar().setTitle(subject);
         initViews();
@@ -84,9 +84,11 @@ public class SearchActivity extends AppCompatActivity {
                     findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
                 } else {
                     mArrayList = (ArrayList<GameModel>) jsonResponse;
+                    findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
                 }
                 mAdapter = new GameAdapter(mArrayList);
                 mRecyclerView.setAdapter(mAdapter);
+                mySwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -134,9 +136,7 @@ public class SearchActivity extends AppCompatActivity {
             new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
+                    loadJSON();
                 }
             }
         );

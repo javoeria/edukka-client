@@ -101,7 +101,7 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("game/edit")
-    Call<GameModel> updateGame(@Field("subject") String subject, @Field("title") String title, @Field("description") String description,
+    Call<GameModel> updateGame(@Field("title") String title, @Field("description") String description,
                                @Field("difficulty") String difficulty, @Field("id") int gameId);
 
     @FormUrlEncoded

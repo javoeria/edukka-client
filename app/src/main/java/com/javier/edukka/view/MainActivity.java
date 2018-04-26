@@ -99,11 +99,11 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setOffscreenPageLimit(3);
     }
 
-    static class Adapter extends FragmentPagerAdapter {
+    private static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        public Adapter(FragmentManager manager) {
+        private Adapter(FragmentManager manager) {
             super(manager);
         }
 
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             return mFragmentList.size();
         }
 
-        public void addFragment(Fragment fragment, String title) {
+        private void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
@@ -139,11 +139,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
-            case R.id.refresh:
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-                return true;
             case R.id.profile:
                 Intent intentp = new Intent(MainActivity.this, ProfileActivity.class);
                 Integer idp = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
