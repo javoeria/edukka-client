@@ -28,7 +28,7 @@
         android:gravity="center"
         android:drawableTop="@drawable/empty"
         android:visibility="invisible"
-        android:text="@string/no_data_available" />
+        android:text="@string/nodata" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"

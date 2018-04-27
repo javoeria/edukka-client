@@ -1,6 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Edukka</string>
+
+    <string name="username">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Entrar</string>
+    <string name="register">Nuevo Usuario</string>
+
+    <string name="student">Estudiante</string>
+    <string name="teacher">Profesor</string>
+    <string name="fullname">Nombre y Apellidos</string>
+    <string name="classid">ID Clase (opcional)</string>
+    <string name="signup">Registrar</string>
+
+    <string name="nodata">No Datos Disponibles</string>
+    <string name="myprofile">Mi Perfil</string>
+    <string name="myclass">Mi Clase</string>
+    <string name="help">Ayuda</string>
+    <string name="logout">Salir</string>
+
+    <string name="search">Buscar</string>
+    <string name="history">Historial</string>
+    <string name="statistics">Estadísticas</string>
+
+    <string name="clase">Clase</string>
+    <string name="identifier">Identificador</string>
+    <string name="information">Información</string>
+    <string name="size">Tamaño</string>
+
+    <string name="game">Juego</string>
+    <string name="description">Descripción</string>
+    <string name="difficulty">Dificultad</string>
+    <string name="vote">Votos</string>
+
+    <string name="score">Puntuación</string>
+    <string name="role">Rol</string>
+    <string name="avatar">Avatar</string>
+    <string name="newpassword">Nueva Contraseña</string>
+
+    <string name="editprofile">Editar Perfil</string>
+    <string name="editclass">Editar Clase</string>
+    <string name="editgame">Editar Juego</string>
+    <string name="save">Guardar Cambios</string>
+
+    <string name="delete">Borrar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Vale</string>
+
+    <string name="deleteuser">Borrar Usuario</string>
+    <string name="deleteclass">Borrar Clase</string>
+    <string name="deletegame">Borrar Juego</string>
+
+    <string name="dialoguser">Esta acción borrará tu usuario de la base de datos, ¿estás seguro?</string>
+    <string name="dialogclass">Esta acción borrará tu clase de la base de datos, ¿estás seguro?</string>
+    <string name="dialoggame">Esta acción borrará tu juego de la base de datos, ¿estás seguro?</string>
+
+    <string name="completed">Juegos Completados</string>
+    <string name="approved">Juegos Aprobados</string>
+    <string name="average">Puntuación Media</string>
+    <string name="failure">Porcentaje de Fallos</string>
+    <string name="best">Mejor Asignatura</string>
+    <string name="worst">Peor Asignatura</string>
+
+    <string name="empty">Campo Obligatorio</string>
+    <string name="invalid">Usuario/Contraseña inválido</string>
+    <string name="login_success">Inicio sesión correcto</string>
+    <string name="signup_success">Registro usuario correcto</string>
+    <string name="data_update">Datos actualizados</string>
+
+    <string name="deleteclass_success">Clase eliminada con éxito</string>
+    <string name="deleteuser_success">Usuario eliminado con éxito</string>
+    <string name="deletegame_success">Juego eliminado con éxito</string>
+
     <string name="item_title">Manhattan</string>
     <string name="item_desc">Manhattan es el distrito en Nueva York.</string>
     <string name="detail_location">Nueva York</string>
@@ -11,40 +82,4 @@
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
         deserunt mollit anim id est laborum.
     </string>
-    <string name="no_data_available">No Datos Disponibles</string>
-    <string name="information">Información</string>
-    <string name="description">Descripción</string>
-    <string name="register">Nuevo Usuario</string>
-    <string name="identifier">Identificador</string>
-    <string name="difficulty">Dificultad</string>
-    <string name="myprofile">Mi Perfil</string>
-    <string name="fullname">Nombre y Apellidos</string>
-    <string name="username">Usuario</string>
-    <string name="password">Contraseña</string>
-    <string name="myclass">Mi Clase</string>
-    <string name="classid">ID Clase</string>
-    <string name="student">Estudiante</string>
-    <string name="teacher">Profesor</string>
-    <string name="signup">Registrar</string>
-    <string name="logout">Salir</string>
-    <string name="search">Buscar</string>
-    <string name="login">Entrar</string>
-    <string name="score">Puntuación</string>
-    <string name="clase">Clase</string>
-    <string name="size">Número</string>
-    <string name="vote">Votos</string>
-    <string name="role">Rol</string>
-    <string name="help">Ayuda</string>
-    <string name="avatar">Avatar</string>
-    <string name="newpassword">Nueva Contraseña</string>
-    <string name="save">Guardar Cambios</string>
-    <string name="editprofile">Editar Perfil</string>
-    <string name="editclass">Editar Clase</string>
-    <string name="editgame">Editar Juego</string>
-    <string name="history">Historial</string>
-    <string name="statistics">Estadísticas</string>
-    <string name="delete">Borrar</string>
-    <string name="cancel">Cancelar</string>
-    <string name="ok">Vale</string>
-    <string name="game">Juego</string>
 </resources>

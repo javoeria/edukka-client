@@ -51,12 +51,12 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editprofile);
 
-        name = findViewById(R.id.user_name);
-        pass = findViewById(R.id.user_pass);
-        classid = findViewById(R.id.user_classid);
+        name = (TextView) findViewById(R.id.user_name);
+        pass = (TextView) findViewById(R.id.user_pass);
+        classid = (TextView) findViewById(R.id.user_classid);
 
         initAvatars();
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -98,7 +98,10 @@ public class ProfileEditActivity extends AppCompatActivity {
     private boolean checkFieldValidation() {
         boolean valid = true;
         if (name.getText().toString().equals("")) {
-            name.setError("Can't be Empty");
+            name.setError(getText(R.string.empty));
+            valid = false;
+        } else if (classid.getText().toString().equals("")) {
+            classid.setError(getText(R.string.empty));
             valid = false;
         }
         return valid;
@@ -118,7 +121,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                         Toast.makeText(ProfileEditActivity.this, "Clase no existe", Toast.LENGTH_SHORT).show();
                     } else {
                         UserSingleton.getInstance().setUserModel(jsonResponse);
-                        Toast.makeText(ProfileEditActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileEditActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 }
@@ -151,7 +154,7 @@ public class ProfileEditActivity extends AppCompatActivity {
     private void infoDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Delete User");
+        builder.setTitle(R.string.deleteuser);
         builder.setIcon(android.R.drawable.ic_delete);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
@@ -168,8 +171,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         });
 
         View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
-        TextView textView1 = dialogView.findViewById(android.R.id.text1);
-        textView1.setText("Esta acción borrará tu usuario de la base de datos, ¿estás seguro?");
+        TextView textView1 = (TextView) dialogView.findViewById(android.R.id.text1);
+        textView1.setText(R.string.dialoguser);
         builder.setView(dialogView);
         builder.show();
     }
@@ -185,7 +188,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 Intent i = new Intent(ProfileEditActivity.this, LoginActivity.class);
                 finish();
                 startActivity(i);
-                Toast.makeText(ProfileEditActivity.this, "User Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileEditActivity.this, R.string.deleteuser_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

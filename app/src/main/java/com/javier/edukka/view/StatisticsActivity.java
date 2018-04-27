@@ -22,7 +22,7 @@ import retrofit2.Response;
 
 public class StatisticsActivity extends AppCompatActivity {
 
-    private TextView total, approved, mean, average, best, worst;
+    private TextView total, approved, average, failure, best, worst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,12 @@ public class StatisticsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.statistics);
 
-        total = findViewById(R.id.total);
-        approved = findViewById(R.id.approved);
-        mean = findViewById(R.id.mean);
-        average = findViewById(R.id.average);
-        best = findViewById(R.id.best);
-        worst = findViewById(R.id.worst);
+        total = (TextView) findViewById(R.id.total);
+        approved = (TextView) findViewById(R.id.approved);
+        average = (TextView) findViewById(R.id.average);
+        failure = (TextView) findViewById(R.id.failure);
+        best = (TextView) findViewById(R.id.best);
+        worst = (TextView) findViewById(R.id.worst);
 
         if (UserSingleton.getInstance().getUserModel().getRole().equals("Student")) {
             loadJSON1();
@@ -86,8 +86,8 @@ public class StatisticsActivity extends AppCompatActivity {
         if (list.get(0).getStudentId()==null) {
             total.setText("0");
             approved.setText("0");
-            mean.setText("0.0");
-            average.setText("0%");
+            average.setText("0.0");
+            failure.setText("0%");
             best.setText("-");
             worst.setText("-");
         } else {
@@ -105,8 +105,8 @@ public class StatisticsActivity extends AppCompatActivity {
             String mode2 = modeMin(list);
             total.setText(String.valueOf(list.size()));
             approved.setText(String.valueOf(Math.round(res)));
-            mean.setText(String.valueOf(media));
-            average.setText(String.valueOf(Math.round(error))+"%");
+            average.setText(String.valueOf(media));
+            failure.setText(String.valueOf(Math.round(error))+"%");
             best.setText(mode1);
             if (mode1.equals(mode2)) {
                 worst.setText("-");

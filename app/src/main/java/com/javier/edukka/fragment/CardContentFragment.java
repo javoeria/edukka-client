@@ -77,9 +77,9 @@ public class CardContentFragment extends Fragment {
 
         private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_card, parent, false));
-            picture = itemView.findViewById(R.id.card_image);
-            name = itemView.findViewById(R.id.card_title);
-            description = itemView.findViewById(R.id.card_text);
+            picture = (ImageView) itemView.findViewById(R.id.card_image);
+            name = (TextView) itemView.findViewById(R.id.card_title);
+            description = (TextView) itemView.findViewById(R.id.card_text);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

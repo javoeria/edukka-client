@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -53,9 +54,9 @@ public class ListContentFragment extends Fragment {
 
     private void loadJSON(){
         RestInterface restInterface = RetrofitClient.getInstance();
-        Call<List<UserModel>> call = restInterface.getAllUsers();
-        //Integer id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
-        //Call<List<UserModel>> call = restInterface.getUserClass(id);
+        //Call<List<UserModel>> call = restInterface.getAllUsers();
+        Integer id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
+        Call<List<UserModel>> call = restInterface.getUserClass(id);
         call.enqueue(new Callback<List<UserModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<UserModel>> call, @NonNull Response<List<UserModel>> response) {
@@ -111,10 +112,10 @@ public class ListContentFragment extends Fragment {
 
         private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_list, parent, false));
-            avatar = itemView.findViewById(R.id.list_avatar);
-            name = itemView.findViewById(R.id.list_title);
-            description = itemView.findViewById(R.id.list_desc);
-            score = itemView.findViewById(R.id.list_score);
+            avatar = (ImageView) itemView.findViewById(R.id.list_avatar);
+            name = (TextView) itemView.findViewById(R.id.list_title);
+            description = (TextView) itemView.findViewById(R.id.list_desc);
+            score = (TextView) itemView.findViewById(R.id.list_score);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

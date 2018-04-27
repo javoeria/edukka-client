@@ -47,15 +47,15 @@ public class GameActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        detail = findViewById(R.id.game_detail);
-        difficulty = findViewById(R.id.game_difficulty);
-        vote = findViewById(R.id.game_vote);
-        subjectImage = findViewById(R.id.image);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        detail = (TextView) findViewById(R.id.game_detail);
+        difficulty = (TextView) findViewById(R.id.game_difficulty);
+        vote = (TextView) findViewById(R.id.game_vote);
+        subjectImage = (ImageView) findViewById(R.id.image);
         initMap();
         loadJSON();
 
-        fab = findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

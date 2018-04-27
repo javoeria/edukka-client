@@ -83,9 +83,9 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
 
         private ViewHolder(View view) {
             super(view);
-            game_name = view.findViewById(R.id.game_name);
-            game_desc = view.findViewById(R.id.game_desc);
-            game_level = view.findViewById(R.id.game_level);
+            game_name = (TextView) view.findViewById(R.id.game_name);
+            game_desc = (TextView) view.findViewById(R.id.game_desc);
+            game_level = (TextView) view.findViewById(R.id.game_level);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

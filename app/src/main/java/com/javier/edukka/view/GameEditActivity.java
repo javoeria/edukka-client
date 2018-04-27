@@ -16,8 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.javier.edukka.R;
-import com.javier.edukka.controller.UserSingleton;
-import com.javier.edukka.model.ClassModel;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -42,9 +40,9 @@ public class GameEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editgame);
 
-        name = findViewById(R.id.game_name);
-        desc = findViewById(R.id.game_desc);
-        spinner = findViewById(R.id.game_level);
+        name = (TextView) findViewById(R.id.game_name);
+        desc = (TextView) findViewById(R.id.game_desc);
+        spinner = (MaterialBetterSpinner) findViewById(R.id.game_level);
 
         String[] level_list = getResources().getStringArray(R.array.level);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, level_list);
@@ -75,10 +73,10 @@ public class GameEditActivity extends AppCompatActivity {
     private boolean checkFieldValidation() {
         boolean valid = true;
         if (name.getText().toString().equals("")) {
-            name.setError("Can't be Empty");
+            name.setError(getText(R.string.empty));
             valid = false;
         } else if (desc.getText().toString().equals("")) {
-            desc.setError("Can't be Empty");
+            desc.setError(getText(R.string.empty));
             valid = false;
         }
         return valid;
@@ -92,7 +90,7 @@ public class GameEditActivity extends AppCompatActivity {
             call.enqueue(new Callback<GameModel>() {
                 @Override
                 public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
-                    Toast.makeText(GameEditActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GameEditActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
@@ -124,7 +122,7 @@ public class GameEditActivity extends AppCompatActivity {
     private void infoDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Delete Game");
+        builder.setTitle(R.string.deletegame);
         builder.setIcon(android.R.drawable.ic_delete);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
@@ -141,8 +139,8 @@ public class GameEditActivity extends AppCompatActivity {
         });
 
         View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
-        TextView textView1 = dialogView.findViewById(android.R.id.text1);
-        textView1.setText("Esta acción borrará tu juego de la base de datos, ¿estás seguro?");
+        TextView textView1 = (TextView) dialogView.findViewById(android.R.id.text1);
+        textView1.setText(R.string.dialoggame);
         builder.setView(dialogView);
         builder.show();
     }
@@ -157,7 +155,7 @@ public class GameEditActivity extends AppCompatActivity {
                 Intent i = new Intent(GameEditActivity.this, MainActivity.class);
                 finish();
                 startActivity(i);
-                Toast.makeText(GameEditActivity.this, "Game Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameEditActivity.this, R.string.deletegame_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

@@ -40,22 +40,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Adding Toolbar to Main screen
-        Toolbar toolbar = findViewById(R.id.toolbar_user);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        TextView title = findViewById(R.id.toolbar_title);
+        TextView title = (TextView) findViewById(R.id.toolbar_title);
         title.setText(UserSingleton.getInstance().getUserModel().getUsername());
-        ImageView imageView = findViewById(R.id.profile_image);
+        ImageView imageView = (ImageView) findViewById(R.id.profile_image);
         int resourceId = getResources().getIdentifier(UserSingleton.getInstance().getUserModel().getImage(), "drawable", getPackageName());
         imageView.setImageDrawable(getResources().getDrawable(resourceId));
 
         // Setting ViewPager for each Tabs
-        ViewPager viewPager = findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         // Set Tabs inside Toolbar
-        tabs = findViewById(R.id.tabs);
+        tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         setupTabIcons();
     }

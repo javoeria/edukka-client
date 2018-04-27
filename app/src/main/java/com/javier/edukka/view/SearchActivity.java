@@ -45,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         subject = getIntent().getStringExtra(SUBJECT_NAME);
         getSupportActionBar().setTitle(subject);
@@ -53,7 +53,7 @@ public class SearchActivity extends AppCompatActivity {
         loadJSON();
         refresh();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         if (UserSingleton.getInstance().getUserModel().getRole().equals("Teacher")) {
             fab.setVisibility(View.VISIBLE);
         }
@@ -66,7 +66,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        mRecyclerView = findViewById(R.id.card_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -129,6 +129,11 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    protected void onRestart() {
+        super.onRestart();
+        loadJSON();
     }
 
     private void refresh() {

@@ -54,7 +54,7 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder
 
         private ViewHolder(View itemView) {
             super(itemView);
-            avatar = itemView.findViewById(R.id.avatar_img);
+            avatar = (ImageView) itemView.findViewById(R.id.avatar_img);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

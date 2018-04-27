@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.javier.edukka.R;
-import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.ClassModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -38,8 +37,8 @@ public class ClassEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editclass);
 
-        name = findViewById(R.id.class_name);
-        info = findViewById(R.id.class_info);
+        name = (TextView) findViewById(R.id.class_name);
+        info = (TextView) findViewById(R.id.class_info);
         loadJSON();
     }
 
@@ -65,10 +64,10 @@ public class ClassEditActivity extends AppCompatActivity {
     private boolean checkFieldValidation() {
         boolean valid = true;
         if (name.getText().toString().equals("")) {
-            name.setError("Can't be Empty");
+            name.setError(getText(R.string.empty));
             valid = false;
         } else if (info.getText().toString().equals("")) {
-            info.setError("Can't be Empty");
+            info.setError(getText(R.string.empty));
             valid = false;
         }
         return valid;
@@ -82,7 +81,7 @@ public class ClassEditActivity extends AppCompatActivity {
             call.enqueue(new Callback<ClassModel>() {
                 @Override
                 public void onResponse(@NonNull Call<ClassModel> call, @NonNull Response<ClassModel> response) {
-                    Toast.makeText(ClassEditActivity.this, "Datos actualizados", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClassEditActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
@@ -114,7 +113,7 @@ public class ClassEditActivity extends AppCompatActivity {
     private void infoDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Delete Class");
+        builder.setTitle(R.string.deleteclass);
         builder.setIcon(android.R.drawable.ic_delete);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
@@ -131,24 +130,23 @@ public class ClassEditActivity extends AppCompatActivity {
         });
 
         View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
-        TextView textView1 = dialogView.findViewById(android.R.id.text1);
-        textView1.setText("Esta acción borrará tu clase de la base de datos, ¿estás seguro?");
+        TextView textView1 = (TextView) dialogView.findViewById(android.R.id.text1);
+        textView1.setText(R.string.dialogclass);
         builder.setView(dialogView);
         builder.show();
     }
 
     private void deleteClass(){
         int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
-        String role = UserSingleton.getInstance().getUserModel().getRole();
         RestInterface restInterface = RetrofitClient.getInstance();
-        Call<Void> call = restInterface.deleteUser(position, role);
+        Call<Void> call = restInterface.deleteClass(position);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 Intent i = new Intent(ClassEditActivity.this, MainActivity.class);
                 finish();
                 startActivity(i);
-                Toast.makeText(ClassEditActivity.this, "Class Deleted Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClassEditActivity.this, R.string.deleteclass_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

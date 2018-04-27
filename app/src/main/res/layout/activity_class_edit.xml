@@ -34,7 +34,8 @@
             android:focusableInTouchMode="true"
             android:paddingStart="@dimen/md_keylines"
             android:paddingEnd="@dimen/md_keylines"
-            android:paddingTop="@dimen/md_keylines">
+            android:paddingTop="@dimen/md_keylines"
+            android:paddingBottom="@dimen/md_keylines">
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                 android:textSize="@dimen/article_titles"
                 android:layout_marginTop="@dimen/md_keylines" />
 
-            <EditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/class_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -59,7 +60,7 @@
                 android:textSize="@dimen/article_titles"
                 android:layout_marginTop="@dimen/md_keylines" />
 
-            <EditText
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/class_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

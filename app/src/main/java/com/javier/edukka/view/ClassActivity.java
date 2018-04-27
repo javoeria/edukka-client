@@ -39,13 +39,13 @@ public class ClassActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        id = findViewById(R.id.class_id);
-        info = findViewById(R.id.class_info);
-        size = findViewById(R.id.class_size);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        id = (TextView) findViewById(R.id.class_id);
+        info = (TextView) findViewById(R.id.class_info);
+        size = (TextView) findViewById(R.id.class_size);
         loadJSON();
 
-        fab = findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -89,9 +89,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         private ViewHolder(View view) {
             super(view);
-            history_name = view.findViewById(R.id.list_game);
-            history_date = view.findViewById(R.id.list_date);
-            history_rating = view.findViewById(R.id.ratingBar);
+            history_name = (TextView) view.findViewById(R.id.list_game);
+            history_date = (TextView) view.findViewById(R.id.list_date);
+            history_rating = (RatingBar) view.findViewById(R.id.ratingBar);
         }
     }
 

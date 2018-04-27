@@ -1,6 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Edukka</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Log In</string>
+    <string name="register">Register Here</string>
+
+    <string name="student">Student</string>
+    <string name="teacher">Teacher</string>
+    <string name="fullname">Full Name</string>
+    <string name="classid">Class ID (optional)</string>
+    <string name="signup">Sign Up</string>
+
+    <string name="nodata">No Data Available</string>
+    <string name="myprofile">My Profile</string>
+    <string name="myclass">My Class</string>
+    <string name="help">Help</string>
+    <string name="logout">Log Out</string>
+
+    <string name="search">Search</string>
+    <string name="history">History</string>
+    <string name="statistics">Statistics</string>
+
+    <string name="clase">Class</string>
+    <string name="identifier">Identifier</string>
+    <string name="information">Information</string>
+    <string name="size">Size</string>
+
+    <string name="game">Game</string>
+    <string name="description">Description</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="vote">Vote</string>
+
+    <string name="score">Score</string>
+    <string name="role">Role</string>
+    <string name="avatar">Avatar</string>
+    <string name="newpassword">New Password</string>
+
+    <string name="editprofile">Edit Profile</string>
+    <string name="editclass">Edit Class</string>
+    <string name="editgame">Edit Game</string>
+    <string name="save">Save Changes</string>
+
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <string name="deleteuser">Delete User</string>
+    <string name="deleteclass">Delete Class</string>
+    <string name="deletegame">Delete Game</string>
+
+    <string name="dialoguser">This action will erase your user from the database, are you sure?</string>
+    <string name="dialogclass">This action will erase your class from the database, are you sure?</string>
+    <string name="dialoggame">This action will erase your game from the database, are you sure?</string>
+
+    <string name="completed">Completed Games</string>
+    <string name="approved">Approved Games</string>
+    <string name="average">Average Score</string>
+    <string name="failure">Failure Rate</string>
+    <string name="best">Best Subject</string>
+    <string name="worst">Worst Subject</string>
+
+    <string name="empty">Can\'t be Empty</string>
+    <string name="invalid">Invalid UserName/Password</string>
+    <string name="login_success">Successful Login</string>
+    <string name="signup_success">Successful Signup</string>
+    <string name="data_update">Data updated</string>
+
+    <string name="deleteclass_success">Class deleted successfully</string>
+    <string name="deleteuser_success">User deleted successfully</string>
+    <string name="deletegame_success">Game deleted successfully</string>
+
     <string name="item_title">Manhattan</string>
     <string name="item_desc">Manhattan is the district in New York City.</string>
     <string name="detail_location">"New York City"</string>
@@ -11,40 +82,4 @@
         pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
         deserunt mollit anim id est laborum.
     </string>
-    <string name="no_data_available">No Data Available</string>
-    <string name="information">Information</string>
-    <string name="description">Description</string>
-    <string name="register">Register Here</string>
-    <string name="identifier">Identifier</string>
-    <string name="difficulty">Difficulty</string>
-    <string name="myprofile">My Profile</string>
-    <string name="fullname">Full Name</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="myclass">My Class</string>
-    <string name="classid">Class ID</string>
-    <string name="student">Student</string>
-    <string name="teacher">Teacher</string>
-    <string name="signup">Sign Up</string>
-    <string name="logout">Log Out</string>
-    <string name="search">Search</string>
-    <string name="login">Log In</string>
-    <string name="score">Score</string>
-    <string name="clase">Class</string>
-    <string name="size">Size</string>
-    <string name="vote">Vote</string>
-    <string name="role">Role</string>
-    <string name="help">Help</string>
-    <string name="avatar">Avatar</string>
-    <string name="newpassword">New Password</string>
-    <string name="save">Save Changes</string>
-    <string name="editprofile">Edit Profile</string>
-    <string name="editclass">Edit Class</string>
-    <string name="editgame">Edit Game</string>
-    <string name="history">History</string>
-    <string name="statistics">Statistics</string>
-    <string name="delete">Delete</string>
-    <string name="cancel">Cancel</string>
-    <string name="ok">OK</string>
-    <string name="game">Game</string>
 </resources>

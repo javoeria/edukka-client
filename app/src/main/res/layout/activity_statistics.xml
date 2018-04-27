@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <android.support.design.widget.AppBarLayout
@@ -43,7 +44,7 @@
                 <TextView
                     android:layout_width="225dp"
                     android:layout_height="wrap_content"
-                    android:text="Juegos completados"
+                    android:text="@string/completed"
                     android:textSize="@dimen/article_titles" />
 
                 <TextView
@@ -66,7 +67,7 @@
                 <TextView
                     android:layout_width="225dp"
                     android:layout_height="wrap_content"
-                    android:text="Juegos aprobados"
+                    android:text="@string/approved"
                     android:textSize="@dimen/article_titles" />
 
                 <TextView
@@ -88,11 +89,11 @@
                 <TextView
                     android:layout_width="225dp"
                     android:layout_height="wrap_content"
-                    android:text="Puntuación media"
+                    android:text="@string/average"
                     android:textSize="@dimen/article_titles" />
 
                 <TextView
-                    android:id="@+id/mean"
+                    android:id="@+id/average"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
@@ -110,11 +111,11 @@
                 <TextView
                     android:layout_width="225dp"
                     android:layout_height="wrap_content"
-                    android:text="Porcentaje de errores"
+                    android:text="@string/failure"
                     android:textSize="@dimen/article_titles" />
 
                 <TextView
-                    android:id="@+id/average"
+                    android:id="@+id/failure"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorAccent"
@@ -132,7 +133,7 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Mejor asignatura"
+                    android:text="@string/best"
                     android:textSize="@dimen/article_titles" />
 
                 <TextView
@@ -154,7 +155,7 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:text="Peor asignatura"
+                    android:text="@string/worst"
                     android:textSize="@dimen/article_titles" />
 
                 <TextView

@@ -48,7 +48,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void initViews(){
-        mRecyclerView = findViewById(R.id.card_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);

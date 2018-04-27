@@ -30,9 +30,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         StatusBarUtil.setTransparent(this);
 
-        user = findViewById(R.id.editText);
-        pass = findViewById(R.id.editText2);
-        CardView cardview = findViewById(R.id.cardView);
+        user = (EditText) findViewById(R.id.editText);
+        pass = (EditText) findViewById(R.id.editText2);
+        CardView cardview = (CardView) findViewById(R.id.cardView);
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,10 +47,10 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checkFieldValidation() {
         boolean valid = true;
         if (user.getText().toString().equals("")) {
-            user.setError("Can't be Empty");
+            user.setError(getText(R.string.empty));
             valid = false;
         } else if (pass.getText().toString().equals("")) {
-            pass.setError("Can't be Empty");
+            pass.setError(getText(R.string.empty));
             valid = false;
         }
         //return valid;
@@ -60,18 +60,18 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         RestInterface restInterface = RetrofitClient.getInstance();
         //Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
-        Call<UserModel> request = restInterface.logIn("javi", "123");
+        Call<UserModel> request = restInterface.logIn("oak", "123");
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 finish();
                 UserModel model = response.body();
                 if (model.getId()==null) {
-                    Toast.makeText(LoginActivity.this, "Invalid UserName/Pass", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.invalid, Toast.LENGTH_SHORT).show();
                     startActivity(getIntent());
                 } else {
                     UserSingleton.getInstance().setUserModel(model);
-                    Toast.makeText(LoginActivity.this, "Login In SuccessFully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, R.string.login_success, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(i);
                 }

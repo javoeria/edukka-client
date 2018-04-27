@@ -25,7 +25,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +34,6 @@
             android:orientation="vertical"
             android:focusable="false"
             android:focusableInTouchMode="true"
-            android:paddingTop="48dp"
             android:paddingLeft="24dp"
             android:paddingRight="24dp">
 
@@ -139,13 +139,13 @@
                     android:textColor="#ffffff"
                     android:paddingStart="8dp"
                     android:paddingEnd="8dp"
-                    android:hint="Class ID (optional)" />
+                    android:hint="@string/classid" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="76dp"
+                android:layout_height="72dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:scrollbars="horizontal"
@@ -155,7 +155,7 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/colorAccent"

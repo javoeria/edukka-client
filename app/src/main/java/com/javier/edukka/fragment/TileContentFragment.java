@@ -76,8 +76,8 @@ public class TileContentFragment extends Fragment {
 
         private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_tile, parent, false));
-            picture = itemView.findViewById(R.id.tile_picture);
-            name = itemView.findViewById(R.id.tile_title);
+            picture = (ImageView) itemView.findViewById(R.id.tile_picture);
+            name = (TextView) itemView.findViewById(R.id.tile_title);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

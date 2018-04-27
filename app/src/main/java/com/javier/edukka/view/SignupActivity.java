@@ -48,20 +48,20 @@ public class SignupActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        name = findViewById(R.id.fullname);
-        user = findViewById(R.id.username);
-        pass = findViewById(R.id.password);
-        classid = findViewById(R.id.classid);
+        name = (EditText) findViewById(R.id.fullname);
+        user = (EditText) findViewById(R.id.username);
+        pass = (EditText) findViewById(R.id.password);
+        classid = (EditText) findViewById(R.id.classid);
 
         initAvatars();
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
         avatarAdapter = new AvatarAdapter(avatars);
         recyclerView.setAdapter(avatarAdapter);
 
-        CardView cardview = findViewById(R.id.cardView);
+        CardView cardview = (CardView) findViewById(R.id.cardView);
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,13 +89,13 @@ public class SignupActivity extends AppCompatActivity {
     private boolean checkFieldValidation() {
         boolean valid = true;
         if (name.getText().toString().equals("")) {
-            name.setError("Can't be Empty");
+            name.setError(getText(R.string.empty));
             valid = false;
         } else if (user.getText().toString().equals("")) {
-            user.setError("Can't be Empty");
+            user.setError(getText(R.string.empty));
             valid = false;
         } else if (pass.getText().toString().equals("")) {
-            pass.setError("Can't be Empty");
+            pass.setError(getText(R.string.empty));
             valid = false;
         }
         return valid;
@@ -122,11 +122,11 @@ public class SignupActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 UserModel model = response.body();
                 if (model.getId()==null) {
-                    Toast.makeText(SignupActivity.this, "Invalid UserName/Class", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, R.string.invalid, Toast.LENGTH_SHORT).show();
                 } else {
                     setContentView(R.layout.progressbar_layout);
                     UserSingleton.getInstance().setUserModel(model);
-                    Toast.makeText(SignupActivity.this, "Login In SuccessFully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignupActivity.this, R.string.signup_success, Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignupActivity.this, MainActivity.class);
                     finish();
                     startActivity(i);

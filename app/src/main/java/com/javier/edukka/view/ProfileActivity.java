@@ -40,14 +40,14 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        collapsingToolbar = findViewById(R.id.collapsing_toolbar);
-        name = findViewById(R.id.user_name);
-        score = findViewById(R.id.user_score);
-        role = findViewById(R.id.user_role);
-        userImage = findViewById(R.id.image);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        name = (TextView) findViewById(R.id.user_name);
+        score = (TextView) findViewById(R.id.user_score);
+        role = (TextView) findViewById(R.id.user_role);
+        userImage = (ImageView) findViewById(R.id.image);
         loadJSON();
 
-        fab = findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
