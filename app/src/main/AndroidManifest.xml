@@ -89,6 +89,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.MainActivity" />
         </activity>
+        <activity
+            android:name=".view.ClassNewActivity"
+            android:parentActivityName=".view.ClassActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.ClassActivity" />
+        </activity>
     </application>
 
 </manifest>

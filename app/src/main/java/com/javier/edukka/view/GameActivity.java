@@ -19,8 +19,9 @@ import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+import com.javier.edukka.service.HelperClient;
 
-import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -31,12 +32,11 @@ public class GameActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
     public static final String EXTRA_SUBJECT = "subject";
-    private Map<String, String> map;
+    private final Map<String, String> map = HelperClient.map_subject();
     private CollapsingToolbarLayout collapsingToolbar;
+    private FloatingActionButton fab;
     private TextView detail, difficulty, vote;
     private ImageView subjectImage;
-    private FloatingActionButton fab;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class GameActivity extends AppCompatActivity {
         difficulty = (TextView) findViewById(R.id.game_difficulty);
         vote = (TextView) findViewById(R.id.game_vote);
         subjectImage = (ImageView) findViewById(R.id.image);
-        initMap();
         loadJSON();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -67,19 +66,7 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    private void initMap() {
-        map = new HashMap<>();
-        map.put("Spanish Literature", "subject_spanish");
-        map.put("Mathematics", "subject_math");
-        map.put("Natural Sciences", "subject_natural");
-        map.put("Social Sciences", "subject_social");
-        map.put("Biology & Geology", "subject_biology");
-        map.put("Geography & History", "subject_geography");
-        map.put("Music", "subject_music");
-        map.put("Sports", "subject_sport");
-        map.put("English Language", "subject_english");
-        map.put("General Knowledge", "subject_general");
-    }
+
 
     private void loadJSON(){
         int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
@@ -91,7 +78,14 @@ public class GameActivity extends AppCompatActivity {
                 GameModel jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getTitle());
                 detail.setText(jsonResponse.getDescription());
-                difficulty.setText(jsonResponse.getDifficulty());
+                if (Locale.getDefault().getLanguage().equals("es")) {
+                    String level = HelperClient.levelTranslateEs(jsonResponse.getDifficulty());
+                    difficulty.setText(level);
+                } else {
+                    String upperString = jsonResponse.getDifficulty().substring(0,1).toUpperCase() + jsonResponse.getDifficulty().substring(1);
+                    difficulty.setText(upperString);
+                }
+
                 if (Integer.parseInt(jsonResponse.getVote()) > 0) {
                     vote.setText("+"+jsonResponse.getVote());
                     vote.setTextColor(Color.GREEN);
@@ -101,6 +95,7 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     vote.setText(jsonResponse.getVote());
                 }
+
                 String s = getIntent().getStringExtra(EXTRA_SUBJECT);
                 int resourceId = getResources().getIdentifier(map.get(s), "drawable", getPackageName());
                 subjectImage.setImageDrawable(getResources().getDrawable(resourceId));

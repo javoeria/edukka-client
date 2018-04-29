@@ -7,11 +7,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +22,10 @@ import com.javier.edukka.R;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+import com.javier.edukka.service.HelperClient;
 import com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,8 +34,8 @@ import retrofit2.Response;
 public class GameEditActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
-    private TextView name, desc;
     private MaterialBetterSpinner spinner;
+    private EditText name, desc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +46,33 @@ public class GameEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editgame);
 
-        name = (TextView) findViewById(R.id.game_name);
-        desc = (TextView) findViewById(R.id.game_desc);
+        name = (EditText) findViewById(R.id.game_name);
+        desc = (EditText) findViewById(R.id.game_desc);
         spinner = (MaterialBetterSpinner) findViewById(R.id.game_level);
 
         String[] level_list = getResources().getStringArray(R.array.level);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, level_list);
         spinner.setAdapter(arrayAdapter);
         loadJSON();
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (name.getText().hashCode() == editable.hashCode() && name.getText().toString().equals("")) {
+                    name.setError(getText(R.string.empty));
+                } else if (desc.getText().hashCode() == editable.hashCode() && desc.getText().toString().equals("")) {
+                    desc.setError(getText(R.string.empty));
+                }
+            }
+        };
+        name.addTextChangedListener(watcher);
+        desc.addTextChangedListener(watcher);
     }
 
     private void loadJSON(){
@@ -60,7 +85,13 @@ public class GameEditActivity extends AppCompatActivity {
                 GameModel jsonResponse = response.body();
                 name.setText(jsonResponse.getTitle());
                 desc.setText(jsonResponse.getDescription());
-                spinner.setText(jsonResponse.getDifficulty());
+                if (Locale.getDefault().getLanguage().equals("es")) {
+                    String level = HelperClient.levelTranslateEs(jsonResponse.getDifficulty());
+                    spinner.setText(level);
+                } else {
+                    String upperString = jsonResponse.getDifficulty().substring(0,1).toUpperCase() + jsonResponse.getDifficulty().substring(1);
+                    spinner.setText(upperString);
+                }
             }
 
             @Override
@@ -75,7 +106,8 @@ public class GameEditActivity extends AppCompatActivity {
         if (name.getText().toString().equals("")) {
             name.setError(getText(R.string.empty));
             valid = false;
-        } else if (desc.getText().toString().equals("")) {
+        }
+        if (desc.getText().toString().equals("")) {
             desc.setError(getText(R.string.empty));
             valid = false;
         }
@@ -86,7 +118,7 @@ public class GameEditActivity extends AppCompatActivity {
         if (checkFieldValidation()) {
             int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
             RestInterface restInterface = RetrofitClient.getInstance();
-            Call<GameModel> call = restInterface.updateGame(name.getText().toString(), desc.getText().toString(), spinner.getText().toString(), position);
+            Call<GameModel> call = restInterface.updateGame(name.getText().toString(), desc.getText().toString(), HelperClient.levelCode(spinner.getText().toString()), position);
             call.enqueue(new Callback<GameModel>() {
                 @Override
                 public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
@@ -152,10 +184,10 @@ public class GameEditActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Toast.makeText(GameEditActivity.this, R.string.deletegame_success, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(GameEditActivity.this, MainActivity.class);
                 finish();
                 startActivity(i);
-                Toast.makeText(GameEditActivity.this, R.string.deletegame_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

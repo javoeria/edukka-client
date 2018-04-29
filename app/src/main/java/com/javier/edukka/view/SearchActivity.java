@@ -21,9 +21,11 @@ import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+import com.javier.edukka.service.HelperClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,8 +35,8 @@ public class SearchActivity extends AppCompatActivity {
 
     public static final String SUBJECT_NAME = "subject";
     private SwipeRefreshLayout mySwipeRefreshLayout;
-    private RecyclerView mRecyclerView;
     private ArrayList<GameModel> mArrayList;
+    private RecyclerView mRecyclerView;
     private GameAdapter mAdapter;
     private String subject;
 
@@ -54,7 +56,7 @@ public class SearchActivity extends AppCompatActivity {
         refresh();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("Teacher")) {
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
             fab.setVisibility(View.VISIBLE);
         }
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +75,15 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void loadJSON(){
+        String search;
+        if (Locale.getDefault().getLanguage().equals("es")) {
+            search = HelperClient.subjectTranslateEn(subject);
+        } else {
+            search = subject;
+        }
+
         RestInterface restInterface = RetrofitClient.getInstance();
-        Call<List<GameModel>> call = restInterface.getSubjectGames(subject);
+        Call<List<GameModel>> call = restInterface.getSubjectGames(search);
         call.enqueue(new Callback<List<GameModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<GameModel>> call, @NonNull Response<List<GameModel>> response) {
@@ -83,8 +92,18 @@ public class SearchActivity extends AppCompatActivity {
                     mArrayList = new ArrayList<>();
                     findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
                 } else {
-                    mArrayList = (ArrayList<GameModel>) jsonResponse;
-                    findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
+                    ArrayList<GameModel> list = new ArrayList<>();
+                    for (GameModel game : jsonResponse) {
+                        if (game.getLocale().equals(Locale.getDefault().getLanguage())) {
+                            list.add(game);
+                        }
+                    }
+                    mArrayList = list;
+                    if (mArrayList.isEmpty()) {
+                        findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
+                    } else {
+                        findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
+                    }
                 }
                 mAdapter = new GameAdapter(mArrayList);
                 mRecyclerView.setAdapter(mAdapter);

@@ -11,10 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+import com.javier.edukka.service.HelperClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,11 +40,10 @@ import retrofit2.Response;
 public class ProfileEditActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
-    private TextView name, pass, classid;
-    private List<Drawable> avatars;
+    private final String[] array = HelperClient.array_avatar();
+    private EditText name, pass, classid;
     private AvatarAdapter avatarAdapter;
-    private final String[] array = {"avatar_butterfly", "avatar_cat", "avatar_dog", "avatar_elephant",
-            "avatar_lion", "avatar_panda", "avatar_snake", "avatar_spider", "avatar_turtle", "avatar_wolf", "avatar_teacher"};
+    private List<Drawable> avatars;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +54,9 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editprofile);
 
-        name = (TextView) findViewById(R.id.user_name);
-        pass = (TextView) findViewById(R.id.user_pass);
-        classid = (TextView) findViewById(R.id.user_classid);
+        name = (EditText) findViewById(R.id.user_name);
+        pass = (EditText) findViewById(R.id.user_pass);
+        classid = (EditText) findViewById(R.id.user_classid);
 
         initAvatars();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -63,6 +66,28 @@ public class ProfileEditActivity extends AppCompatActivity {
         avatarAdapter = new AvatarAdapter(avatars);
         recyclerView.setAdapter(avatarAdapter);
         loadJSON();
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (name.getText().hashCode() == editable.hashCode() && name.getText().toString().equals("")) {
+                    name.setError(getText(R.string.empty));
+                } else if (classid.getText().hashCode() == editable.hashCode() && classid.getText().toString().equals("")) {
+                    classid.setError(getText(R.string.empty));
+                } else if (pass.getText().hashCode() == editable.hashCode() && pass.getText().toString().length()>0 && pass.getText().toString().length()<4) {
+                    pass.setError(getText(R.string.minimum));
+                }
+            }
+        };
+        name.addTextChangedListener(watcher);
+        pass.addTextChangedListener(watcher);
+        classid.addTextChangedListener(watcher);
     }
 
     private void initAvatars() {
@@ -100,7 +125,8 @@ public class ProfileEditActivity extends AppCompatActivity {
         if (name.getText().toString().equals("")) {
             name.setError(getText(R.string.empty));
             valid = false;
-        } else if (classid.getText().toString().equals("")) {
+        }
+        if (classid.getText().toString().equals("")) {
             classid.setError(getText(R.string.empty));
             valid = false;
         }
@@ -118,7 +144,7 @@ public class ProfileEditActivity extends AppCompatActivity {
                 public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                     UserModel jsonResponse = response.body();
                     if (jsonResponse.getId()==null) {
-                        Toast.makeText(ProfileEditActivity.this, "Clase no existe", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileEditActivity.this, R.string.class_fail, Toast.LENGTH_SHORT).show();
                     } else {
                         UserSingleton.getInstance().setUserModel(jsonResponse);
                         Toast.makeText(ProfileEditActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();
@@ -185,10 +211,10 @@ public class ProfileEditActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Toast.makeText(ProfileEditActivity.this, R.string.deleteuser_success, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ProfileEditActivity.this, LoginActivity.class);
                 finish();
                 startActivity(i);
-                Toast.makeText(ProfileEditActivity.this, R.string.deleteuser_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

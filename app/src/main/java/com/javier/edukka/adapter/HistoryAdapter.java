@@ -59,14 +59,15 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             }
         });
 
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("Teacher")) {
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
             int id2 = Integer.parseInt(mArrayList.get(i).getStudentId());
             Call<UserModel> call2 = restInterface.getUser(id2);
             call2.enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                     UserModel jsonResponse = response.body();
-                    viewHolder.history_name.append(" - "+jsonResponse.getUsername());
+                    //viewHolder.history_name.append(" - "+jsonResponse.getUsername());
+                    viewHolder.history_user.setText(jsonResponse.getUsername());
                 }
 
                 @Override
@@ -85,12 +86,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     class ViewHolder extends RecyclerView.ViewHolder {
         private final TextView history_name;
         private final TextView history_date;
+        private final TextView history_user;
         private final RatingBar history_rating;
 
         private ViewHolder(View view) {
             super(view);
             history_name = (TextView) view.findViewById(R.id.list_game);
             history_date = (TextView) view.findViewById(R.id.list_date);
+            history_user = (TextView) view.findViewById(R.id.list_user);
             history_rating = (RatingBar) view.findViewById(R.id.ratingBar);
         }
     }

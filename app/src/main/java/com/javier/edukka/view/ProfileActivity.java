@@ -18,6 +18,9 @@ import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+import com.javier.edukka.service.HelperClient;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,9 +30,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
     private CollapsingToolbarLayout collapsingToolbar;
-    private TextView name, score, role;
-    private ImageView userImage;
     private FloatingActionButton fab;
+    private TextView name, role, score, score_title;
+    private ImageView userImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         name = (TextView) findViewById(R.id.user_name);
-        score = (TextView) findViewById(R.id.user_score);
         role = (TextView) findViewById(R.id.user_role);
         userImage = (ImageView) findViewById(R.id.image);
+        score = (TextView) findViewById(R.id.user_score);
+        score_title = (TextView) findViewById(R.id.score_title);
         loadJSON();
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -80,8 +84,21 @@ public class ProfileActivity extends AppCompatActivity {
                 UserModel jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getUsername());
                 name.setText(jsonResponse.getName());
-                score.setText(jsonResponse.getScore()+" points");
-                role.setText(jsonResponse.getRole());
+                if (jsonResponse.getRole().equals("student")) {
+                    score.setText(getString(R.string.user_score, jsonResponse.getScore()));
+                } else {
+                    score_title.setVisibility(View.INVISIBLE);
+                    score.setVisibility(View.INVISIBLE);
+                }
+
+                if (Locale.getDefault().getLanguage().equals("es")) {
+                    String rol = HelperClient.roleTranslateEs(jsonResponse.getRole());
+                    role.setText(rol);
+                } else {
+                    String upperString = jsonResponse.getRole().substring(0,1).toUpperCase() + jsonResponse.getRole().substring(1);
+                    role.setText(upperString);
+                }
+
                 int resourceId = getResources().getIdentifier(jsonResponse.getImage(), "drawable", getPackageName());
                 userImage.setImageDrawable(getResources().getDrawable(resourceId));
                 if (UserSingleton.getInstance().getUserModel().getUsername().equals(jsonResponse.getUsername())) {

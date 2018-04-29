@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,6 +44,25 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (user.getText().hashCode() == editable.hashCode() && user.getText().toString().equals("")) {
+                    user.setError(getText(R.string.empty));
+                } else if (pass.getText().hashCode() == editable.hashCode() && pass.getText().toString().equals("")) {
+                    pass.setError(getText(R.string.empty));
+                }
+            }
+        };
+        user.addTextChangedListener(watcher);
+        pass.addTextChangedListener(watcher);
     }
 
     private boolean checkFieldValidation() {
@@ -49,7 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         if (user.getText().toString().equals("")) {
             user.setError(getText(R.string.empty));
             valid = false;
-        } else if (pass.getText().toString().equals("")) {
+        }
+        if (pass.getText().toString().equals("")) {
             pass.setError(getText(R.string.empty));
             valid = false;
         }
@@ -60,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         RestInterface restInterface = RetrofitClient.getInstance();
         //Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
-        Call<UserModel> request = restInterface.logIn("oak", "123");
+        Call<UserModel> request = restInterface.logIn("javi", "123");
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {

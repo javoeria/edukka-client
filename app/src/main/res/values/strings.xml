@@ -10,7 +10,8 @@
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
     <string name="fullname">Full Name</string>
-    <string name="classid">Class ID (optional)</string>
+    <string name="classid">Class ID</string>
+    <string name="classopt">Class ID (optional)</string>
     <string name="signup">Sign Up</string>
 
     <string name="nodata">No Data Available</string>
@@ -41,7 +42,9 @@
     <string name="editprofile">Edit Profile</string>
     <string name="editclass">Edit Class</string>
     <string name="editgame">Edit Game</string>
-    <string name="save">Save Changes</string>
+    <string name="newclass">New Class</string>
+    <string name="save">Save</string>
+    <string name="create">Create</string>
 
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
@@ -63,14 +66,20 @@
     <string name="worst">Worst Subject</string>
 
     <string name="empty">Can\'t be Empty</string>
+    <string name="minimum">At least 4 characters</string>
     <string name="invalid">Invalid UserName/Password</string>
     <string name="login_success">Successful Login</string>
     <string name="signup_success">Successful Signup</string>
     <string name="data_update">Data updated</string>
+    <string name="class_fail">Class not found</string>
+    <string name="username_fail">Username not available</string>
 
     <string name="deleteclass_success">Class deleted successfully</string>
     <string name="deleteuser_success">User deleted successfully</string>
     <string name="deletegame_success">Game deleted successfully</string>
+
+    <string name="user_score">%1$s points</string>
+    <string name="class_size">%1$d users</string>
 
     <string name="item_title">Manhattan</string>
     <string name="item_desc">Manhattan is the district in New York City.</string>

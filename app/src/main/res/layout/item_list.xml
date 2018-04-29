@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -37,17 +38,25 @@
         android:textSize="@dimen/list_body"
         tools:text="@string/item_title" />
 
+    <ImageView
+        android:id="@+id/list_medal"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_toStartOf="@+id/list_score"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/medal_first" />
+
     <TextView
         android:id="@+id/list_score"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/md_keylines"
-        android:layout_marginTop="@dimen/md_keylines"
-        android:layout_toEndOf="@+id/list_title"
+        android:layout_marginTop="4dp"
+        android:padding="4dp"
+        android:layout_alignParentEnd="true"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="@dimen/article_subheading"
-        android:gravity="end"
-        android:textColor="@color/colorPrimary"
-        tools:text="100 points" />
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
+        tools:text="100" />
 
 </RelativeLayout>

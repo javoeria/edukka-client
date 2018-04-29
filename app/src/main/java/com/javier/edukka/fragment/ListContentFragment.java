@@ -52,6 +52,10 @@ public class ListContentFragment extends Fragment {
         return size;
     }
 
+    public static void setSize(int i) {
+        size = i;
+    }
+
     private void loadJSON(){
         RestInterface restInterface = RetrofitClient.getInstance();
         //Call<List<UserModel>> call = restInterface.getAllUsers();
@@ -93,8 +97,23 @@ public class ListContentFragment extends Fragment {
             holder.avatar.setImageResource(resourceId);
             holder.name.setText(mArrayList.get(i).getUsername());
             holder.description.setText(mArrayList.get(i).getName());
-            if (mArrayList.get(i).getRole().equals("Student")) {
+            if (mArrayList.get(i).getRole().equals("student")) {
                 holder.score.setText(mArrayList.get(i).getScore());
+            }
+
+            switch (i) {
+                case 0:
+                    holder.medal.setImageDrawable(getResources().getDrawable(R.drawable.medal_first));
+                    holder.medal.setVisibility(View.VISIBLE);
+                    break;
+                case 1:
+                    holder.medal.setImageDrawable(getResources().getDrawable(R.drawable.medal_second));
+                    holder.medal.setVisibility(View.VISIBLE);
+                    break;
+                case 2:
+                    holder.medal.setImageDrawable(getResources().getDrawable(R.drawable.medal_third));
+                    holder.medal.setVisibility(View.VISIBLE);
+                    break;
             }
         }
 
@@ -106,6 +125,7 @@ public class ListContentFragment extends Fragment {
 
     private class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView avatar;
+        private final ImageView medal;
         private final TextView name;
         private final TextView description;
         private final TextView score;
@@ -113,6 +133,7 @@ public class ListContentFragment extends Fragment {
         private ViewHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.item_list, parent, false));
             avatar = (ImageView) itemView.findViewById(R.id.list_avatar);
+            medal = (ImageView) itemView.findViewById(R.id.list_medal);
             name = (TextView) itemView.findViewById(R.id.list_title);
             description = (TextView) itemView.findViewById(R.id.list_desc);
             score = (TextView) itemView.findViewById(R.id.list_score);

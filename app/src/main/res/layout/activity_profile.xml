@@ -70,20 +70,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="@string/score"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
-
-            <TextView
-                android:id="@+id/user_score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="0 points" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
                 android:text="@string/role"
                 android:textSize="@dimen/article_titles"
                 android:layout_marginTop="@dimen/md_keylines" />
@@ -93,6 +79,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Student" />
+
+            <TextView
+                android:id="@+id/score_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorAccent"
+                android:visibility="visible"
+                android:text="@string/score"
+                android:textSize="@dimen/article_titles"
+                android:layout_marginTop="@dimen/md_keylines" />
+
+            <TextView
+                android:id="@+id/user_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                tools:text="0 points" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

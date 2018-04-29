@@ -10,7 +10,8 @@
     <string name="student">Estudiante</string>
     <string name="teacher">Profesor</string>
     <string name="fullname">Nombre y Apellidos</string>
-    <string name="classid">ID Clase (opcional)</string>
+    <string name="classid">ID Clase</string>
+    <string name="classopt">ID Clase (opcional)</string>
     <string name="signup">Registrar</string>
 
     <string name="nodata">No Datos Disponibles</string>
@@ -41,7 +42,9 @@
     <string name="editprofile">Editar Perfil</string>
     <string name="editclass">Editar Clase</string>
     <string name="editgame">Editar Juego</string>
-    <string name="save">Guardar Cambios</string>
+    <string name="newclass">Nueva Clase</string>
+    <string name="save">Guardar</string>
+    <string name="create">Crear</string>
 
     <string name="delete">Borrar</string>
     <string name="cancel">Cancelar</string>
@@ -63,14 +66,20 @@
     <string name="worst">Peor Asignatura</string>
 
     <string name="empty">Campo Obligatorio</string>
+    <string name="minimum">Al menos 4 caracteres</string>
     <string name="invalid">Usuario/Contraseña inválido</string>
     <string name="login_success">Inicio sesión correcto</string>
     <string name="signup_success">Registro usuario correcto</string>
     <string name="data_update">Datos actualizados</string>
+    <string name="class_fail">Clase no encontrada</string>
+    <string name="username_fail">Usuario no disponible</string>
 
     <string name="deleteclass_success">Clase eliminada con éxito</string>
     <string name="deleteuser_success">Usuario eliminado con éxito</string>
     <string name="deletegame_success">Juego eliminado con éxito</string>
+
+    <string name="user_score">%1$s puntos</string>
+    <string name="class_size">%1$d usuarios</string>
 
     <string name="item_title">Manhattan</string>
     <string name="item_desc">Manhattan es el distrito en Nueva York.</string>

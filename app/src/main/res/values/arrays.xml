@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="subjects">
-        <item>Spanish Literature</item>
+        <item>Spanish Language</item>
         <item>Mathematics</item>
         <item>Natural Sciences</item>
         <item>Social Sciences</item>
@@ -9,7 +9,7 @@
         <item>Geography &amp; History</item>
         <item>Music</item>
         <item>Sports</item>
-        <item>English Language</item>
+        <item>English</item>
         <item>General Knowledge</item>
     </string-array>
     <string-array name="activity">
@@ -38,12 +38,17 @@
         <item>@drawable/subject_general</item>
     </array>
     <array name="avatar_pictures">
+        <item>@drawable/avatar_bird</item>
         <item>@drawable/avatar_butterfly</item>
         <item>@drawable/avatar_cat</item>
         <item>@drawable/avatar_dog</item>
         <item>@drawable/avatar_elephant</item>
+        <item>@drawable/avatar_fox</item>
         <item>@drawable/avatar_lion</item>
         <item>@drawable/avatar_panda</item>
+        <item>@drawable/avatar_penguin</item>
+        <item>@drawable/avatar_pig</item>
+        <item>@drawable/avatar_snail</item>
         <item>@drawable/avatar_snake</item>
         <item>@drawable/avatar_spider</item>
         <item>@drawable/avatar_turtle</item>

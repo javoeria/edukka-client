@@ -29,6 +29,18 @@
         android:textSize="@dimen/list_body"
         tools:text="@string/item_title" />
 
+    <TextView
+        android:id="@+id/list_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_game"
+        android:layout_toEndOf="@id/list_date"
+        android:layout_marginStart="@dimen/md_keylines"
+        android:textColor="@color/colorSecondaryText"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="@dimen/list_body"
+        tools:text="@string/item_title" />
+
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
@@ -36,7 +48,8 @@
         android:layout_alignParentEnd="true"
         android:numStars="5"
         android:rating="3.5"
-        android:progressTint="@color/colorAccent"
+        android:progressTint="@color/colorStar"
+        android:secondaryProgressTint="@color/colorStar"
         style="?android:attr/ratingBarStyleIndicator"/>
 
 </RelativeLayout>

@@ -27,8 +27,8 @@ import retrofit2.Response;
 
 public class HistoryActivity extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
     private ArrayList<ActivityModel> mArrayList;
+    private RecyclerView mRecyclerView;
     private HistoryAdapter mAdapter;
 
     @Override
@@ -40,7 +40,7 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(R.string.history);
 
         initViews();
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("Student")) {
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
             loadJSON1();
         } else {
             loadJSON2();

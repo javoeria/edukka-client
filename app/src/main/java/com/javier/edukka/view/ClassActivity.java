@@ -27,8 +27,9 @@ public class ClassActivity extends AppCompatActivity {
 
     private static final String EXTRA_POSITION = "position";
     private CollapsingToolbarLayout collapsingToolbar;
-    private TextView id, info, size;
     private FloatingActionButton fab;
+    private TextView id, info, size;
+    private boolean create = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +50,15 @@ public class ClassActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ClassActivity.this, ClassEditActivity.class);
-                int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
-                intent.putExtra(ClassEditActivity.EXTRA_POSITION, id);
-                startActivity(intent);
+                if (create) {
+                    Intent intent = new Intent(ClassActivity.this, ClassNewActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(ClassActivity.this, ClassEditActivity.class);
+                    int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+                    intent.putExtra(ClassEditActivity.EXTRA_POSITION, id);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -69,7 +75,7 @@ public class ClassActivity extends AppCompatActivity {
     }
 
     private void loadJSON(){
-        int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        int position = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<ClassModel> call = restInterface.getClass(position);
         call.enqueue(new Callback<ClassModel>() {
@@ -79,9 +85,14 @@ public class ClassActivity extends AppCompatActivity {
                 collapsingToolbar.setTitle(jsonResponse.getName());
                 id.setText(jsonResponse.getId());
                 info.setText(jsonResponse.getInformation());
-                size.setText(ListContentFragment.getSize()+" users");
+                size.setText(getString(R.string.class_size,ListContentFragment.getSize()));
                 if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
                     fab.setVisibility(View.VISIBLE);
+                } else if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher") &&
+                           UserSingleton.getInstance().getUserModel().getClassId().equals("0")) {
+                    fab.setImageResource(android.R.drawable.ic_input_add);
+                    fab.setVisibility(View.VISIBLE);
+                    create = true;
                 }
             }
 

@@ -91,13 +91,10 @@ public interface RestInterface {
     @GET("games/{sub}")
     Call<List<GameModel>> getSubjectGames(@Path("sub") String subject);
 
-    @GET("games/{sub}?{str}")
-    Call<List<GameModel>> searchGames(@Path("sub") String subject, @Path("str") String string);
-
     @FormUrlEncoded
     @POST("game/new")
     Call<GameModel> createGame(@Field("subject") String subject, @Field("title") String title, @Field("description") String description,
-                               @Field("difficulty") String difficulty, @Field("teacher_id") int teacherId);
+                               @Field("locale") String locale, @Field("difficulty") String difficulty, @Field("teacher_id") int teacherId);
 
     @FormUrlEncoded
     @POST("game/edit")

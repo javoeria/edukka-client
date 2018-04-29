@@ -13,9 +13,11 @@ import android.widget.TextView;
 
 import com.javier.edukka.R;
 import com.javier.edukka.model.GameModel;
+import com.javier.edukka.service.HelperClient;
 import com.javier.edukka.view.GameActivity;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> implements Filterable {
     private final ArrayList<GameModel> mArrayList;
@@ -37,7 +39,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.game_name.setText(mFilteredList.get(i).getTitle());
         viewHolder.game_desc.setText(mFilteredList.get(i).getDescription());
-        viewHolder.game_level.setText(mFilteredList.get(i).getDifficulty());
+        if (Locale.getDefault().getLanguage().equals("es")) {
+            String level = HelperClient.levelTranslateEs(mFilteredList.get(i).getDifficulty());
+            viewHolder.game_level.setText(level);
+        } else {
+            String upperString = mFilteredList.get(i).getDifficulty().substring(0,1).toUpperCase() + mFilteredList.get(i).getDifficulty().substring(1);
+            viewHolder.game_level.setText(upperString);
+        }
     }
 
     @Override

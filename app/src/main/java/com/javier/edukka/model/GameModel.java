@@ -17,6 +17,9 @@ public class GameModel {
     @SerializedName("description")
     @Expose
     private String description;
+    @SerializedName("locale")
+    @Expose
+    private String locale;
     @SerializedName("difficulty")
     @Expose
     private String difficulty;
@@ -29,12 +32,13 @@ public class GameModel {
 
     public GameModel() {}
 
-    public GameModel(String id, String subject, String title, String description, String difficulty, String vote, String teacherId) {
+    public GameModel(String id, String subject, String title, String description, String locale, String difficulty, String vote, String teacherId) {
         super();
         this.id = id;
         this.subject = subject;
         this.title = title;
         this.description = description;
+        this.locale = locale;
         this.difficulty = difficulty;
         this.vote = vote;
         this.teacherId = teacherId;
@@ -70,6 +74,14 @@ public class GameModel {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     public String getDifficulty() {

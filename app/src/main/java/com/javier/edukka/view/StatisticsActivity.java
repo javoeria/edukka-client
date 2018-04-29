@@ -13,8 +13,10 @@ import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.ActivityModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+import com.javier.edukka.service.HelperClient;
 
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,7 +41,7 @@ public class StatisticsActivity extends AppCompatActivity {
         best = (TextView) findViewById(R.id.best);
         worst = (TextView) findViewById(R.id.worst);
 
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("Student")) {
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
             loadJSON1();
         } else {
             loadJSON2();
@@ -131,6 +133,9 @@ public class StatisticsActivity extends AppCompatActivity {
                 maxValue = list.get(i).getSubject();
             }
         }
+        if (Locale.getDefault().getLanguage().equals("es")) {
+            maxValue = HelperClient.subjectTranslateEs(maxValue);
+        }
         return maxValue;
     }
 
@@ -148,6 +153,9 @@ public class StatisticsActivity extends AppCompatActivity {
                 minCount = count;
                 minValue = list.get(i).getSubject();
             }
+        }
+        if (Locale.getDefault().getLanguage().equals("es")) {
+            minValue = HelperClient.subjectTranslateEs(minValue);
         }
         return minValue;
     }

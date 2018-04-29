@@ -41,12 +41,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="@string/fullname"
+                android:text="@string/clase"
                 android:textSize="@dimen/article_titles"
                 android:layout_marginTop="@dimen/md_keylines" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_name"
+                android:id="@+id/class_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
@@ -56,48 +56,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="@string/classid"
+                android:text="@string/information"
                 android:textSize="@dimen/article_titles"
                 android:layout_marginTop="@dimen/md_keylines" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_classid"
+                android:id="@+id/class_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="textCapSentences|textMultiLine"
                 tools:text="@string/detail_location" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
-                android:text="@string/newpassword"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
-
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                tools:text="@string/detail_location" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?attr/colorAccent"
-                android:text="@string/avatar"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="72dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:scrollbars="horizontal"
-                android:scrollbarStyle="outsideInset" />
 
             <Button
                 android:id="@+id/button"
@@ -106,8 +74,8 @@
                 android:layout_marginTop="@dimen/md_keylines"
                 android:background="@color/colorAccent"
                 android:textColor="#ffffff"
-                android:onClick="save"
-                android:text="@string/save" />
+                android:onClick="create"
+                android:text="@string/create" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

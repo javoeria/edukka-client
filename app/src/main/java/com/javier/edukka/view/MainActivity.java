@@ -3,6 +3,7 @@ package com.javier.edukka.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -152,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentc);
                 return true;
             case R.id.help:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://edukka.000webhostapp.com/"));
+                startActivity(browserIntent);
                 return true;
             case R.id.logout:
                 UserSingleton.getInstance().setUserModel(null);
@@ -161,6 +164,12 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
 }

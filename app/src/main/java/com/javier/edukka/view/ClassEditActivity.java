@@ -7,14 +7,18 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.ClassModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -26,7 +30,7 @@ import retrofit2.Response;
 public class ClassEditActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
-    private TextView name, info;
+    private EditText name, info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +41,28 @@ public class ClassEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editclass);
 
-        name = (TextView) findViewById(R.id.class_name);
-        info = (TextView) findViewById(R.id.class_info);
+        name = (EditText) findViewById(R.id.class_name);
+        info = (EditText) findViewById(R.id.class_info);
         loadJSON();
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (name.getText().hashCode() == editable.hashCode() && name.getText().toString().equals("")) {
+                    name.setError(getText(R.string.empty));
+                } else if (info.getText().hashCode() == editable.hashCode() && info.getText().toString().equals("")) {
+                    info.setError(getText(R.string.empty));
+                }
+            }
+        };
+        name.addTextChangedListener(watcher);
+        info.addTextChangedListener(watcher);
     }
 
     private void loadJSON(){
@@ -66,7 +89,8 @@ public class ClassEditActivity extends AppCompatActivity {
         if (name.getText().toString().equals("")) {
             name.setError(getText(R.string.empty));
             valid = false;
-        } else if (info.getText().toString().equals("")) {
+        }
+        if (info.getText().toString().equals("")) {
             info.setError(getText(R.string.empty));
             valid = false;
         }
@@ -143,10 +167,11 @@ public class ClassEditActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                UserSingleton.getInstance().getUserModel().setClassId("0");
+                Toast.makeText(ClassEditActivity.this, R.string.deleteclass_success, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ClassEditActivity.this, MainActivity.class);
                 finish();
                 startActivity(i);
-                Toast.makeText(ClassEditActivity.this, R.string.deleteclass_success, Toast.LENGTH_SHORT).show();
             }
 
             @Override

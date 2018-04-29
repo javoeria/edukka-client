@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="subjects">
-        <item>Lengua Castellana y Literatura</item>
+        <item>Lengua Castellana</item>
         <item>Matemáticas</item>
         <item>Ciencias Naturales</item>
         <item>Ciencias Sociales</item>
@@ -18,7 +18,7 @@
     </string-array>
     <string-array name="activity_desc">
         <item>Registro en una base de datos de los juegos realizados por el usuario.</item>
-        <item>Estudio de los juegos para llegar a conclusiones a partir de los resultados obtenidos.</item>
+        <item>Estudio de los juegos para obtener conclusiones a partir de los resultados.</item>
     </string-array>
     <string-array name="level">
         <item>Difícil</item>
@@ -38,12 +38,17 @@
         <item>@drawable/subject_general</item>
     </array>
     <array name="avatar_pictures">
+        <item>@drawable/avatar_bird</item>
         <item>@drawable/avatar_butterfly</item>
         <item>@drawable/avatar_cat</item>
         <item>@drawable/avatar_dog</item>
         <item>@drawable/avatar_elephant</item>
+        <item>@drawable/avatar_fox</item>
         <item>@drawable/avatar_lion</item>
         <item>@drawable/avatar_panda</item>
+        <item>@drawable/avatar_penguin</item>
+        <item>@drawable/avatar_pig</item>
+        <item>@drawable/avatar_snail</item>
         <item>@drawable/avatar_snake</item>
         <item>@drawable/avatar_spider</item>
         <item>@drawable/avatar_turtle</item>
