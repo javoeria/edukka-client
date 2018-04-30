@@ -17,7 +17,7 @@
         <item>Estadísticas</item>
     </string-array>
     <string-array name="activity_desc">
-        <item>Registro en una base de datos de los juegos realizados por el usuario.</item>
+        <item>Registro en una base de datos de los juegos completados por el usuario o clase.</item>
         <item>Estudio de los juegos para obtener conclusiones a partir de los resultados.</item>
     </string-array>
     <string-array name="level">

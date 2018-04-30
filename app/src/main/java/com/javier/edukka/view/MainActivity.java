@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(i);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

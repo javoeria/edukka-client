@@ -1,6 +1,7 @@
 package com.javier.edukka.view;
 
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -27,6 +28,7 @@ import retrofit2.Response;
 
 public class HistoryActivity extends AppCompatActivity {
 
+    private SwipeRefreshLayout mySwipeRefreshLayout;
     private ArrayList<ActivityModel> mArrayList;
     private RecyclerView mRecyclerView;
     private HistoryAdapter mAdapter;
@@ -39,7 +41,10 @@ public class HistoryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.history);
 
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         initViews();
+        refresh();
         if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
             loadJSON1();
         } else {
@@ -73,6 +78,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 mAdapter = new HistoryAdapter(mArrayList);
                 mRecyclerView.setAdapter(mAdapter);
+                mySwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -98,6 +104,7 @@ public class HistoryActivity extends AppCompatActivity {
                 }
                 mAdapter = new HistoryAdapter(mArrayList);
                 mRecyclerView.setAdapter(mAdapter);
+                mySwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -111,6 +118,21 @@ public class HistoryActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    private void refresh() {
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+                            loadJSON1();
+                        } else {
+                            loadJSON2();
+                        }
+                    }
+                }
+        );
     }
 
 }

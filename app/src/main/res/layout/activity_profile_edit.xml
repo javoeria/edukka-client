@@ -46,7 +46,7 @@
                 android:layout_marginTop="@dimen/md_keylines" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_name"
+                android:id="@+id/user_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
@@ -56,15 +56,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="@string/classid"
+                android:text="@string/username"
                 android:textSize="@dimen/article_titles"
                 android:layout_marginTop="@dimen/md_keylines" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:id="@+id/user_classid"
+                android:id="@+id/user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
                 tools:text="@string/detail_location" />
 
             <TextView

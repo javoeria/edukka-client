@@ -41,7 +41,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
     private final String[] array = HelperClient.array_avatar();
-    private EditText name, pass, classid;
+    private EditText name, user, pass;
     private AvatarAdapter avatarAdapter;
     private List<Drawable> avatars;
 
@@ -54,9 +54,9 @@ public class ProfileEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.editprofile);
 
-        name = (EditText) findViewById(R.id.user_name);
+        name = (EditText) findViewById(R.id.user_fullname);
+        user = (EditText) findViewById(R.id.user_name);
         pass = (EditText) findViewById(R.id.user_pass);
-        classid = (EditText) findViewById(R.id.user_classid);
 
         initAvatars();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -78,16 +78,16 @@ public class ProfileEditActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 if (name.getText().hashCode() == editable.hashCode() && name.getText().toString().equals("")) {
                     name.setError(getText(R.string.empty));
-                } else if (classid.getText().hashCode() == editable.hashCode() && classid.getText().toString().equals("")) {
-                    classid.setError(getText(R.string.empty));
+                } else if (user.getText().hashCode() == editable.hashCode() && user.getText().toString().equals("")) {
+                    user.setError(getText(R.string.empty));
                 } else if (pass.getText().hashCode() == editable.hashCode() && pass.getText().toString().length()>0 && pass.getText().toString().length()<4) {
                     pass.setError(getText(R.string.minimum));
                 }
             }
         };
         name.addTextChangedListener(watcher);
+        user.addTextChangedListener(watcher);
         pass.addTextChangedListener(watcher);
-        classid.addTextChangedListener(watcher);
     }
 
     private void initAvatars() {
@@ -108,7 +108,7 @@ public class ProfileEditActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                 UserModel jsonResponse = response.body();
                 name.setText(jsonResponse.getName());
-                classid.setText(jsonResponse.getClassId());
+                user.setText(jsonResponse.getUsername());
                 int pos = Arrays.asList(array).indexOf(jsonResponse.getImage());
                 avatarAdapter.setSelectedPos(pos);
             }
@@ -126,8 +126,8 @@ public class ProfileEditActivity extends AppCompatActivity {
             name.setError(getText(R.string.empty));
             valid = false;
         }
-        if (classid.getText().toString().equals("")) {
-            classid.setError(getText(R.string.empty));
+        if (user.getText().toString().equals("")) {
+            user.setError(getText(R.string.empty));
             valid = false;
         }
         return valid;
@@ -137,14 +137,15 @@ public class ProfileEditActivity extends AppCompatActivity {
         if (checkFieldValidation()) {
             int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
             RestInterface restInterface = RetrofitClient.getInstance();
-            Call<UserModel> call = restInterface.updateUser(name.getText().toString(), pass.getText().toString(),
-                    array[avatarAdapter.getSelectedPos()], Integer.parseInt(classid.getText().toString()), position);
+            Call<UserModel> call = restInterface.updateUser(name.getText().toString(), user.getText().toString(),
+                    pass.getText().toString(), array[avatarAdapter.getSelectedPos()], position);
             call.enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                     UserModel jsonResponse = response.body();
                     if (jsonResponse.getId()==null) {
-                        Toast.makeText(ProfileEditActivity.this, R.string.class_fail, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProfileEditActivity.this, R.string.username_fail, Toast.LENGTH_SHORT).show();
+                        user.setError(getText(R.string.username_fail));
                     } else {
                         UserSingleton.getInstance().setUserModel(jsonResponse);
                         Toast.makeText(ProfileEditActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();

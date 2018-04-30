@@ -39,8 +39,8 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("user/edit")
-    Call<UserModel> updateUser(@Field("name") String name, @Field("password") String password, @Field("image") String image,
-                               @Field("class_id") int class_id, @Field("id") int userId);
+    Call<UserModel> updateUser(@Field("name") String name, @Field("username") String username, @Field("password") String password,
+                               @Field("image") String image, @Field("id") int userId);
 
     @FormUrlEncoded
     @POST("user/delete")

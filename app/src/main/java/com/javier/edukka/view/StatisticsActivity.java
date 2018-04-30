@@ -2,6 +2,7 @@ package com.javier.edukka.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,6 +25,7 @@ import retrofit2.Response;
 
 public class StatisticsActivity extends AppCompatActivity {
 
+    private SwipeRefreshLayout mySwipeRefreshLayout;
     private TextView total, approved, average, failure, best, worst;
 
     @Override
@@ -34,6 +36,8 @@ public class StatisticsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.statistics);
 
+        mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         total = (TextView) findViewById(R.id.total);
         approved = (TextView) findViewById(R.id.approved);
         average = (TextView) findViewById(R.id.average);
@@ -41,6 +45,7 @@ public class StatisticsActivity extends AppCompatActivity {
         best = (TextView) findViewById(R.id.best);
         worst = (TextView) findViewById(R.id.worst);
 
+        refresh();
         if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
             loadJSON1();
         } else {
@@ -57,6 +62,7 @@ public class StatisticsActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<ActivityModel>> call, @NonNull Response<List<ActivityModel>> response) {
                 List<ActivityModel> jsonResponse = response.body();
                 setData(jsonResponse);
+                mySwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -75,6 +81,7 @@ public class StatisticsActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<ActivityModel>> call, @NonNull Response<List<ActivityModel>> response) {
                 List<ActivityModel> jsonResponse = response.body();
                 setData(jsonResponse);
+                mySwipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
@@ -164,6 +171,21 @@ public class StatisticsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return true;
+    }
+
+    private void refresh() {
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+                            loadJSON1();
+                        } else {
+                            loadJSON2();
+                        }
+                    }
+                }
+        );
     }
 
 }
