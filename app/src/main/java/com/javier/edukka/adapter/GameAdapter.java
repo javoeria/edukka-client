@@ -98,10 +98,10 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int i = Integer.parseInt(mFilteredList.get(getAdapterPosition()).getId());
+                    String s = mFilteredList.get(getAdapterPosition()).getSubject();
                     Context context = v.getContext();
                     Intent intent = new Intent(context, GameActivity.class);
-                    Integer i = Integer.parseInt(mFilteredList.get(getAdapterPosition()).getId());
-                    String s = mFilteredList.get(getAdapterPosition()).getSubject();
                     intent.putExtra(GameActivity.EXTRA_POSITION, i);
                     intent.putExtra(GameActivity.EXTRA_SUBJECT, s);
                     context.startActivity(intent);

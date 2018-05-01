@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Edukka</string>
+    <string name="app_user">Javier Rosales Bañón</string>
 
     <string name="username">Usuario</string>
     <string name="password">Contraseña</string>
@@ -10,8 +11,7 @@
     <string name="student">Estudiante</string>
     <string name="teacher">Profesor</string>
     <string name="fullname">Nombre y Apellidos</string>
-    <string name="classid">ID Clase</string>
-    <string name="classopt">ID Clase (opcional)</string>
+    <string name="classid">ID Clase (opcional)</string>
     <string name="signup">Registrar</string>
 
     <string name="nodata">No Datos Disponibles</string>
@@ -24,12 +24,12 @@
     <string name="history">Historial</string>
     <string name="statistics">Estadísticas</string>
 
-    <string name="clase">Clase</string>
+    <string name="classname">Nombre de la Clase</string>
     <string name="identifier">Identificador</string>
     <string name="information">Información</string>
     <string name="size">Tamaño</string>
 
-    <string name="game">Juego</string>
+    <string name="gametitle">Título del Juego</string>
     <string name="description">Descripción</string>
     <string name="difficulty">Dificultad</string>
     <string name="vote">Votos</string>
@@ -81,14 +81,14 @@
     <string name="user_score">%1$s puntos</string>
     <string name="class_size">%1$d usuarios</string>
 
-    <string name="item_title">Manhattan</string>
-    <string name="item_desc">Manhattan es el distrito en Nueva York.</string>
-    <string name="detail_location">Nueva York</string>
-    <string name="detail_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+    <string name="enter_class">Entrar Class</string>
+    <string name="leave_class">Dejar Class</string>
+    <string name="dialogenter">Introduce el identificador de la clase</string>
+    <string name="dialogleave">Vas a salir de la clase actual, ¿estás seguro?</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
         nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-        deserunt mollit anim id est laborum.
+        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur.
     </string>
 </resources>

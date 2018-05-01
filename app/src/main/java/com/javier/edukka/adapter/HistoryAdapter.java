@@ -39,7 +39,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        //viewHolder.history_name.setText(mArrayList.get(i).getGameId());
         viewHolder.history_date.setText(mArrayList.get(i).getDate());
         viewHolder.history_rating.setRating(Float.parseFloat(mArrayList.get(i).getResult()));
 
@@ -66,7 +65,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 @Override
                 public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
                     UserModel jsonResponse = response.body();
-                    //viewHolder.history_name.append(" - "+jsonResponse.getUsername());
                     viewHolder.history_user.setText(jsonResponse.getUsername());
                 }
 

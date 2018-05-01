@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Edukka</string>
+    <string name="app_user">Javier Rosales Bañón</string>
 
     <string name="username">Username</string>
     <string name="password">Password</string>
@@ -10,8 +11,7 @@
     <string name="student">Student</string>
     <string name="teacher">Teacher</string>
     <string name="fullname">Full Name</string>
-    <string name="classid">Class ID</string>
-    <string name="classopt">Class ID (optional)</string>
+    <string name="classid">Class ID (optional)</string>
     <string name="signup">Sign Up</string>
 
     <string name="nodata">No Data Available</string>
@@ -24,12 +24,12 @@
     <string name="history">History</string>
     <string name="statistics">Statistics</string>
 
-    <string name="clase">Class</string>
+    <string name="classname">Class Name</string>
     <string name="identifier">Identifier</string>
     <string name="information">Information</string>
     <string name="size">Size</string>
 
-    <string name="game">Game</string>
+    <string name="gametitle">Game Title</string>
     <string name="description">Description</string>
     <string name="difficulty">Difficulty</string>
     <string name="vote">Vote</string>
@@ -81,14 +81,14 @@
     <string name="user_score">%1$s points</string>
     <string name="class_size">%1$d users</string>
 
-    <string name="item_title">Manhattan</string>
-    <string name="item_desc">Manhattan is the district in New York City.</string>
-    <string name="detail_location">"New York City"</string>
-    <string name="detail_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+    <string name="enter_class">Enter Class</string>
+    <string name="leave_class">Exit Class</string>
+    <string name="dialogenter">Insert the class identifier</string>
+    <string name="dialogleave">You are going to leave the current class, are you sure?</string>
+
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
         nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-        deserunt mollit anim id est laborum.
+        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat pariatur.
     </string>
 </resources>

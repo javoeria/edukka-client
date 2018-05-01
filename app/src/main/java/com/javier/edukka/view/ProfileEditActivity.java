@@ -93,8 +93,12 @@ public class ProfileEditActivity extends AppCompatActivity {
     private void initAvatars() {
         avatars = new ArrayList<>();
         TypedArray a = getResources().obtainTypedArray(R.array.avatar_pictures);
-        for (int i=0; i<array.length; i++) {
-            avatars.add(a.getDrawable(i));
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
+            avatars.add(a.getDrawable(array.length-1));
+        } else {
+            for (int i=0; i<array.length-1; i++) {
+                avatars.add(a.getDrawable(i));
+            }
         }
         a.recycle();
     }
@@ -109,8 +113,10 @@ public class ProfileEditActivity extends AppCompatActivity {
                 UserModel jsonResponse = response.body();
                 name.setText(jsonResponse.getName());
                 user.setText(jsonResponse.getUsername());
-                int pos = Arrays.asList(array).indexOf(jsonResponse.getImage());
-                avatarAdapter.setSelectedPos(pos);
+                if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+                    int pos = Arrays.asList(array).indexOf(jsonResponse.getImage());
+                    avatarAdapter.setSelectedPos(pos);
+                }
             }
 
             @Override
@@ -130,15 +136,23 @@ public class ProfileEditActivity extends AppCompatActivity {
             user.setError(getText(R.string.empty));
             valid = false;
         }
+        if (pass.getText().toString().length()>0 && pass.getText().toString().length()<4) {
+            pass.setError(getText(R.string.minimum));
+            valid = false;
+        }
         return valid;
     }
 
     public void save(View v) {
         if (checkFieldValidation()) {
-            int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+            int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+            int position = avatarAdapter.getSelectedPos();
+            if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
+                position = 15;
+            }
             RestInterface restInterface = RetrofitClient.getInstance();
             Call<UserModel> call = restInterface.updateUser(name.getText().toString(), user.getText().toString(),
-                    pass.getText().toString(), array[avatarAdapter.getSelectedPos()], position);
+                    pass.getText().toString(), array[position], id);
             call.enqueue(new Callback<UserModel>() {
                 @Override
                 public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {

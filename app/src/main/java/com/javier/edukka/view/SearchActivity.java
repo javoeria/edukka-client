@@ -38,7 +38,6 @@ public class SearchActivity extends AppCompatActivity {
     private ArrayList<GameModel> mArrayList;
     private RecyclerView mRecyclerView;
     private GameAdapter mAdapter;
-    private String subject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +48,7 @@ public class SearchActivity extends AppCompatActivity {
 
         mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        subject = getIntent().getStringExtra(SUBJECT_NAME);
-        getSupportActionBar().setTitle(subject);
+        getSupportActionBar().setTitle(getIntent().getStringExtra(SUBJECT_NAME));
         initViews();
         loadJSON();
         refresh();
@@ -67,6 +65,11 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    protected void onRestart() {
+        super.onRestart();
+        loadJSON();
+    }
+
     private void initViews(){
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -75,11 +78,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void loadJSON(){
-        String search;
+        String search = getIntent().getStringExtra(SUBJECT_NAME);
         if (Locale.getDefault().getLanguage().equals("es")) {
-            search = HelperClient.subjectTranslateEn(subject);
-        } else {
-            search = subject;
+            search = HelperClient.subjectTranslateEn(search);
         }
 
         RestInterface restInterface = RetrofitClient.getInstance();
@@ -148,11 +149,6 @@ public class SearchActivity extends AppCompatActivity {
                 return true;
             }
         });
-    }
-
-    protected void onRestart() {
-        super.onRestart();
-        loadJSON();
     }
 
     private void refresh() {

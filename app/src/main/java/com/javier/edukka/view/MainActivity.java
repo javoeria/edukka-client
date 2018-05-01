@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Adding Toolbar to Main screen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -51,11 +50,8 @@ public class MainActivity extends AppCompatActivity {
         int resourceId = getResources().getIdentifier(UserSingleton.getInstance().getUserModel().getImage(), "drawable", getPackageName());
         imageView.setImageDrawable(getResources().getDrawable(resourceId));
 
-        // Setting ViewPager for each Tabs
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
-        // Set Tabs inside Toolbar
         tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         setupTabIcons();
@@ -90,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new TileContentFragment(), "Subjects");
@@ -131,25 +126,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.profile:
+                int idp = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
                 Intent intentp = new Intent(MainActivity.this, ProfileActivity.class);
-                Integer idp = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
                 intentp.putExtra(ProfileActivity.EXTRA_POSITION, idp);
                 startActivity(intentp);
                 return true;
             case R.id.myclass:
+                int idc = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
                 Intent intentc = new Intent(MainActivity.this, ClassActivity.class);
-                Integer idc = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
-                intentc.putExtra(ProfileActivity.EXTRA_POSITION, idc);
+                intentc.putExtra(ClassActivity.EXTRA_POSITION, idc);
                 startActivity(intentc);
                 return true;
             case R.id.help:

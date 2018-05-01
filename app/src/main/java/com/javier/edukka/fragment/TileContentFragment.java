@@ -28,15 +28,13 @@ public class TileContentFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
 
-        // Set padding for Tiles
-        int tilePadding = getResources().getDimensionPixelSize(R.dimen.tile_padding);
+        int tilePadding = getResources().getDimensionPixelSize(R.dimen.md_keylines);
         recyclerView.setPadding(tilePadding, tilePadding, tilePadding, tilePadding);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         return recyclerView;
     }
 
     private static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
-        // Set numbers of List in RecyclerView.
         private static final int LENGTH = 10;
         private final String[] subjects;
         private final Drawable[] subjectPictures;

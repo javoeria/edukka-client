@@ -39,6 +39,7 @@ public class SignupActivity extends AppCompatActivity {
     private EditText name, user, pass, classid;
     private AvatarAdapter avatarAdapter;
     private List<Drawable> avatars;
+    private RecyclerView recyclerView;
     private String radio = "student";
 
     @Override
@@ -56,7 +57,7 @@ public class SignupActivity extends AppCompatActivity {
         classid = (EditText) findViewById(R.id.classid);
 
         initAvatars();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -102,11 +103,16 @@ public class SignupActivity extends AppCompatActivity {
             case R.id.radio_student:
                 if (checked)
                     radio = "student";
+                    initAvatars();
+                    avatarAdapter = new AvatarAdapter(avatars);
+                    recyclerView.setAdapter(avatarAdapter);
                 break;
             case R.id.radio_teacher:
                 if (checked)
                     radio = "teacher";
-                    avatarAdapter.setSelectedPos(15);
+                    initAvatars();
+                    avatarAdapter = new AvatarAdapter(avatars);
+                    recyclerView.setAdapter(avatarAdapter);
                 break;
         }
     }
@@ -121,7 +127,7 @@ public class SignupActivity extends AppCompatActivity {
             user.setError(getText(R.string.empty));
             valid = false;
         }
-        if (pass.getText().toString().equals("")) {
+        if (pass.getText().toString().length()<4) {
             pass.setError(getText(R.string.minimum));
             valid = false;
         }
@@ -131,22 +137,28 @@ public class SignupActivity extends AppCompatActivity {
     private void initAvatars() {
         avatars = new ArrayList<>();
         TypedArray a = getResources().obtainTypedArray(R.array.avatar_pictures);
-        for (int i=0; i<array.length; i++) {
-            avatars.add(a.getDrawable(i));
+        if (radio.equals("teacher")) {
+            avatars.add(a.getDrawable(array.length-1));
+        } else {
+            for (int i=0; i<array.length-1; i++) {
+                avatars.add(a.getDrawable(i));
+            }
         }
         a.recycle();
     }
 
     private void signup() {
-        String str;
+        String str = classid.getText().toString();
         if (classid.getText().toString().equals("")) {
             str = "0";
-        } else {
-            str = classid.getText().toString();
+        }
+        int position = avatarAdapter.getSelectedPos();
+        if (radio.equals("teacher")) {
+            position = 15;
         }
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<UserModel> request = restInterface.signUp(name.getText().toString(), user.getText().toString(),
-                pass.getText().toString(), radio, array[avatarAdapter.getSelectedPos()], Integer.parseInt(str));
+                pass.getText().toString(), radio, array[position], Integer.parseInt(str));
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {

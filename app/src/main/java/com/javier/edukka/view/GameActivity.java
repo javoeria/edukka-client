@@ -58,15 +58,18 @@ public class GameActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameActivity.this, GameEditActivity.class);
                 int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+                Intent intent = new Intent(GameActivity.this, GameEditActivity.class);
                 intent.putExtra(GameEditActivity.EXTRA_POSITION, id);
                 startActivity(intent);
             }
         });
     }
 
-
+    protected void onRestart() {
+        super.onRestart();
+        loadJSON();
+    }
 
     private void loadJSON(){
         int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
@@ -109,11 +112,6 @@ public class GameActivity extends AppCompatActivity {
                 Log.d("Error",t.getMessage());
             }
         });
-    }
-
-    protected void onRestart() {
-        super.onRestart();
-        loadJSON();
     }
 
     @Override

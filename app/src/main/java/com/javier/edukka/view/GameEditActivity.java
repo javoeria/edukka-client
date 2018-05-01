@@ -118,7 +118,8 @@ public class GameEditActivity extends AppCompatActivity {
         if (checkFieldValidation()) {
             int position = getIntent().getIntExtra(EXTRA_POSITION, 0);
             RestInterface restInterface = RetrofitClient.getInstance();
-            Call<GameModel> call = restInterface.updateGame(name.getText().toString(), desc.getText().toString(), HelperClient.levelCode(spinner.getText().toString()), position);
+            Call<GameModel> call = restInterface.updateGame(name.getText().toString(), desc.getText().toString(),
+                    HelperClient.levelCode(spinner.getText().toString()), position);
             call.enqueue(new Callback<GameModel>() {
                 @Override
                 public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {

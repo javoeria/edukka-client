@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 public class ClassActivity extends AppCompatActivity {
 
-    private static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_POSITION = "position";
     private CollapsingToolbarLayout collapsingToolbar;
     private FloatingActionButton fab;
     private TextView id, info, size;
@@ -122,24 +122,25 @@ public class ClassActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.add_class) {
-            infoDialog1();
-            return true;
-        } else if (item.getItemId() == R.id.rem_class) {
-            infoDialog2();
-            return true;
-        } else {
-            finish();
-            return true;
+        switch (item.getItemId()) {
+            case R.id.add_class:
+                infoDialog1();
+                return true;
+            case R.id.rem_class:
+                infoDialog2();
+                return true;
+            default:
+                finish();
+                return true;
         }
     }
 
     private void infoDialog1() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Enter Class");
-        builder.setMessage(R.string.dialogclass);
-        builder.setIcon(android.R.drawable.ic_dialog_info);
+        builder.setTitle(R.string.enter_class);
+        builder.setMessage(R.string.dialogenter);
+        builder.setIconAttribute(android.R.attr.alertDialogIcon);
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -164,8 +165,8 @@ public class ClassActivity extends AppCompatActivity {
     private void infoDialog2() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Leave Class");
-        builder.setIcon(android.R.drawable.ic_dialog_info);
+        builder.setTitle(R.string.leave_class);
+        builder.setIconAttribute(android.R.attr.alertDialogIcon);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
@@ -181,7 +182,7 @@ public class ClassActivity extends AppCompatActivity {
 
         View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
         TextView textView1 = (TextView) dialogView.findViewById(android.R.id.text1);
-        textView1.setText(R.string.dialogclass);
+        textView1.setText(R.string.dialogleave);
         builder.setView(dialogView);
         builder.show();
     }

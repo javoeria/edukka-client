@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         StatusBarUtil.setTransparent(this);
 
-        user = (EditText) findViewById(R.id.editText);
-        pass = (EditText) findViewById(R.id.editText2);
+        user = (EditText) findViewById(R.id.username);
+        pass = (EditText) findViewById(R.id.password);
         CardView cardview = (CardView) findViewById(R.id.cardView);
         cardview.setOnClickListener(new View.OnClickListener() {
             @Override

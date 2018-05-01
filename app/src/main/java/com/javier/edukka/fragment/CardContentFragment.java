@@ -33,7 +33,6 @@ public class CardContentFragment extends Fragment {
     }
 
     private static class ContentAdapter extends RecyclerView.Adapter<ViewHolder> {
-        // Set numbers of List in RecyclerView.
         private static final int LENGTH = 2;
         private final String[] activity;
         private final String[] activityDesc;

@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginEnd="@dimen/article_keylines"
-            app:expandedTitleMarginStart="36dp"
+            app:expandedTitleMarginEnd="@dimen/article_padding"
+            app:expandedTitleMarginStart="@dimen/article_margin"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -48,31 +48,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingStart="@dimen/article_keylines"
-            android:paddingEnd="@dimen/article_keylines"
-            android:paddingTop="@dimen/md_keylines">
+            android:paddingStart="@dimen/article_padding"
+            android:paddingEnd="@dimen/article_padding"
+            android:paddingTop="@dimen/md_keylines_x3">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
                 android:text="@string/fullname"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:textSize="@dimen/article_title"
+                android:layout_marginTop="@dimen/md_keylines_x3" />
 
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="@string/detail_location" />
+                tools:text="@string/app_user" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
                 android:text="@string/role"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:textSize="@dimen/article_title"
+                android:layout_marginTop="@dimen/md_keylines_x3" />
 
             <TextView
                 android:id="@+id/user_role"
@@ -87,8 +87,8 @@
                 android:textColor="?attr/colorAccent"
                 android:visibility="visible"
                 android:text="@string/score"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:textSize="@dimen/article_title"
+                android:layout_marginTop="@dimen/md_keylines_x3" />
 
             <TextView
                 android:id="@+id/user_score"

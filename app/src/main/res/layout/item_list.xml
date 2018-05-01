@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
-    android:padding="@dimen/md_keylines">
+    android:padding="@dimen/md_keylines_x3">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/list_avatar"
@@ -18,31 +18,31 @@
         android:id="@+id/list_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/md_keylines"
-        android:layout_toEndOf="@+id/list_avatar"
+        android:layout_marginStart="@dimen/md_keylines_x3"
+        android:layout_toEndOf="@id/list_avatar"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="@dimen/article_subheading"
-        tools:text="@string/item_title" />
+        tools:text="@string/app_name" />
 
     <TextView
         android:id="@+id/list_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/list_title"
-        android:layout_marginStart="@dimen/md_keylines"
-        android:layout_toEndOf="@+id/list_avatar"
+        android:layout_below="@id/list_title"
+        android:layout_marginStart="@dimen/md_keylines_x3"
+        android:layout_toEndOf="@id/list_avatar"
         android:textColor="@color/colorSecondaryText"
         android:ellipsize="end"
         android:singleLine="true"
         android:textAppearance="?attr/textAppearanceListItem"
         android:textSize="@dimen/list_body"
-        tools:text="@string/item_title" />
+        tools:text="@string/app_user" />
 
     <ImageView
         android:id="@+id/list_medal"
         android:layout_width="@dimen/avatar_size"
         android:layout_height="@dimen/avatar_size"
-        android:layout_toStartOf="@+id/list_score"
+        android:layout_toStartOf="@id/list_score"
         android:visibility="invisible"
         app:srcCompat="@drawable/medal_first" />
 
@@ -50,12 +50,12 @@
         android:id="@+id/list_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/md_keylines"
-        android:layout_marginTop="4dp"
-        android:padding="4dp"
+        android:layout_marginEnd="@dimen/md_keylines_x3"
+        android:layout_marginTop="@dimen/md_keylines"
+        android:padding="@dimen/md_keylines"
         android:layout_alignParentEnd="true"
         android:textAppearance="?attr/textAppearanceListItem"
-        android:textSize="20sp"
+        android:textSize="@dimen/article_title"
         android:textColor="@color/colorAccent"
         tools:text="100" />
 

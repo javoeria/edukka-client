@@ -40,8 +40,7 @@ public class ListContentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mRecyclerView = (RecyclerView) inflater.inflate(R.layout.recycler_view, container, false);
         mRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         loadJSON();
@@ -141,10 +140,10 @@ public class ListContentFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    int id = Integer.parseInt(mArrayList.get(getAdapterPosition()).getId());
                     Context context = v.getContext();
                     Intent intent = new Intent(context, ProfileActivity.class);
-                    Integer i = Integer.parseInt(mArrayList.get(getAdapterPosition()).getId());
-                    intent.putExtra(ProfileActivity.EXTRA_POSITION, i);
+                    intent.putExtra(ProfileActivity.EXTRA_POSITION, id);
                     context.startActivity(intent);
                 }
             });

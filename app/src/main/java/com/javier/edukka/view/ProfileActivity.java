@@ -55,18 +55,12 @@ public class ProfileActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
                 Intent intent = new Intent(ProfileActivity.this, ProfileEditActivity.class);
-                Integer id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
                 intent.putExtra(ProfileEditActivity.EXTRA_POSITION, id);
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        finish();
-        return true;
     }
 
     protected void onRestart() {
@@ -111,5 +105,11 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("Error",t.getMessage());
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        finish();
+        return true;
     }
 }

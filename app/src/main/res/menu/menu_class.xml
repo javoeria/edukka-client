@@ -6,13 +6,13 @@
     <item
         android:id="@+id/add_class"
         android:icon="@drawable/ic_add_circle_outline_white_24dp"
-        android:title="@string/delete"
+        android:title="@string/enter_class"
         android:visible="false"
         app:showAsAction="ifRoom|collapseActionView"/>
     <item
         android:id="@+id/rem_class"
         android:icon="@drawable/ic_remove_circle_outline_white_24dp"
-        android:title="@string/delete"
+        android:title="@string/leave_class"
         android:visible="false"
         app:showAsAction="ifRoom|collapseActionView"/>
 </menu>

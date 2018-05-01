@@ -32,61 +32,62 @@
             android:orientation="vertical"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:paddingStart="@dimen/md_keylines"
-            android:paddingEnd="@dimen/md_keylines"
-            android:paddingTop="@dimen/md_keylines"
-            android:paddingBottom="@dimen/md_keylines">
+            android:paddingStart="@dimen/md_keylines_x3"
+            android:paddingEnd="@dimen/md_keylines_x3"
+            android:paddingTop="@dimen/md_keylines_x3"
+            android:paddingBottom="@dimen/md_keylines_x3">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
-                android:text="@string/game"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:text="@string/gametitle"
+                android:textSize="@dimen/article_title"
+                android:layout_marginTop="@dimen/md_keylines_x3" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/game_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapWords"
-                tools:text="@string/detail_location" />
+                tools:text="@string/app_name" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
                 android:text="@string/description"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:textSize="@dimen/article_title"
+                android:layout_marginTop="@dimen/md_keylines_x3" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/game_desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences|textMultiLine"
-                tools:text="@string/detail_location" />
+                tools:text="@string/lorem_ipsum" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorAccent"
                 android:text="@string/difficulty"
-                android:textSize="@dimen/article_titles"
-                android:layout_marginTop="@dimen/md_keylines" />
+                android:textSize="@dimen/article_title"
+                android:layout_marginTop="@dimen/md_keylines_x3" />
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:id="@+id/game_level"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                tools:text="Easy"/>
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/md_keylines"
+                android:layout_marginTop="@dimen/md_keylines_x3"
                 android:background="@color/colorAccent"
-                android:textColor="#ffffff"
+                android:textColor="@android:color/white"
                 android:onClick="save"
                 android:text="@string/save" />
 
