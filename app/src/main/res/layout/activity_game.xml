@@ -98,10 +98,11 @@
                 android:id="@+id/imageButton"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_margin"
-                android:layout_marginTop="@dimen/fab_margin"
                 android:layout_marginBottom="@dimen/md_keylines_x3"
-                android:scaleType="centerInside"
+                android:layout_marginTop="@dimen/fab_margin"
                 android:background="?android:selectableItemBackground"
+                android:onClick="play"
+                android:scaleType="centerInside"
                 app:srcCompat="@drawable/play" />
 
         </LinearLayout>

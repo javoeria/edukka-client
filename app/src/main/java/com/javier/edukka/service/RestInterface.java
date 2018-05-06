@@ -38,6 +38,10 @@ public interface RestInterface {
                            @Field("role") String role, @Field("image") String image, @Field("class_id") int classId);
 
     @FormUrlEncoded
+    @POST("user/score")
+    Call<UserModel> updateUserScore(@Field("score") int score, @Field("id") int userId);
+
+    @FormUrlEncoded
     @POST("user/edit")
     Call<UserModel> updateUser(@Field("name") String name, @Field("username") String username, @Field("password") String password,
                                @Field("image") String image, @Field("id") int userId);
@@ -107,8 +111,7 @@ public interface RestInterface {
 
     @FormUrlEncoded
     @POST("game/finish")
-    Call<ActivityModel> finishGame(@Field("student_id") int studentId, @Field("game_id") int gameId, @Field("subject") String subject,
-                                   @Field("result") float result, @Field("date") String date);
+    Call<ActivityModel> finishGame(@Field("student_id") int studentId, @Field("game_id") int gameId, @Field("subject") String subject, @Field("result") float result);
 
     @FormUrlEncoded
     @POST("game/upvote")

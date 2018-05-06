@@ -96,6 +96,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.ClassActivity" />
         </activity>
+        <activity android:name=".view.GameLookActivity"
+            android:parentActivityName=".view.GameActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.GameActivity" />
+        </activity>
+        <activity
+            android:name=".view.PlayActivity"
+            android:parentActivityName=".view.GameActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.GameActivity" />
+        </activity>
     </application>
 
 </manifest>

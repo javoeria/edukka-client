@@ -25,6 +25,8 @@ import retrofit2.Response;
 
 public class StatisticsActivity extends AppCompatActivity {
 
+    public static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_EDITION = "edition";
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private TextView total, approved, average, failure, best, worst;
 
@@ -46,7 +48,7 @@ public class StatisticsActivity extends AppCompatActivity {
         worst = (TextView) findViewById(R.id.worst);
 
         refresh();
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+        if (getIntent().getStringExtra(EXTRA_EDITION).equals("student")) {
             loadJSON1();
         } else {
             loadJSON2();
@@ -54,7 +56,8 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private void loadJSON1(){
-        int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
+        int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        //int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<List<ActivityModel>> call = restInterface.getUserActivity(id);
         call.enqueue(new Callback<List<ActivityModel>>() {
@@ -73,6 +76,7 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     private void loadJSON2(){
+        //int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
         int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<List<ActivityModel>> call = restInterface.getClassActivity(id);
@@ -109,13 +113,13 @@ public class StatisticsActivity extends AppCompatActivity {
                 }
             }
             float media = Math.round((sum / list.size()) * 100f) / 100f;
-            float error = 100 - (res / list.size() * 100);
+            int error = Math.round(100 - (res / list.size() * 100));
             String mode1 = modeMax(list);
             String mode2 = modeMin(list);
             total.setText(String.valueOf(list.size()));
             approved.setText(String.valueOf(Math.round(res)));
             average.setText(String.valueOf(media));
-            failure.setText(String.valueOf(Math.round(error))+"%");
+            failure.setText(String.valueOf(error)+"%");
             best.setText(mode1);
             if (mode1.equals(mode2)) {
                 worst.setText("-");
@@ -178,7 +182,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+                        if (getIntent().getStringExtra(EXTRA_EDITION).equals("student")) {
                             loadJSON1();
                         } else {
                             loadJSON2();

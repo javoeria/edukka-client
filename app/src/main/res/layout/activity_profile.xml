@@ -97,6 +97,38 @@
                 android:visibility="visible"
                 tools:text="0 points" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/md_keylines_x3"
+                android:layout_marginBottom="@dimen/md_keylines_x3"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/user_history"
+                    android:layout_width="@dimen/image_margin"
+                    android:layout_height="@dimen/image_margin"
+                    android:layout_gravity="start"
+                    android:onClick="onClick"
+                    android:scaleType="centerInside"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:background="?android:selectableItemBackground"
+                    app:srcCompat="@drawable/activity_history"/>
+
+                <ImageButton
+                    android:id="@+id/user_statistics"
+                    android:layout_width="@dimen/image_margin"
+                    android:layout_height="@dimen/image_margin"
+                    android:onClick="onClick"
+                    android:scaleType="centerInside"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:background="?android:selectableItemBackground"
+                    app:srcCompat="@drawable/activity_statistics" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.view.HistoryActivity;
 import com.javier.edukka.view.StatisticsActivity;
 
@@ -84,11 +85,17 @@ public class CardContentFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
+                    int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
+                    String role = UserSingleton.getInstance().getUserModel().getRole();
                     if (getAdapterPosition()==0) {
                         Intent intent = new Intent(context, HistoryActivity.class);
+                        intent.putExtra(HistoryActivity.EXTRA_POSITION, id);
+                        intent.putExtra(HistoryActivity.EXTRA_EDITION, role);
                         context.startActivity(intent);
                     } else if (getAdapterPosition()==1) {
                         Intent intent = new Intent(context, StatisticsActivity.class);
+                        intent.putExtra(StatisticsActivity.EXTRA_POSITION, id);
+                        intent.putExtra(StatisticsActivity.EXTRA_EDITION, role);
                         context.startActivity(intent);
                     }
                 }

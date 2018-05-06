@@ -10,7 +10,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
-import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.ActivityModel;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.model.UserModel;
@@ -25,9 +24,11 @@ import retrofit2.Response;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
     private final ArrayList<ActivityModel> mArrayList;
+    private final String mRole;
 
-    public HistoryAdapter(ArrayList<ActivityModel> arrayList) {
+    public HistoryAdapter(ArrayList<ActivityModel> arrayList, String role) {
         mArrayList = arrayList;
+        mRole = role;
     }
 
     @NonNull
@@ -58,7 +59,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             }
         });
 
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
+        if (mRole.equals("teacher")) {
             int id2 = Integer.parseInt(mArrayList.get(i).getStudentId());
             Call<UserModel> call2 = restInterface.getUser(id2);
             call2.enqueue(new Callback<UserModel>() {

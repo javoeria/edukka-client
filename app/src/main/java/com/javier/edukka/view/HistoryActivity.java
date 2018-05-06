@@ -28,6 +28,8 @@ import retrofit2.Response;
 
 public class HistoryActivity extends AppCompatActivity {
 
+    public static final String EXTRA_POSITION = "position";
+    public static final String EXTRA_EDITION = "edition";
     private SwipeRefreshLayout mySwipeRefreshLayout;
     private ArrayList<ActivityModel> mArrayList;
     private RecyclerView mRecyclerView;
@@ -37,32 +39,30 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(R.string.history);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+
         mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
-        initViews();
         refresh();
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+        if (getIntent().getStringExtra(EXTRA_EDITION).equals("student")) {
             loadJSON1();
         } else {
             loadJSON2();
         }
     }
 
-    private void initViews(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-    }
-
     private void loadJSON1(){
-        int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
+        int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        //int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<List<ActivityModel>> call = restInterface.getUserActivity(id);
         call.enqueue(new Callback<List<ActivityModel>>() {
@@ -76,7 +76,7 @@ public class HistoryActivity extends AppCompatActivity {
                     mArrayList = (ArrayList<ActivityModel>) jsonResponse;
                     findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
                 }
-                mAdapter = new HistoryAdapter(mArrayList);
+                mAdapter = new HistoryAdapter(mArrayList,getIntent().getStringExtra(EXTRA_EDITION));
                 mRecyclerView.setAdapter(mAdapter);
                 mySwipeRefreshLayout.setRefreshing(false);
             }
@@ -89,6 +89,7 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void loadJSON2(){
+        //int id = getIntent().getIntExtra(EXTRA_POSITION, 0);
         int id = Integer.parseInt(UserSingleton.getInstance().getUserModel().getClassId());
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<List<ActivityModel>> call = restInterface.getClassActivity(id);
@@ -102,7 +103,7 @@ public class HistoryActivity extends AppCompatActivity {
                 } else {
                     mArrayList = (ArrayList<ActivityModel>) jsonResponse;
                 }
-                mAdapter = new HistoryAdapter(mArrayList);
+                mAdapter = new HistoryAdapter(mArrayList,getIntent().getStringExtra(EXTRA_EDITION));
                 mRecyclerView.setAdapter(mAdapter);
                 mySwipeRefreshLayout.setRefreshing(false);
             }
@@ -125,7 +126,7 @@ public class HistoryActivity extends AppCompatActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {
+                        if (getIntent().getStringExtra(EXTRA_EDITION).equals("student")) {
                             loadJSON1();
                         } else {
                             loadJSON2();

@@ -46,10 +46,13 @@ public class SearchActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mySwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
         mySwipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         getSupportActionBar().setTitle(getIntent().getStringExtra(SUBJECT_NAME));
-        initViews();
         loadJSON();
         refresh();
 
@@ -68,13 +71,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         loadJSON();
-    }
-
-    private void initViews(){
-        mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
     }
 
     private void loadJSON(){

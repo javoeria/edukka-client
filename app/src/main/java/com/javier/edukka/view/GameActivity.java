@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.controller.GameSingleton;
 import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
@@ -37,6 +38,7 @@ public class GameActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private TextView detail, difficulty, vote;
     private ImageView subjectImage;
+    private GameModel jsonResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,7 @@ public class GameActivity extends AppCompatActivity {
         call.enqueue(new Callback<GameModel>() {
             @Override
             public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
-                GameModel jsonResponse = response.body();
+                jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getTitle());
                 detail.setText(jsonResponse.getDescription());
                 if (Locale.getDefault().getLanguage().equals("es")) {
@@ -112,6 +114,17 @@ public class GameActivity extends AppCompatActivity {
                 Log.d("Error",t.getMessage());
             }
         });
+    }
+
+    public void play(View v) {
+        GameSingleton.getInstance().setGameModel(jsonResponse);
+        if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
+            Intent i = new Intent(GameActivity.this, GameLookActivity.class);
+            startActivity(i);
+        } else if (jsonResponse.getSubject().equals("Mathematics")){
+            Intent i = new Intent(GameActivity.this, PlayActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override

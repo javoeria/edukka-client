@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private TextView name, role, score, score_title;
     private ImageView userImage;
+    private int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,14 @@ public class ProfileActivity extends AppCompatActivity {
                 UserModel jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getUsername());
                 name.setText(jsonResponse.getName());
-                if (jsonResponse.getRole().equals("student")) {
+                if (jsonResponse.getRole().equals("student") && UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
+                    score.setText(getString(R.string.user_score, jsonResponse.getScore()));
+                    id = Integer.parseInt(jsonResponse.getId());
+                    ImageButton button1 = (ImageButton) findViewById(R.id.user_history);
+                    ImageButton button2 = (ImageButton) findViewById(R.id.user_statistics);
+                    button1.setVisibility(View.VISIBLE);
+                    button2.setVisibility(View.VISIBLE);
+                } else if (jsonResponse.getRole().equals("student")) {
                     score.setText(getString(R.string.user_score, jsonResponse.getScore()));
                 } else {
                     score_title.setVisibility(View.INVISIBLE);
@@ -105,6 +114,20 @@ public class ProfileActivity extends AppCompatActivity {
                 Log.d("Error",t.getMessage());
             }
         });
+    }
+
+    public void onClick(View v) {
+        if (v.getId() == R.id.user_history) {
+            Intent intent = new Intent(this, HistoryActivity.class);
+            intent.putExtra(HistoryActivity.EXTRA_POSITION, id);
+            intent.putExtra(HistoryActivity.EXTRA_EDITION, "student");
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, StatisticsActivity.class);
+            intent.putExtra(StatisticsActivity.EXTRA_POSITION, id);
+            intent.putExtra(StatisticsActivity.EXTRA_EDITION, "student");
+            startActivity(intent);
+        }
     }
 
     @Override
