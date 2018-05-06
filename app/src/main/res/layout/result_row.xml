@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:padding="@dimen/md_keylines_x3">
+
+    <TextView
+        android:id="@+id/list_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/md_keylines_x3"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="@dimen/article_subheading"
+        tools:text="2 + 6" />
+
+    <TextView
+        android:id="@+id/list_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_question"
+        android:layout_marginStart="@dimen/md_keylines_x3"
+        android:textColor="@color/colorSecondaryText"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:textSize="@dimen/list_body"
+        tools:text="8" />
+
+    <ImageView
+        android:id="@+id/list_result"
+        android:layout_width="@dimen/avatar_size"
+        android:layout_height="@dimen/avatar_size"
+        android:layout_alignParentEnd="true"
+        tools:src="@drawable/ic_thumb_up_black_24dp"/>
+
+</RelativeLayout>
