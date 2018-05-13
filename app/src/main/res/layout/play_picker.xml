@@ -31,7 +31,7 @@
         android:id="@+id/seekBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/md_keylines_x6"
+        android:layout_marginBottom="@dimen/md_keylines_x12"
         android:progressBackgroundTint="@android:color/black"
         tools:progress="50"/>
 

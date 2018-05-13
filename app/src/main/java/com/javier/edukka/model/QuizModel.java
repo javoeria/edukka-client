@@ -8,9 +8,6 @@ public class QuizModel {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("type")
-    @Expose
-    private String type;
     @SerializedName("question")
     @Expose
     private String question;
@@ -20,23 +17,18 @@ public class QuizModel {
     @SerializedName("options")
     @Expose
     private String options;
-    @SerializedName("hint")
-    @Expose
-    private String hint;
     @SerializedName("game_id")
     @Expose
     private String gameId;
 
     public QuizModel() {}
 
-    public QuizModel(String id, String type, String question, String answer, String options, String hint, String gameId) {
+    public QuizModel(String id, String question, String answer, String options, String gameId) {
         super();
         this.id = id;
-        this.type = type;
         this.question = question;
         this.answer = answer;
         this.options = options;
-        this.hint = hint;
         this.gameId = gameId;
     }
 
@@ -46,14 +38,6 @@ public class QuizModel {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getQuestion() {
@@ -78,14 +62,6 @@ public class QuizModel {
 
     public void setOptions(String options) {
         this.options = options;
-    }
-
-    public String getHint() {
-        return hint;
-    }
-
-    public void setHint(String hint) {
-        this.hint = hint;
     }
 
     public String getGameId() {

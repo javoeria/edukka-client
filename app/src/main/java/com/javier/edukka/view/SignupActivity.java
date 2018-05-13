@@ -150,7 +150,7 @@ public class SignupActivity extends AppCompatActivity {
     private void signup() {
         String str = classid.getText().toString();
         if (classid.getText().toString().equals("")) {
-            str = "0";
+            str = "1";
         }
         int position = avatarAdapter.getSelectedPos();
         if (radio.equals("teacher")) {

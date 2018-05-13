@@ -33,7 +33,7 @@ public class PickerAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return answer.getText().toString();
     }
 
     @Override
@@ -41,14 +41,10 @@ public class PickerAdapter extends BaseAdapter {
         return 0;
     }
 
-    public int getAnswer() {
-        return Integer.parseInt(answer.getText().toString());
-    }
-
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (cont < questions.size()) {
-            view = inflater.inflate(R.layout.play_quiz, viewGroup, false);
+        if (i != 0 || cont != questions.size()-1) {
+            view = inflater.inflate(R.layout.play_picker, viewGroup, false);
             final int min = (Integer.parseInt(answers.get(i))/10)*10;
             TextView question = (TextView) view.findViewById(R.id.question);
             question.setText(questions.get(i));
@@ -70,7 +66,7 @@ public class PickerAdapter extends BaseAdapter {
                 public void onStopTrackingTouch(SeekBar seekBar) {}
             });
         }
-        cont++;
+        cont = i;
         return view;
     }
 }

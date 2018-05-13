@@ -46,6 +46,13 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
             String upperString = mFilteredList.get(i).getDifficulty().substring(0,1).toUpperCase() + mFilteredList.get(i).getDifficulty().substring(1);
             viewHolder.game_level.setText(upperString);
         }
+        if (Integer.parseInt(mFilteredList.get(i).getVote()) >= 0) {
+            viewHolder.game_vote.setText("+"+mFilteredList.get(i).getVote());
+            viewHolder.game_vote.setTextColor(0xFF009688);
+        } else {
+            viewHolder.game_vote.setText(mFilteredList.get(i).getVote());
+            viewHolder.game_vote.setTextColor(0xFFD32F2F);
+        }
     }
 
     @Override
@@ -88,12 +95,14 @@ public class GameAdapter extends RecyclerView.Adapter<GameAdapter.ViewHolder> im
         private final TextView game_name;
         private final TextView game_desc;
         private final TextView game_level;
+        private final TextView game_vote;
 
         private ViewHolder(View view) {
             super(view);
             game_name = (TextView) view.findViewById(R.id.game_name);
             game_desc = (TextView) view.findViewById(R.id.game_desc);
             game_level = (TextView) view.findViewById(R.id.game_level);
+            game_vote = (TextView) view.findViewById(R.id.game_vote);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

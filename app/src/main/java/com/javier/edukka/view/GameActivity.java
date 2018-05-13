@@ -1,7 +1,6 @@
 package com.javier.edukka.view;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -83,6 +82,7 @@ public class GameActivity extends AppCompatActivity {
                 jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getTitle());
                 detail.setText(jsonResponse.getDescription());
+                vote.setText(jsonResponse.getVote());
                 if (Locale.getDefault().getLanguage().equals("es")) {
                     String level = HelperClient.levelTranslateEs(jsonResponse.getDifficulty());
                     difficulty.setText(level);
@@ -91,20 +91,10 @@ public class GameActivity extends AppCompatActivity {
                     difficulty.setText(upperString);
                 }
 
-                if (Integer.parseInt(jsonResponse.getVote()) > 0) {
-                    vote.setText("+"+jsonResponse.getVote());
-                    vote.setTextColor(Color.GREEN);
-                } else if (Integer.parseInt(jsonResponse.getVote()) < 0) {
-                    vote.setText(jsonResponse.getVote());
-                    vote.setTextColor(Color.RED);
-                } else {
-                    vote.setText(jsonResponse.getVote());
-                }
-
                 String s = getIntent().getStringExtra(EXTRA_SUBJECT);
                 int resourceId = getResources().getIdentifier(map.get(s), "drawable", getPackageName());
                 subjectImage.setImageDrawable(getResources().getDrawable(resourceId));
-                if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
+                if (UserSingleton.getInstance().getUserModel().getId().equals("1")) {
                     fab.setVisibility(View.VISIBLE);
                 }
             }
@@ -121,7 +111,7 @@ public class GameActivity extends AppCompatActivity {
         if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
             Intent i = new Intent(GameActivity.this, GameLookActivity.class);
             startActivity(i);
-        } else if (jsonResponse.getSubject().equals("Mathematics")){
+        } else {
             Intent i = new Intent(GameActivity.this, PlayActivity.class);
             startActivity(i);
         }

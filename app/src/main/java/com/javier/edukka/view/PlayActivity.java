@@ -1,8 +1,11 @@
 package com.javier.edukka.view;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterViewFlipper;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -20,11 +24,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.javier.edukka.R;
+import com.javier.edukka.adapter.CheckboxAdapter;
+import com.javier.edukka.adapter.CompleteAdapter;
+import com.javier.edukka.adapter.ImageAdapter;
 import com.javier.edukka.adapter.PickerAdapter;
 import com.javier.edukka.adapter.ScoreAdapter;
+import com.javier.edukka.adapter.SelectAdapter;
+import com.javier.edukka.adapter.SoundAdapter;
+import com.javier.edukka.adapter.SpinnerAdapter;
 import com.javier.edukka.controller.GameSingleton;
 import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.ActivityModel;
+import com.javier.edukka.model.GameModel;
 import com.javier.edukka.model.QuizModel;
 import com.javier.edukka.model.UserModel;
 import com.javier.edukka.service.RestInterface;
@@ -44,14 +55,16 @@ public class PlayActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView progressText;
     private ImageView avatarView;
-    private FloatingActionButton fab;
+    private FloatingActionButton fab, back;
     private List<String> questions;
+    private List<String> options;
     private List<String> answers;
     private List<String> values;
     private List<String> results;
     private int step = 0;
     private int correct = 0;
-    private PickerAdapter pickerAdapter;
+    private boolean end = false;
+    private BaseAdapter baseAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +85,7 @@ public class PlayActivity extends AppCompatActivity {
         avatarView = (ImageView) findViewById(R.id.avatar);
         progressText = (TextView) findViewById(R.id.progress_text);
         questions = new ArrayList<>();
+        options = new ArrayList<>();
         answers = new ArrayList<>();
         results = new ArrayList<>();
         values = new ArrayList<>();
@@ -81,27 +95,54 @@ public class PlayActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.parseInt(answers.get(step)) == pickerAdapter.getAnswer()) {
+                if (answers.get(step).equals(baseAdapter.getItem(step).toString())) {
                     results.add("true");
                     correct++;
                 } else {
                     results.add("false");
                 }
 
+                values.add(baseAdapter.getItem(step).toString());
                 step++;
-                values.add(String.valueOf(pickerAdapter.getAnswer()));
-                progressBar.setProgress(progressBar.getProgress()+100/pickerAdapter.getCount());
-                progressText.setText((step+1)+"/"+pickerAdapter.getCount());
+                progressBar.setProgress(progressBar.getProgress() + 100/baseAdapter.getCount());
+                progressText.setText((step+1) + "/" + baseAdapter.getCount());
+                if (step == baseAdapter.getCount()) {
+                    end = true;
+                }
+
                 flipper.showNext();
-                if (step == pickerAdapter.getCount()) {
+                back.setVisibility(View.VISIBLE);
+                if (end) {
                     RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-                    ratingBar.setRating((correct*5.0f)/questions.size());
+                    ratingBar.setRating((correct*5.0f) / questions.size());
                     ratingBar.setVisibility(View.VISIBLE);
                     fab.setVisibility(View.INVISIBLE);
+                    back.setVisibility(View.INVISIBLE);
 
-                    ScoreAdapter scoreAdapter = new ScoreAdapter(questions,values,results);
+                    ScoreAdapter scoreAdapter = new ScoreAdapter(questions, values, results);
                     recyclerView.setAdapter(scoreAdapter);
-                    finishGame();
+                    //finishGame();
+                }
+            }
+        });
+
+        back = (FloatingActionButton) findViewById(R.id.back);
+        back.setVisibility(View.INVISIBLE);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (results.get(results.size()-1).equals("true")) {
+                    correct--;
+                }
+                results.remove(results.size()-1);
+                values.remove(values.size()-1);
+                step--;
+                progressBar.setProgress(progressBar.getProgress() - 100/baseAdapter.getCount());
+                progressText.setText((step+1) + "/" + baseAdapter.getCount());
+
+                flipper.showPrevious();
+                if (step==0) {
+                    back.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -118,15 +159,44 @@ public class PlayActivity extends AppCompatActivity {
                 for (QuizModel quizModel : jsonResponse) {
                     questions.add(quizModel.getQuestion());
                     answers.add(quizModel.getAnswer());
+                    options.add(quizModel.getOptions());
                 }
                 progressBar.setProgress(0);
-                progressText.setText(1+"/"+questions.size());
+                progressText.setText(1 + "/" + questions.size());
                 int resourceId = getResources().getIdentifier(UserSingleton.getInstance().getUserModel().getImage(), "drawable", getPackageName());
                 avatarView.setImageDrawable(getResources().getDrawable(resourceId));
                 flipper = (AdapterViewFlipper) findViewById(R.id.adapter_view);
 
-                pickerAdapter = new PickerAdapter(getApplication(), questions, answers);
-                flipper.setAdapter(pickerAdapter);
+                switch (GameSingleton.getInstance().getGameModel().getSubject()) {
+                    case "Mathematics":
+                        baseAdapter = new PickerAdapter(getApplication(), questions, answers);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "Music":
+                        baseAdapter = new SoundAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "Geography & History":
+                        baseAdapter = new CompleteAdapter(getApplication(), questions, answers);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "Biology & Geology":
+                        baseAdapter = new CheckboxAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "Sports":
+                        baseAdapter = new ImageAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "English":
+                        baseAdapter = new SpinnerAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "General Knowledge":
+                        baseAdapter = new SelectAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                }
             }
 
             @Override
@@ -139,7 +209,7 @@ public class PlayActivity extends AppCompatActivity {
     private void finishGame(){
         int student = Integer.parseInt(UserSingleton.getInstance().getUserModel().getId());
         int game = Integer.parseInt(GameSingleton.getInstance().getGameModel().getId());
-        float note = (correct*5.0f)/questions.size();
+        float note = (correct*5.0f) / questions.size();
         RestInterface restInterface = RetrofitClient.getInstance();
         Call<ActivityModel> call = restInterface.finishGame(student, game, GameSingleton.getInstance().getGameModel().getSubject(), note);
         call.enqueue(new Callback<ActivityModel>() {
@@ -156,20 +226,19 @@ public class PlayActivity extends AppCompatActivity {
         });
 
         if (note >= 2.5f) {
-            String dif = GameSingleton.getInstance().getGameModel().getDifficulty();
             int score = Integer.parseInt(UserSingleton.getInstance().getUserModel().getScore());
-            switch (dif) {
+            switch (GameSingleton.getInstance().getGameModel().getDifficulty()) {
                 case "easy":
                     score += 10;
-                    progressText.setText("+ "+10);
+                    progressText.setText("+ 10");
                     break;
                 case "medium":
                     score += 20;
-                    progressText.setText("+ "+20);
+                    progressText.setText("+ 20");
                     break;
                 case "hard":
                     score += 30;
-                    progressText.setText("+ "+30);
+                    progressText.setText("+ 30");
                     break;
             }
 
@@ -186,6 +255,8 @@ public class PlayActivity extends AppCompatActivity {
                     Log.d("Error",t.getMessage());
                 }
             });
+        } else {
+            progressText.setText("+ 0");
         }
     }
 
@@ -200,9 +271,96 @@ public class PlayActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.help) {
             Toast.makeText(PlayActivity.this, results.toString(), Toast.LENGTH_SHORT).show();
             return true;
+        } else if (end) {
+            infoDialog();
+            return true;
         } else {
             finish();
             return true;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (end) {
+            infoDialog();
+        } else {
+            finish();
+        }
+    }
+
+    private void infoDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle("Finished Game");
+        builder.setIcon(R.drawable.ic_done_teal_a700_24dp);
+        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                Intent i = new Intent(PlayActivity.this, MainActivity.class);
+                finish();
+                startActivity(i);
+            }
+        });
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                upvote();
+                Intent i = new Intent(PlayActivity.this, MainActivity.class);
+                finish();
+                startActivity(i);
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                downvote();
+                Intent i = new Intent(PlayActivity.this, MainActivity.class);
+                finish();
+                startActivity(i);
+            }
+        });
+
+        View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
+        TextView textView1 = (TextView) dialogView.findViewById(android.R.id.text1);
+        textView1.setText("Give us your feedback about the game, do you like it?");
+        builder.setView(dialogView);
+        builder.show();
+    }
+
+    private void upvote(){
+        int position = Integer.parseInt(GameSingleton.getInstance().getGameModel().getId());
+        RestInterface restInterface = RetrofitClient.getInstance();
+        Call<GameModel> call = restInterface.upvoteGame(position);
+        call.enqueue(new Callback<GameModel>() {
+            @Override
+            public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
+                GameModel jsonResponse = response.body();
+                GameSingleton.getInstance().getGameModel().setVote(jsonResponse.getVote());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GameModel> call, @NonNull Throwable t) {
+                Log.d("Error",t.getMessage());
+            }
+        });
+    }
+
+    private void downvote(){
+        int position = Integer.parseInt(GameSingleton.getInstance().getGameModel().getId());
+        RestInterface restInterface = RetrofitClient.getInstance();
+        Call<GameModel> call = restInterface.downvoteGame(position);
+        call.enqueue(new Callback<GameModel>() {
+            @Override
+            public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
+                GameModel jsonResponse = response.body();
+                GameSingleton.getInstance().getGameModel().setVote(jsonResponse.getVote());
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GameModel> call, @NonNull Throwable t) {
+                Log.d("Error",t.getMessage());
+            }
+        });
     }
 }

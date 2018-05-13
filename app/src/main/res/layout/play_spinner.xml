@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true">
+
+    <TextView
+        android:id="@+id/question1"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:background="@color/colorAccent"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        tools:text="Hola Ocean, ¿como estas?"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/md_keylines_x12"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/question2"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            tools:text="Hello Ocean, how "/>
+
+        <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            android:id="@+id/answer"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:layout_toEndOf="@id/question2"
+            android:textSize="20sp"
+            android:dropDownWidth="100dp"
+            android:popupBackground="@color/colorAccent"
+            app:met_textColor="@android:color/black"
+            app:met_underlineColor="@color/colorAccent"
+            android:focusableInTouchMode="false"
+            android:text="   "/>
+
+        <TextView
+            android:id="@+id/question3"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_toEndOf="@id/answer"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            tools:text=" you?"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

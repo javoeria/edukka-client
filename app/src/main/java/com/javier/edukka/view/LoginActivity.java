@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         RestInterface restInterface = RetrofitClient.getInstance();
         //Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
-        Call<UserModel> request = restInterface.logIn("javi", "123");
+        Call<UserModel> request = restInterface.logIn("user", "1234");
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
