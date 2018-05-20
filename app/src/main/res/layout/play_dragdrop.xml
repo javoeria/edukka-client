@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fillViewport="true">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textColor="@android:color/white"
+        android:background="@color/colorAccent"
+        android:padding="@dimen/md_keylines_x3"
+        tools:text="Drag and drop the text"/>
+
+    <LinearLayout
+        android:id="@+id/optionsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/md_keylines_x12"
+        android:layout_marginLeft="@dimen/md_keylines_x6"
+        android:layout_marginRight="@dimen/md_keylines_x6"
+        android:layout_marginBottom="@dimen/md_keylines_x3"
+        android:background="@drawable/layout_border"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvOptions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/answerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/md_keylines_x9"
+        android:layout_margin="@dimen/md_keylines_x6"
+        android:gravity="start"
+        android:background="@drawable/layout_border"
+        android:orientation="horizontal"/>
+
+</LinearLayout>

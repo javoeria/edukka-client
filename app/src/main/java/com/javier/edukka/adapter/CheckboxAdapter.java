@@ -40,12 +40,9 @@ public class CheckboxAdapter extends BaseAdapter {
     public Object getItem(int i) {
         Collections.sort(values, String.CASE_INSENSITIVE_ORDER);
         StringBuilder res = new StringBuilder();
-        for (String str : values) {
-            res.append(str).append(",");
-        }
-        if (res.length()>0) {
-            res.deleteCharAt(res.length()-1);
-        }
+        res.append(values.toString());
+        res.deleteCharAt(res.length()-1);
+        res.deleteCharAt(0);
         return res.toString();
     }
 

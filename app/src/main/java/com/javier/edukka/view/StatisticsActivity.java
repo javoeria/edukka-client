@@ -121,11 +121,7 @@ public class StatisticsActivity extends AppCompatActivity {
             average.setText(String.valueOf(media));
             failure.setText(String.valueOf(error)+"%");
             best.setText(mode1);
-            if (mode1.equals(mode2)) {
-                worst.setText("-");
-            } else {
-                worst.setText(mode2);
-            }
+            worst.setText(mode2);
         }
     }
 
@@ -147,12 +143,13 @@ public class StatisticsActivity extends AppCompatActivity {
         if (Locale.getDefault().getLanguage().equals("es")) {
             maxValue = HelperClient.subjectTranslateEs(maxValue);
         }
+        maxValue += " (" + maxCount + ")";
         return maxValue;
     }
 
     private String modeMin(List<ActivityModel> list) {
         String minValue="";
-        int minCount=10;
+        int minCount=999;
         for (int i=0; i<list.size(); i++) {
             int count=0;
             for (int j=0; j<list.size(); j++) {
@@ -168,6 +165,7 @@ public class StatisticsActivity extends AppCompatActivity {
         if (Locale.getDefault().getLanguage().equals("es")) {
             minValue = HelperClient.subjectTranslateEs(minValue);
         }
+        minValue += " (" + minCount + ")";
         return minValue;
     }
 

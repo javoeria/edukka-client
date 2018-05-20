@@ -6,20 +6,10 @@
     android:orientation="vertical"
     android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/question"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:gravity="center"
-        android:background="@color/colorAccent"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"
-        android:text="Complete the text"/>
-
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="180dp"
         android:background="@color/colorAccent"
         android:scaleType="centerInside"
         android:src="@drawable/subject_english"/>
@@ -32,6 +22,7 @@
         android:textSize="30sp"
         android:textColor="@android:color/black"
         android:inputType="textPersonName"
-        app:met_primaryColor="@color/colorAccent"/>
+        app:met_primaryColor="@color/colorAccent"
+        app:met_underlineColor="@color/colorAccent"/>
 
 </LinearLayout>

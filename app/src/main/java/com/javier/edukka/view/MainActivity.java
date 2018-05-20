@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static class Adapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
+        //private final List<String> mFragmentTitleList = new ArrayList<>();
 
         private Adapter(FragmentManager manager) {
             super(manager);
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
 
         private void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
+            //mFragmentTitleList.add(title);
         }
 
         @Override

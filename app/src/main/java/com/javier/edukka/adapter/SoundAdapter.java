@@ -54,7 +54,7 @@ public class SoundAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (i != 0 || cont != questions.size()-1) {
-            view = inflater.inflate(R.layout.play_recycler, viewGroup, false);
+            view = inflater.inflate(R.layout.play_sound, viewGroup, false);
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
             recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 2));
             adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));
@@ -68,7 +68,7 @@ public class SoundAdapter extends BaseAdapter {
                 mediaPlayer.setDataSource(url);
                 mediaPlayer.prepare();
                 mediaPlayer.start();
-                Toast.makeText(view.getContext(), "Ok", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Turn the volume up", Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();

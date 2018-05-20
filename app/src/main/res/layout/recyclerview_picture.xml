@@ -5,13 +5,10 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/md_keylines">
 
-    <TextView
-        android:id="@+id/info_text"
+    <ImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/md_keylines_x12"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@android:color/black"
-        tools:text="Text"/>
+        android:layout_height="100dp"
+        tools:src="@drawable/audio"/>
 
 </RelativeLayout>

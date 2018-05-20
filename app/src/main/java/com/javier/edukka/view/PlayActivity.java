@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -20,12 +21,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.javier.edukka.R;
 import com.javier.edukka.adapter.CheckboxAdapter;
 import com.javier.edukka.adapter.CompleteAdapter;
+import com.javier.edukka.adapter.DragDropAdapter;
+import com.javier.edukka.adapter.DragImageAdapter;
+import com.javier.edukka.adapter.DragNameAdapter;
 import com.javier.edukka.adapter.ImageAdapter;
 import com.javier.edukka.adapter.PickerAdapter;
 import com.javier.edukka.adapter.ScoreAdapter;
@@ -65,6 +70,7 @@ public class PlayActivity extends AppCompatActivity {
     private int correct = 0;
     private boolean end = false;
     private BaseAdapter baseAdapter;
+    private NestedScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +81,7 @@ public class PlayActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(GameSingleton.getInstance().getGameModel().getTitle());
 
+        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
         recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -95,6 +102,7 @@ public class PlayActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                scrollView.fullScroll(ScrollView.FOCUS_UP);
                 if (answers.get(step).equals(baseAdapter.getItem(step).toString())) {
                     results.add("true");
                     correct++;
@@ -131,6 +139,7 @@ public class PlayActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                scrollView.fullScroll(ScrollView.FOCUS_UP);
                 if (results.get(results.size()-1).equals("true")) {
                     correct--;
                 }
@@ -168,20 +177,32 @@ public class PlayActivity extends AppCompatActivity {
                 flipper = (AdapterViewFlipper) findViewById(R.id.adapter_view);
 
                 switch (GameSingleton.getInstance().getGameModel().getSubject()) {
+                    case "Spanish Language":
+                        baseAdapter = new DragDropAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
                     case "Mathematics":
                         baseAdapter = new PickerAdapter(getApplication(), questions, answers);
                         flipper.setAdapter(baseAdapter);
                         break;
-                    case "Music":
-                        baseAdapter = new SoundAdapter(getApplication(), questions, options);
+                    case "Natural Sciences":
+                        baseAdapter = new DragNameAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "Social Sciences":
+                        baseAdapter = new DragImageAdapter(getApplication(), questions, options);
+                        flipper.setAdapter(baseAdapter);
+                        break;
+                    case "Biology & Geology":
+                        baseAdapter = new CheckboxAdapter(getApplication(), questions, options);
                         flipper.setAdapter(baseAdapter);
                         break;
                     case "Geography & History":
                         baseAdapter = new CompleteAdapter(getApplication(), questions, answers);
                         flipper.setAdapter(baseAdapter);
                         break;
-                    case "Biology & Geology":
-                        baseAdapter = new CheckboxAdapter(getApplication(), questions, options);
+                    case "Music":
+                        baseAdapter = new SoundAdapter(getApplication(), questions, options);
                         flipper.setAdapter(baseAdapter);
                         break;
                     case "Sports":
@@ -270,6 +291,7 @@ public class PlayActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.help) {
             Toast.makeText(PlayActivity.this, results.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(PlayActivity.this, GameSingleton.getInstance().getGameModel().getDescription(), Toast.LENGTH_SHORT).show();
             return true;
         } else if (end) {
             infoDialog();
