@@ -61,14 +61,14 @@ public class SoundAdapter extends BaseAdapter {
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
 
-            String url = "http://docs.google.com/uc?export=download&id="+questions.get(i).split(";")[1];
+            String url = "http://docs.google.com/uc?export=download&id="+questions.get(i).split(",")[1];
             final MediaPlayer mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
                 mediaPlayer.setDataSource(url);
                 mediaPlayer.prepare();
                 mediaPlayer.start();
-                Toast.makeText(view.getContext(), "Turn the volume up", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), R.string.sound, Toast.LENGTH_SHORT).show();
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(view.getContext(), "Error", Toast.LENGTH_SHORT).show();
@@ -79,6 +79,7 @@ public class SoundAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     mediaPlayer.start();
+                    Toast.makeText(view.getContext(), R.string.sound, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -106,7 +107,7 @@ public class SoundAdapter extends BaseAdapter {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.myTextView.setText(mData.get(position));
-            holder.myTextView.setBackgroundColor(selectedPos == position ? 0xFFFFA000: 0xFFFFC107);
+            holder.myTextView.setBackgroundColor(selectedPos == position ? 0xFF4caf50 : 0xFF8bc34a);
         }
 
         @Override

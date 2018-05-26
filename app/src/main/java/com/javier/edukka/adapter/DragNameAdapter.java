@@ -2,17 +2,19 @@ package com.javier.edukka.adapter;
 
 import android.content.ClipData;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Vibrator;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
 import java.util.List;
@@ -60,13 +62,22 @@ public class DragNameAdapter extends BaseAdapter {
             final TextView answer2 = (TextView) view.findViewById(R.id.textView2);
             final TextView answer3 = (TextView) view.findViewById(R.id.textView3);
             question.setText(questions.get(i));
-            answer1.setText(options.get(i).split(",")[0]);
-            answer2.setText(options.get(i).split(",")[1]);
-            answer3.setText(options.get(i).split(",")[2]);
+            answer1.setText(options.get(i).split(";")[0].split(",")[0]);
+            answer2.setText(options.get(i).split(";")[0].split(",")[1]);
+            answer3.setText(options.get(i).split(";")[0].split(",")[2]);
+
+            ImageView image1 = (ImageView) view.findViewById(R.id.imageView1);
+            ImageView image2 = (ImageView) view.findViewById(R.id.imageView2);
+            ImageView image3 = (ImageView) view.findViewById(R.id.imageView3);
+            Picasso.with(inflater.getContext()).load(options.get(i).split(";")[1].split(",")[0]).into(image1);
+            Picasso.with(inflater.getContext()).load(options.get(i).split(";")[1].split(",")[1]).into(image2);
+            Picasso.with(inflater.getContext()).load(options.get(i).split(";")[1].split(",")[2]).into(image3);
 
             answer1.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+                    Vibrator v = (Vibrator) inflater.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(100);
                     ClipData data = ClipData.newPlainText("", answer1.getText().toString());
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);
@@ -77,6 +88,8 @@ public class DragNameAdapter extends BaseAdapter {
             answer2.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+                    Vibrator v = (Vibrator) inflater.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(100);
                     ClipData data = ClipData.newPlainText("", answer2.getText().toString());
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);
@@ -87,6 +100,8 @@ public class DragNameAdapter extends BaseAdapter {
             answer3.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+                    Vibrator v = (Vibrator) inflater.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(100);
                     ClipData data = ClipData.newPlainText("", answer3.getText().toString());
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);
@@ -104,7 +119,7 @@ public class DragNameAdapter extends BaseAdapter {
                         case DragEvent.ACTION_DRAG_LOCATION:
                             break;
                         case DragEvent.ACTION_DRAG_ENTERED:
-                            view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+                            view.getBackground().setColorFilter(0xffef5350, PorterDuff.Mode.SRC_IN);
                             view.invalidate();
                             break;
                         case DragEvent.ACTION_DRAG_EXITED:

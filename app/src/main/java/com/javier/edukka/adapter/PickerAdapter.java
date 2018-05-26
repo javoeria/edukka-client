@@ -1,6 +1,7 @@
 package com.javier.edukka.adapter;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class PickerAdapter extends BaseAdapter {
             answer.setText(String.valueOf(min));
             SeekBar seekBar = (SeekBar) view.findViewById(R.id.seekBar);
             seekBar.setMax(10);
+            seekBar.getProgressDrawable().setColorFilter(inflater.getContext().getResources().getColor(R.color.colorMaths), PorterDuff.Mode.SRC_IN);
 
             seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override

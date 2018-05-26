@@ -62,8 +62,8 @@
     <string name="approved">Approved Games</string>
     <string name="average">Average Score</string>
     <string name="failure">Failure Rate</string>
-    <string name="best">Best Subject</string>
-    <string name="worst">Worst Subject</string>
+    <string name="best">Most Played Subject</string>
+    <string name="worst">Least Played Subject</string>
 
     <string name="empty">Can\'t be Empty</string>
     <string name="minimum">At least 4 characters</string>
@@ -82,9 +82,15 @@
     <string name="class_size">%1$d users</string>
 
     <string name="enter_class">Enter Class</string>
-    <string name="leave_class">Exit Class</string>
+    <string name="leave_class">Leave Class</string>
     <string name="dialogenter">Insert the class identifier</string>
-    <string name="dialogleave">You are going to leave the current class, are you sure?</string>
+    <string name="dialogleave">You are going to exit the current class, are you sure?</string>
+
+    <string name="feedback">Give us your feedback about the game, do you like it?</string>
+    <string name="sound">Turn the volume up</string>
+    <string name="finished">Finished Game</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis

@@ -2,8 +2,8 @@ package com.javier.edukka.adapter;
 
 import android.content.ClipData;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Vibrator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.DragEvent;
@@ -66,7 +66,7 @@ public class DragImageAdapter extends BaseAdapter {
             question.setText(questions.get(i));
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
             recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 2));
-            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));
+            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(";")));
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
 
@@ -75,7 +75,7 @@ public class DragImageAdapter extends BaseAdapter {
                 public boolean onDrag(View view, DragEvent dragEvent) {
                     switch (dragEvent.getAction()) {
                         case DragEvent.ACTION_DRAG_ENTERED:
-                            view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+                            view.getBackground().setColorFilter(0xffce93d8, PorterDuff.Mode.SRC_IN);
                             view.invalidate();
                             break;
                         case DragEvent.ACTION_DRAG_EXITED:
@@ -127,11 +127,13 @@ public class DragImageAdapter extends BaseAdapter {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, final int position) {
-            final String str = mData.get(position).split(";")[0];
-            Picasso.with(inflater.getContext()).load(mData.get(position).split(";")[1]).into(holder.imageView);
+            final String str = mData.get(position).split(",")[0];
+            Picasso.with(inflater.getContext()).load(mData.get(position).split(",")[1]).into(holder.imageView);
             holder.imageView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+                    Vibrator v = (Vibrator) inflater.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(100);
                     ClipData data = ClipData.newPlainText("", str);
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);

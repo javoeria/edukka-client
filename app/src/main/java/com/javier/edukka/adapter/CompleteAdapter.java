@@ -49,7 +49,7 @@ public class CompleteAdapter extends BaseAdapter {
         if (i != 0 || cont != questions.size()-1) {
             view = inflater.inflate(R.layout.play_complete, viewGroup, false);
             ImageView question = (ImageView) view.findViewById(R.id.image);
-            Picasso.with(inflater.getContext()).load(questions.get(i).split(";")[1]).into(question);
+            Picasso.with(inflater.getContext()).load(questions.get(i).split(",")[1]).into(question);
             answer = (EditText) view.findViewById(R.id.answer);
             answer.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
             answer.setText(answers.get(i).substring(0,1));

@@ -9,9 +9,9 @@
     <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/play_height"
         android:gravity="center"
-        android:textSize="25sp"
+        android:textSize="@dimen/play_question"
         android:textColor="@android:color/white"
         android:background="@color/colorAccent"
         android:padding="@dimen/md_keylines_x3"

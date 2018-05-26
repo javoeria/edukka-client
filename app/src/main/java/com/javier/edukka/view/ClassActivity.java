@@ -91,14 +91,14 @@ public class ClassActivity extends AppCompatActivity {
                 if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
                     fab.setVisibility(View.VISIBLE);
                 } else if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher") &&
-                           UserSingleton.getInstance().getUserModel().getClassId().equals("0")) {
+                           UserSingleton.getInstance().getUserModel().getClassId().equals("1")) {
                     fab.setImageResource(android.R.drawable.ic_input_add);
                     fab.setVisibility(View.VISIBLE);
                     create = true;
                 }
 
                 if (!UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
-                    if (UserSingleton.getInstance().getUserModel().getClassId().equals("0")) {
+                    if (UserSingleton.getInstance().getUserModel().getClassId().equals("1")) {
                         mMenu.findItem(R.id.add_class).setVisible(true);
                     } else {
                         mMenu.findItem(R.id.rem_class).setVisible(true);
@@ -221,7 +221,7 @@ public class ClassActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                UserSingleton.getInstance().getUserModel().setClassId("0");
+                UserSingleton.getInstance().getUserModel().setClassId("1");
                 Toast.makeText(ClassActivity.this, R.string.deleteclass_success, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ClassActivity.this, MainActivity.class);
                 finish();

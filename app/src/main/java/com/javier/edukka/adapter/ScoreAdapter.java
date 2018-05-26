@@ -34,7 +34,7 @@ public class ScoreAdapter extends RecyclerView.Adapter<ScoreAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, final int i) {
-        viewHolder.question.setText(questions.get(i).split(";")[0]);
+        viewHolder.question.setText(questions.get(i).split(",")[0]);
         viewHolder.answer.setText(answers.get(i));
 
         if (UserSingleton.getInstance().getUserModel().getRole().equals("student")) {

@@ -52,6 +52,7 @@ public class SelectAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.play_recycler, viewGroup, false);
             TextView question = (TextView) view.findViewById(R.id.question);
             question.setText(questions.get(i));
+            question.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorGeneral));
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
             recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
             adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));
@@ -82,7 +83,7 @@ public class SelectAdapter extends BaseAdapter {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.myTextView.setText(mData.get(position));
-            holder.myTextView.setBackgroundColor(selectedPos == position ? 0xFFFFA000: 0xFFFFC107);
+            holder.myTextView.setBackgroundColor(selectedPos == position ? 0xFF90a4ae : 0xFFcfd8dc);
         }
 
         @Override

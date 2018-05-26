@@ -38,7 +38,7 @@ public class ImageAdapter extends BaseAdapter {
     public Object getItem(int i) {
         String str = "";
         if (adapter.getSelectedPos()>=0) {
-            str = Arrays.asList(options.get(i).split(",")).get(adapter.getSelectedPos()).split(";")[0];
+            str = Arrays.asList(options.get(i).split(";")).get(adapter.getSelectedPos()).split(",")[0];
         }
         return str;
     }
@@ -54,9 +54,10 @@ public class ImageAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.play_recycler, viewGroup, false);
             TextView question = (TextView) view.findViewById(R.id.question);
             question.setText(questions.get(i));
+            question.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorSports));
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
             recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 2));
-            adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));
+            adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(";")));
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
         }
@@ -83,7 +84,7 @@ public class ImageAdapter extends BaseAdapter {
 
         @Override
         public void onBindViewHolder(final MyRecyclerViewAdapter.ViewHolder holder, int position) {
-            Picasso.with(inflater.getContext()).load("https://"+mData.get(position).split(";")[1]).into(holder.myImageView);
+            Picasso.with(inflater.getContext()).load(mData.get(position).split(",")[1]).into(holder.myImageView);
             holder.myImageView.setBackgroundColor(selectedPos == position ? 0xFFFFA000: 0xFFFFC107);
         }
 

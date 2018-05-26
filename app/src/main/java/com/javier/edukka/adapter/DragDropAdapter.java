@@ -2,8 +2,8 @@ package com.javier.edukka.adapter;
 
 import android.content.ClipData;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Vibrator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.DragEvent;
@@ -64,7 +64,7 @@ public class DragDropAdapter extends BaseAdapter {
             TextView question = (TextView) view.findViewById(R.id.question);
             question.setText(questions.get(i));
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
-            recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 3));
+            recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 4));
             MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
@@ -74,7 +74,7 @@ public class DragDropAdapter extends BaseAdapter {
                 public boolean onDrag(View view, DragEvent dragEvent) {
                     switch (dragEvent.getAction()) {
                         case DragEvent.ACTION_DRAG_ENTERED:
-                            view.getBackground().setColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+                            view.getBackground().setColorFilter(0xff33b5e5, PorterDuff.Mode.SRC_IN);
                             view.invalidate();
                             break;
                         case DragEvent.ACTION_DRAG_EXITED:
@@ -134,6 +134,8 @@ public class DragDropAdapter extends BaseAdapter {
             holder.textView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+                    Vibrator v = (Vibrator) inflater.getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                    v.vibrate(100);
                     ClipData data = ClipData.newPlainText("", holder.textView.getText().toString());
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);

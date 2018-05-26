@@ -58,6 +58,7 @@ public class CheckboxAdapter extends BaseAdapter {
             values.clear();
             TextView question = (TextView) view.findViewById(R.id.question);
             question.setText(questions.get(i));
+            question.setBackgroundColor(inflater.getContext().getResources().getColor(R.color.colorBioGeo));
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
             recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 2));
             MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));

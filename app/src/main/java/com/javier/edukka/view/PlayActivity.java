@@ -290,8 +290,8 @@ public class PlayActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.help) {
-            Toast.makeText(PlayActivity.this, results.toString(), Toast.LENGTH_SHORT).show();
-            //Toast.makeText(PlayActivity.this, GameSingleton.getInstance().getGameModel().getDescription(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(PlayActivity.this, results.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(PlayActivity.this, GameSingleton.getInstance().getGameModel().getDescription(), Toast.LENGTH_SHORT).show();
             return true;
         } else if (end) {
             infoDialog();
@@ -314,9 +314,9 @@ public class PlayActivity extends AppCompatActivity {
     private void infoDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
-        builder.setTitle("Finished Game");
+        builder.setTitle(R.string.finished);
         builder.setIcon(R.drawable.ic_done_teal_a700_24dp);
-        builder.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 Intent i = new Intent(PlayActivity.this, MainActivity.class);
@@ -324,7 +324,7 @@ public class PlayActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 upvote();
@@ -333,7 +333,7 @@ public class PlayActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 downvote();
@@ -345,7 +345,7 @@ public class PlayActivity extends AppCompatActivity {
 
         View dialogView = getLayoutInflater().inflate(android.R.layout.simple_list_item_1, null);
         TextView textView1 = (TextView) dialogView.findViewById(android.R.id.text1);
-        textView1.setText("Give us your feedback about the game, do you like it?");
+        textView1.setText(R.string.feedback);
         builder.setView(dialogView);
         builder.show();
     }

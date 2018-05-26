@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/md_keylines_x12"
         android:gravity="center"
-        android:textSize="20sp"
+        android:textSize="@dimen/play_option"
         android:textColor="@android:color/black"
         tools:text="Text"/>
 

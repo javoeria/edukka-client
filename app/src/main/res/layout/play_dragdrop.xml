@@ -9,11 +9,11 @@
     <TextView
         android:id="@+id/question"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/play_height"
         android:gravity="center"
-        android:textSize="25sp"
+        android:textSize="@dimen/play_question"
         android:textColor="@android:color/white"
-        android:background="@color/colorAccent"
+        android:background="@color/colorSpanish"
         android:padding="@dimen/md_keylines_x3"
         tools:text="Drag and drop the text"/>
 
@@ -25,7 +25,8 @@
         android:layout_marginLeft="@dimen/md_keylines_x6"
         android:layout_marginRight="@dimen/md_keylines_x6"
         android:layout_marginBottom="@dimen/md_keylines_x3"
-        android:background="@drawable/layout_border"
+        android:padding="@dimen/md_keylines"
+        android:background="@drawable/layout_border1"
         android:orientation="vertical">
 
         <android.support.v7.widget.RecyclerView
@@ -41,7 +42,8 @@
         android:layout_height="@dimen/md_keylines_x9"
         android:layout_margin="@dimen/md_keylines_x6"
         android:gravity="start"
-        android:background="@drawable/layout_border"
+        android:padding="@dimen/md_keylines"
+        android:background="@drawable/layout_border1"
         android:orientation="horizontal"/>
 
 </LinearLayout>

@@ -49,9 +49,9 @@ public class SpinnerAdapter extends BaseAdapter {
             TextView question1 = (TextView) view.findViewById(R.id.question1);
             TextView question2 = (TextView) view.findViewById(R.id.question2);
             TextView question3 = (TextView) view.findViewById(R.id.question3);
-            question1.setText(questions.get(i).split(";")[1]);
-            question2.setText(questions.get(i).split(";")[0].split("_")[0]);
-            question3.setText(questions.get(i).split(";")[0].split("_")[1]);
+            question1.setText(questions.get(i).split(",")[1]);
+            question2.setText(questions.get(i).split(",")[0].split("_")[0]);
+            question3.setText(questions.get(i).split(",")[0].split("_")[1]);
 
             spinner = (MaterialBetterSpinner) view.findViewById(R.id.answer);
             String[] options_list = options.get(i).split(",");

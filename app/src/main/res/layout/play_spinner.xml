@@ -10,18 +10,21 @@
     <TextView
         android:id="@+id/question1"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="@dimen/play_height"
         android:gravity="center"
-        android:textSize="25sp"
+        android:textSize="@dimen/play_question"
         android:textColor="@android:color/white"
-        android:background="@color/colorAccent"
+        android:background="@color/colorEnglish"
         android:padding="@dimen/md_keylines_x3"
         tools:text="Hola, ¿como estas?"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/md_keylines_x12"
+        android:layout_marginTop="@dimen/md_keylines_x12"
+        android:layout_marginStart="@dimen/md_keylines_x6"
+        android:layout_marginEnd="@dimen/md_keylines_x6"
+        android:layout_marginBottom="@dimen/md_keylines_x6"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -29,7 +32,7 @@
             android:id="@+id/question2"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/md_keylines_x12"
-            android:textSize="20sp"
+            android:textSize="@dimen/play_option"
             android:textColor="@android:color/black"
             tools:text="Hello, how "/>
 
@@ -38,12 +41,12 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/md_keylines_x11"
             android:layout_toEndOf="@id/question2"
-            android:textSize="20sp"
+            android:textSize="@dimen/play_option"
             android:textColor="@android:color/black"
-            android:dropDownWidth="100dp"
+            android:dropDownWidth="@dimen/play_dropdown"
             android:focusableInTouchMode="false"
-            android:popupBackground="@color/colorAccent"
-            app:met_underlineColor="@color/colorAccent"
+            android:popupBackground="@color/colorEnglish"
+            app:met_underlineColor="@color/colorEnglish"
             android:text="   "/>
 
         <TextView
@@ -51,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/md_keylines_x12"
             android:layout_toEndOf="@id/answer"
-            android:textSize="20sp"
+            android:textSize="@dimen/play_option"
             android:textColor="@android:color/black"
             tools:text=" you?"/>
 

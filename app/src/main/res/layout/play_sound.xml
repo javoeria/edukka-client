@@ -8,9 +8,10 @@
     <ImageView
         android:id="@+id/btnPlay"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="@color/colorAccent"
+        android:layout_height="@dimen/play_height"
+        android:background="@color/colorMusic"
         android:scaleType="centerInside"
+        android:padding="@dimen/md_keylines"
         android:src="@drawable/audio"/>
 
     <android.support.v7.widget.RecyclerView

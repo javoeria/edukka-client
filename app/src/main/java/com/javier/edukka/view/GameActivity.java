@@ -81,6 +81,7 @@ public class GameActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<GameModel> call, @NonNull Response<GameModel> response) {
                 jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getTitle());
+                setBackground(jsonResponse.getSubject());
                 detail.setText(jsonResponse.getDescription());
                 vote.setText(jsonResponse.getVote());
                 if (Locale.getDefault().getLanguage().equals("es")) {
@@ -104,6 +105,41 @@ public class GameActivity extends AppCompatActivity {
                 Log.d("Error",t.getMessage());
             }
         });
+    }
+
+    private void setBackground(String subject) {
+        switch (subject) {
+            case "Spanish Language":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorSpanish));
+                break;
+            case "Mathematics":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorMaths));
+                break;
+            case "Natural Sciences":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorNatural));
+                break;
+            case "Social Sciences":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorSocial));
+                break;
+            case "Biology & Geology":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorBioGeo));
+                break;
+            case "Geography & History":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorGeoHis));
+                break;
+            case "Music":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorMusic));
+                break;
+            case "Sports":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorSports));
+                break;
+            case "English":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorEnglish));
+                break;
+            case "General Knowledge":
+                collapsingToolbar.setBackgroundColor(getResources().getColor(R.color.colorGeneral));
+                break;
+        }
     }
 
     public void play(View v) {

@@ -31,7 +31,7 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.avatar.setImageDrawable(data.get(position));
-        holder.itemView.setBackgroundColor(selectedPos == position ? Color.BLUE : Color.TRANSPARENT);
+        holder.itemView.setBackgroundColor(selectedPos == position ? 0xFF3F51B5 : Color.TRANSPARENT);
     }
 
     @Override

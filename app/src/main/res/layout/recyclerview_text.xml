@@ -3,5 +3,5 @@
     android:id="@+id/text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:textSize="20sp"
+    android:textSize="@dimen/play_option"
     android:textColor="@android:color/black" />

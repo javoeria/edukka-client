@@ -27,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 tools:background="@drawable/subject_spanish"
+                android:padding="@dimen/md_keylines_x4"
                 app:layout_collapseMode="parallax" />
 
             <android.support.v7.widget.Toolbar
