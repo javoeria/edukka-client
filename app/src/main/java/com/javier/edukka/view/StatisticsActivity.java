@@ -99,8 +99,8 @@ public class StatisticsActivity extends AppCompatActivity {
         if (list.get(0).getStudentId()==null) {
             total.setText("0");
             approved.setText("0");
-            average.setText("0.0");
-            failure.setText("0%");
+            average.setText("-");
+            failure.setText("-");
             best.setText("-");
             worst.setText("-");
         } else {
@@ -121,7 +121,11 @@ public class StatisticsActivity extends AppCompatActivity {
             average.setText(String.valueOf(media));
             failure.setText(String.valueOf(error)+"%");
             best.setText(mode1);
-            worst.setText(mode2);
+            if (mode1.equals(mode2)) {
+                worst.setText("-");
+            } else {
+                worst.setText(mode2);
+            }
         }
     }
 

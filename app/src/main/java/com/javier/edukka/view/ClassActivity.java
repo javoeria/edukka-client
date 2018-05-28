@@ -23,8 +23,11 @@ import com.javier.edukka.R;
 import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.fragment.ListContentFragment;
 import com.javier.edukka.model.ClassModel;
+import com.javier.edukka.service.HelperClient;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
+
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -90,19 +93,23 @@ public class ClassActivity extends AppCompatActivity {
                 size.setText(getString(R.string.class_size,ListContentFragment.getSize()));
                 if (UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
                     fab.setVisibility(View.VISIBLE);
-                } else if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher") &&
-                           UserSingleton.getInstance().getUserModel().getClassId().equals("1")) {
+                } else if (jsonResponse.getId().equals("1") && UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
                     fab.setImageResource(android.R.drawable.ic_input_add);
                     fab.setVisibility(View.VISIBLE);
                     create = true;
                 }
 
                 if (!UserSingleton.getInstance().getUserModel().getId().equals(jsonResponse.getTeacherId())) {
-                    if (UserSingleton.getInstance().getUserModel().getClassId().equals("1")) {
+                    if (jsonResponse.getId().equals("1")) {
                         mMenu.findItem(R.id.add_class).setVisible(true);
                     } else {
                         mMenu.findItem(R.id.rem_class).setVisible(true);
                     }
+                }
+
+                if (jsonResponse.getId().equals("1") && Locale.getDefault().getLanguage().equals("es")) {
+                    collapsingToolbar.setTitle(HelperClient.defaultClassNameEs());
+                    info.setText(HelperClient.defaultClassInfoEs());
                 }
             }
 

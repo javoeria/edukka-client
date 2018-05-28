@@ -112,4 +112,12 @@ public class HelperClient {
         return res;
     }
 
+    public static String defaultClassNameEs() {
+        return "Clase Pública";
+    }
+
+    public static String defaultClassInfoEs() {
+        return "Clase por defecto para los usuarios que no tienen seleccionada una clase privada";
+    }
+
 }

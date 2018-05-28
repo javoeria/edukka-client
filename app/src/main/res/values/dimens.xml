@@ -42,6 +42,7 @@
 
     <dimen name="play_height">180dp</dimen>
     <dimen name="play_fab">208dp</dimen>
+    <dimen name="play_image">152dp</dimen>
     <dimen name="play_dropdown">100dp</dimen>
     <dimen name="play_bottom">64dp</dimen>
     <dimen name="play_number">50sp</dimen>

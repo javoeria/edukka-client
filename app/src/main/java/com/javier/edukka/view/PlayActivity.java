@@ -129,7 +129,7 @@ public class PlayActivity extends AppCompatActivity {
 
                     ScoreAdapter scoreAdapter = new ScoreAdapter(questions, values, results);
                     recyclerView.setAdapter(scoreAdapter);
-                    //finishGame();
+                    finishGame();
                 }
             }
         });

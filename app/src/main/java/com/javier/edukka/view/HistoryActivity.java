@@ -72,9 +72,11 @@ public class HistoryActivity extends AppCompatActivity {
                 if (jsonResponse.get(0).getStudentId()==null) {
                     mArrayList = new ArrayList<>();
                     findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
+                    findViewById(R.id.empty_text).setVisibility(View.VISIBLE);
                 } else {
                     mArrayList = (ArrayList<ActivityModel>) jsonResponse;
                     findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.empty_text).setVisibility(View.INVISIBLE);
                 }
                 mAdapter = new HistoryAdapter(mArrayList,getIntent().getStringExtra(EXTRA_EDITION));
                 mRecyclerView.setAdapter(mAdapter);
@@ -100,8 +102,11 @@ public class HistoryActivity extends AppCompatActivity {
                 if (jsonResponse.get(0).getStudentId()==null) {
                     mArrayList = new ArrayList<>();
                     findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
+                    findViewById(R.id.empty_text).setVisibility(View.VISIBLE);
                 } else {
                     mArrayList = (ArrayList<ActivityModel>) jsonResponse;
+                    findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
+                    findViewById(R.id.empty_text).setVisibility(View.INVISIBLE);
                 }
                 mAdapter = new HistoryAdapter(mArrayList,getIntent().getStringExtra(EXTRA_EDITION));
                 mRecyclerView.setAdapter(mAdapter);

@@ -2,8 +2,6 @@ package com.javier.edukka.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,7 +15,6 @@ import android.view.View;
 
 import com.javier.edukka.R;
 import com.javier.edukka.adapter.GameAdapter;
-import com.javier.edukka.controller.UserSingleton;
 import com.javier.edukka.model.GameModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -55,17 +52,6 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(getIntent().getStringExtra(SUBJECT_NAME));
         loadJSON();
         refresh();
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        if (UserSingleton.getInstance().getUserModel().getRole().equals("teacher")) {
-            fab.setVisibility(View.VISIBLE);
-        }
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
     }
 
     protected void onRestart() {
@@ -88,6 +74,7 @@ public class SearchActivity extends AppCompatActivity {
                 if (jsonResponse.get(0).getId()==null) {
                     mArrayList = new ArrayList<>();
                     findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
+                    findViewById(R.id.empty_text).setVisibility(View.VISIBLE);
                 } else {
                     ArrayList<GameModel> list = new ArrayList<>();
                     for (GameModel game : jsonResponse) {
@@ -98,8 +85,10 @@ public class SearchActivity extends AppCompatActivity {
                     mArrayList = list;
                     if (mArrayList.isEmpty()) {
                         findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
+                        findViewById(R.id.empty_text).setVisibility(View.VISIBLE);
                     } else {
                         findViewById(R.id.empty_view).setVisibility(View.INVISIBLE);
+                        findViewById(R.id.empty_text).setVisibility(View.INVISIBLE);
                     }
                 }
                 mAdapter = new GameAdapter(mArrayList);

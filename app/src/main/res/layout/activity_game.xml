@@ -95,16 +95,18 @@
                 android:layout_height="wrap_content"
                 tools:text="+1"/>
 
-            <ImageButton
-                android:id="@+id/imageButton"
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/image_margin"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/md_keylines_x3"
-                android:layout_marginTop="@dimen/fab_margin"
                 android:background="?android:selectableItemBackground"
                 android:onClick="play"
-                android:scaleType="centerInside"
-                app:srcCompat="@drawable/play" />
+                app:lottie_scale="0.35"
+                app:lottie_imageAssetsFolder="assets"
+                app:lottie_fileName="animation-w400-h400.json"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
