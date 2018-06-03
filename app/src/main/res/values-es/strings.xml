@@ -38,6 +38,9 @@
     <string name="role">Rol</string>
     <string name="avatar">Avatar</string>
     <string name="newpassword">Nueva Contraseña</string>
+    <string name="confirm_password">Confirmar Contraseña</string>
+    <string name="confirm_newpassword">Confirmar Nueva Contraseña</string>
+    <string name="password_error">Las contraseñas no son iguales</string>
 
     <string name="editprofile">Editar Perfil</string>
     <string name="editclass">Editar Clase</string>
@@ -68,8 +71,8 @@
     <string name="empty">Campo Obligatorio</string>
     <string name="minimum">Al menos 4 caracteres</string>
     <string name="invalid">Usuario/Contraseña inválido</string>
-    <string name="login_success">Inicio sesión correcto</string>
-    <string name="signup_success">Registro usuario correcto</string>
+    <string name="login_success">Inicio de sesión correcto</string>
+    <string name="signup_success">Registro de usuario correcto</string>
     <string name="data_update">Datos actualizados</string>
     <string name="class_fail">Clase no encontrada</string>
     <string name="username_fail">Usuario no disponible</string>
@@ -86,7 +89,7 @@
     <string name="dialogenter">Introduce el identificador de la clase</string>
     <string name="dialogleave">Vas a abandonar la clase actual, ¿estás seguro?</string>
 
-    <string name="feedback">Danos tu opinión sobre el juego, ¿te gusta?</string>
+    <string name="feedback">Danos tu opinión sobre el juego, ¿te ha gustado?</string>
     <string name="sound">Sube el volumen</string>
     <string name="finished">Juego Terminado</string>
     <string name="yes">Sí</string>

@@ -130,33 +130,35 @@ public class DragNameAdapter extends BaseAdapter {
                             view.getBackground().clearColorFilter();
                             view.invalidate();
                             View v = (View) dragEvent.getLocalState();
-                            ViewGroup owner = (ViewGroup) v.getParent();
-                            owner.removeView(v);
                             LinearLayout container = (LinearLayout) view;
-                            container.addView(v);
+                            if (container.getId()==R.id.optionsLayout || container.getChildCount()==0) {
+                                ViewGroup owner = (ViewGroup) v.getParent();
+                                owner.removeView(v);
+                                container.addView(v);
+                                switch (owner.getId()) {
+                                    case R.id.answerLayout1:
+                                        answer[0] = " ";
+                                        break;
+                                    case R.id.answerLayout2:
+                                        answer[1] = " ";
+                                        break;
+                                    case R.id.answerLayout3:
+                                        answer[2] = " ";
+                                        break;
+                                }
+                                switch (container.getId()) {
+                                    case R.id.answerLayout1:
+                                        answer[0] = dragEvent.getClipData().getItemAt(0).getText().toString();
+                                        break;
+                                    case R.id.answerLayout2:
+                                        answer[1] = dragEvent.getClipData().getItemAt(0).getText().toString();
+                                        break;
+                                    case R.id.answerLayout3:
+                                        answer[2] = dragEvent.getClipData().getItemAt(0).getText().toString();
+                                        break;
+                                }
+                            }
                             v.setVisibility(View.VISIBLE);
-                            switch (owner.getId()) {
-                                case R.id.answerLayout1:
-                                    answer[0] = " ";
-                                    break;
-                                case R.id.answerLayout2:
-                                    answer[1] = " ";
-                                    break;
-                                case R.id.answerLayout3:
-                                    answer[2] = " ";
-                                    break;
-                            }
-                            switch (container.getId()) {
-                                case R.id.answerLayout1:
-                                    answer[0] = dragEvent.getClipData().getItemAt(0).getText().toString();
-                                    break;
-                                case R.id.answerLayout2:
-                                    answer[1] = dragEvent.getClipData().getItemAt(0).getText().toString();
-                                    break;
-                                case R.id.answerLayout3:
-                                    answer[2] = dragEvent.getClipData().getItemAt(0).getText().toString();
-                                    break;
-                            }
                             break;
                         default:
                             View v1 = (View) dragEvent.getLocalState();

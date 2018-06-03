@@ -229,7 +229,7 @@ public class ClassActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 UserSingleton.getInstance().getUserModel().setClassId("1");
-                Toast.makeText(ClassActivity.this, R.string.deleteclass_success, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClassActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ClassActivity.this, MainActivity.class);
                 finish();
                 startActivity(i);

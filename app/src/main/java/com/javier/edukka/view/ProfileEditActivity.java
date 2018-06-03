@@ -41,7 +41,7 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     public static final String EXTRA_POSITION = "position";
     private final String[] array = HelperClient.array_avatar();
-    private EditText name, user, pass;
+    private EditText name, user, pass, pass1;
     private AvatarAdapter avatarAdapter;
     private List<Drawable> avatars;
 
@@ -57,6 +57,7 @@ public class ProfileEditActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.user_fullname);
         user = (EditText) findViewById(R.id.user_name);
         pass = (EditText) findViewById(R.id.user_pass);
+        pass1 = (EditText) findViewById(R.id.user_pass1);
 
         initAvatars();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -82,12 +83,15 @@ public class ProfileEditActivity extends AppCompatActivity {
                     user.setError(getText(R.string.empty));
                 } else if (pass.getText().hashCode() == editable.hashCode() && pass.getText().toString().length()>0 && pass.getText().toString().length()<4) {
                     pass.setError(getText(R.string.minimum));
+                } else if (pass1.getText().hashCode() == editable.hashCode() && !pass1.getText().toString().equals(pass.getText().toString())) {
+                    pass1.setError(getText(R.string.password_error));
                 }
             }
         };
         name.addTextChangedListener(watcher);
         user.addTextChangedListener(watcher);
         pass.addTextChangedListener(watcher);
+        pass1.addTextChangedListener(watcher);
     }
 
     private void initAvatars() {
@@ -140,6 +144,10 @@ public class ProfileEditActivity extends AppCompatActivity {
             pass.setError(getText(R.string.minimum));
             valid = false;
         }
+        if (!pass1.getText().toString().equals(pass.getText().toString())) {
+            pass1.setError(getText(R.string.password_error));
+            valid = false;
+        }
         return valid;
     }
 
@@ -177,7 +185,9 @@ public class ProfileEditActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        if (!UserSingleton.getInstance().getUserModel().getId().equals("1")) {
+            getMenuInflater().inflate(R.menu.menu_edit, menu);
+        }
         return true;
     }
 

@@ -78,7 +78,7 @@
             android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/md_keylines_x10"
+            android:layout_marginTop="@dimen/md_keylines_x12"
             android:layout_marginBottom="@dimen/md_keylines_x2"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/colorAccent"

@@ -82,6 +82,7 @@ public class GameActivity extends AppCompatActivity {
                 jsonResponse = response.body();
                 collapsingToolbar.setTitle(jsonResponse.getTitle());
                 setBackground(jsonResponse.getSubject());
+                findViewById(R.id.animation_view).setVisibility(View.VISIBLE);
                 detail.setText(jsonResponse.getDescription());
                 vote.setText(jsonResponse.getVote());
                 if (Locale.getDefault().getLanguage().equals("es")) {

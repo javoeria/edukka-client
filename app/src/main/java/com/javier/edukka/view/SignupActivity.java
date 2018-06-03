@@ -36,7 +36,7 @@ import retrofit2.Response;
 public class SignupActivity extends AppCompatActivity {
 
     private final String[] array = HelperClient.array_avatar();
-    private EditText name, user, pass, classid;
+    private EditText name, user, pass, pass1, classid;
     private AvatarAdapter avatarAdapter;
     private List<Drawable> avatars;
     private RecyclerView recyclerView;
@@ -54,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.fullname);
         user = (EditText) findViewById(R.id.username);
         pass = (EditText) findViewById(R.id.password);
+        pass1 = (EditText) findViewById(R.id.password1);
         classid = (EditText) findViewById(R.id.classid);
 
         initAvatars();
@@ -89,12 +90,15 @@ public class SignupActivity extends AppCompatActivity {
                     user.setError(getText(R.string.empty));
                 } else if (pass.getText().hashCode() == editable.hashCode() && pass.getText().toString().length()<4) {
                     pass.setError(getText(R.string.minimum));
+                } else if (pass1.getText().hashCode() == editable.hashCode() && !pass1.getText().toString().equals(pass.getText().toString())) {
+                    pass1.setError(getText(R.string.password_error));
                 }
             }
         };
         name.addTextChangedListener(watcher);
         user.addTextChangedListener(watcher);
         pass.addTextChangedListener(watcher);
+        pass1.addTextChangedListener(watcher);
     }
 
     public void onRadioButtonClicked(View view) {
@@ -129,6 +133,10 @@ public class SignupActivity extends AppCompatActivity {
         }
         if (pass.getText().toString().length()<4) {
             pass.setError(getText(R.string.minimum));
+            valid = false;
+        }
+        if (!pass1.getText().toString().equals(pass.getText().toString())) {
+            pass1.setError(getText(R.string.password_error));
             valid = false;
         }
         return valid;

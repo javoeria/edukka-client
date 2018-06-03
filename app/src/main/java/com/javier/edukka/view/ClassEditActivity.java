@@ -119,7 +119,9 @@ public class ClassEditActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit, menu);
+        if (!UserSingleton.getInstance().getUserModel().getId().equals("1")) {
+            getMenuInflater().inflate(R.menu.menu_edit, menu);
+        }
         return true;
     }
 
@@ -167,7 +169,7 @@ public class ClassEditActivity extends AppCompatActivity {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                UserSingleton.getInstance().getUserModel().setClassId("0");
+                UserSingleton.getInstance().getUserModel().setClassId("1");
                 Toast.makeText(ClassEditActivity.this, R.string.deleteclass_success, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ClassEditActivity.this, MainActivity.class);
                 finish();

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.javier.edukka.R;
+import com.javier.edukka.service.DoubleClickListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +66,7 @@ public class DragDropAdapter extends BaseAdapter {
             question.setText(questions.get(i));
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.rvOptions);
             recyclerView.setLayoutManager(new GridLayoutManager(viewGroup.getContext(), 4));
-            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(view.getContext(), Arrays.asList(options.get(i).split(",")));
+            MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(view.getContext(), view.findViewById(R.id.answerLayout), Arrays.asList(options.get(i).split(",")));
             recyclerView.setAdapter(adapter);
             recyclerView.setHasFixedSize(true);
 
@@ -115,10 +116,12 @@ public class DragDropAdapter extends BaseAdapter {
     class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
 
         private final LayoutInflater mInflater;
+        private final View layoutView;
         private final List<String> mData;
 
-        MyRecyclerViewAdapter(Context context, List<String> data) {
+        MyRecyclerViewAdapter(Context context, View layoutView, List<String> data) {
             this.mInflater = LayoutInflater.from(context);
+            this.layoutView = layoutView;
             this.mData = data;
         }
 
@@ -140,6 +143,16 @@ public class DragDropAdapter extends BaseAdapter {
                     View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
                     view.startDrag(data, shadowBuilder, view, 0);
                     return true;
+                }
+            });
+            holder.textView.setOnClickListener(new DoubleClickListener() {
+                @Override
+                public void onDoubleClick(View view) {
+                    LinearLayout container = (LinearLayout) layoutView;
+                    container.removeView(view);
+                    container.invalidate();
+                    ClipData data = ClipData.newPlainText("", holder.textView.getText().toString());
+                    answer.remove(data.getItemAt(0).getText().toString());
                 }
             });
         }

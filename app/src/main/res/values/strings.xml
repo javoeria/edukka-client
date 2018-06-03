@@ -38,6 +38,9 @@
     <string name="role">Role</string>
     <string name="avatar">Avatar</string>
     <string name="newpassword">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_newpassword">Confirm New Password</string>
+    <string name="password_error">Passwords are not the same</string>
 
     <string name="editprofile">Edit Profile</string>
     <string name="editclass">Edit Class</string>
@@ -86,7 +89,7 @@
     <string name="dialogenter">Insert the class identifier</string>
     <string name="dialogleave">You are going to exit the current class, are you sure?</string>
 
-    <string name="feedback">Give us your feedback about the game, do you like it?</string>
+    <string name="feedback">Give us your feedback about the game, did you like it?</string>
     <string name="sound">Turn the volume up</string>
     <string name="finished">Finished Game</string>
     <string name="yes">Yes</string>

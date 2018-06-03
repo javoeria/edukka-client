@@ -1,7 +1,9 @@
 package com.javier.edukka.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -16,12 +18,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterViewFlipper;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,7 +74,6 @@ public class PlayActivity extends AppCompatActivity {
     private int correct = 0;
     private boolean end = false;
     private BaseAdapter baseAdapter;
-    private NestedScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +83,9 @@ public class PlayActivity extends AppCompatActivity {
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle(GameSingleton.getInstance().getGameModel().getTitle());
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+        NestedScrollView scrollView = (NestedScrollView) findViewById(R.id.scrollView);
         recyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -102,7 +106,6 @@ public class PlayActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scrollView.fullScroll(ScrollView.FOCUS_UP);
                 if (answers.get(step).equals(baseAdapter.getItem(step).toString())) {
                     results.add("true");
                     correct++;
@@ -118,8 +121,12 @@ public class PlayActivity extends AppCompatActivity {
                     end = true;
                 }
 
+                InputMethodManager inputManager  = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputManager.isAcceptingText()) {
+                    inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
                 flipper.showNext();
-                back.setVisibility(View.VISIBLE);
+                //back.setVisibility(View.VISIBLE);
                 if (end) {
                     RatingBar ratingBar = (RatingBar) findViewById(R.id.ratingBar);
                     ratingBar.setRating((correct*5.0f) / questions.size());
@@ -139,7 +146,6 @@ public class PlayActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                scrollView.fullScroll(ScrollView.FOCUS_UP);
                 if (results.get(results.size()-1).equals("true")) {
                     correct--;
                 }
@@ -152,6 +158,23 @@ public class PlayActivity extends AppCompatActivity {
                 flipper.showPrevious();
                 if (step==0) {
                     back.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Animation up = AnimationUtils.loadAnimation(PlayActivity.this, R.anim.scale_up);
+                Animation down = AnimationUtils.loadAnimation(PlayActivity.this, R.anim.scale_down);
+                if (!end) {
+                    if (scrollY == 0) {
+                        fab.startAnimation(up);
+                        fab.show();
+                    } else {
+                        fab.startAnimation(down);
+                        fab.hide();
+                    }
                 }
             }
         });

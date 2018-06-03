@@ -1,5 +1,6 @@
 package com.javier.edukka.view;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.widget.Toast;
 
 import com.javier.edukka.R;
 import com.javier.edukka.controller.UserSingleton;
-import com.javier.edukka.fragment.ListContentFragment;
 import com.javier.edukka.model.ClassModel;
 import com.javier.edukka.service.RestInterface;
 import com.javier.edukka.service.RetrofitClient;
@@ -83,8 +83,10 @@ public class ClassNewActivity extends AppCompatActivity {
                     ClassModel jsonResponse = response.body();
                     UserSingleton.getInstance().getUserModel().setClassId(jsonResponse.getId());
                     Toast.makeText(ClassNewActivity.this, R.string.data_update, Toast.LENGTH_SHORT).show();
-                    ListContentFragment.setSize(1);
+                    //ListContentFragment.setSize(1);
+                    Intent i = new Intent(ClassNewActivity.this, MainActivity.class);
                     finish();
+                    startActivity(i);
                 }
 
                 @Override

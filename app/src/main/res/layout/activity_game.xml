@@ -102,6 +102,7 @@
                 android:layout_marginBottom="@dimen/md_keylines_x3"
                 android:background="?android:selectableItemBackground"
                 android:onClick="play"
+                android:visibility="invisible"
                 app:lottie_scale="0.35"
                 app:lottie_imageAssetsFolder="assets"
                 app:lottie_fileName="animation-w400-h400.json"
