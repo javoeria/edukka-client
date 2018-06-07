@@ -75,14 +75,13 @@ public class LoginActivity extends AppCompatActivity {
             pass.setError(getText(R.string.empty));
             valid = false;
         }
-        //return valid;
-        return true;
+        return valid;
     }
 
     private void login() {
         RestInterface restInterface = RetrofitClient.getInstance();
-        //Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
-        Call<UserModel> request = restInterface.logIn("user", "1234");
+        Call<UserModel> request = restInterface.logIn(user.getText().toString(), pass.getText().toString());
+        //Call<UserModel> request = restInterface.logIn("user", "1234");
         request.enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(@NonNull Call<UserModel> call, @NonNull Response<UserModel> response) {
