@@ -17,8 +17,8 @@
         <item>Statistics</item>
     </string-array>
     <string-array name="activity_desc">
-        <item>Record in a database of completed games made by the user or class.</item>
-        <item>Study of the games to reach conclusions based on the results obtained.</item>
+        <item>List of completed games of all subjects by the user or class.</item>
+        <item>Metrics obtained from completed games by the user or class.</item>
     </string-array>
     <string-array name="level">
         <item>Hard</item>

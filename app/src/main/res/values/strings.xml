@@ -70,7 +70,7 @@
 
     <string name="empty">Can\'t be Empty</string>
     <string name="minimum">At least 4 characters</string>
-    <string name="invalid">Invalid UserName/Password</string>
+    <string name="invalid">Invalid Username/Password</string>
     <string name="login_success">Successful Login</string>
     <string name="signup_success">Successful Signup</string>
     <string name="data_update">Data updated</string>

@@ -238,7 +238,8 @@ public class ProfileEditActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 Toast.makeText(ProfileEditActivity.this, R.string.deleteuser_success, Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(ProfileEditActivity.this, LoginActivity.class);
-                finish();
+                //finish();
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(i);
             }
 
